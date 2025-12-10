@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case – ERP Contábil Pro | ConstruCode</title>
+    <link rel="manifest" href="../manifest.json">
+    <meta name="description" content="Sistema completo ERP contábil com dashboard e integração governamental.">
+
+    <style>
+        :root {
+            --primary-color:#2c3e50;
+            --secondary-color:#3498db;
+            --accent-color:#e74c3c;
+            --light-color:#ecf0f1;
+            --dark-color:#2c3e50;
+            --text-color:#333;
+            --gray-light:#f8f9fa;
+            --shadow:0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family:'Inter', sans-serif;
+            margin:0;
+            padding-top:80px;
+            background:var(--light-color);
+        }
+
+        header {
+            background:white;
+            box-shadow:var(--shadow);
+            position:fixed;
+            top:0;
+            width:100%;
+            z-index:999;
+        }
+
+        .container { max-width:1200px; margin:auto; padding:0 20px; }
+
+        .nav-container {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:1rem 0;
+        }
+
+        .logo { font-size:1.8rem; font-weight:700; color:var(--primary-color); text-decoration:none; }
+        .logo span { color:var(--secondary-color); }
+
+        .hero-case {
+            background:linear-gradient(135deg,#3498db,#2c3e50);
+            padding:100px 0 70px;
+            text-align:center;
+            color:white;
+        }
+
+        .hero-case h1 { font-size:3rem; font-family:'Poppins'; }
+
+        .project-cover {
+            height:350px;
+            background:linear-gradient(45deg,var(--secondary-color),var(--primary-color));
+            border-radius:15px;
+            margin:3rem 0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            font-size:4rem;
+        }
+
+        .content-box {
+            background:white;
+            padding:2rem;
+            border-radius:15px;
+            box-shadow:var(--shadow);
+            margin-bottom:3rem;
+        }
+
+        .section-title {
+            font-size:2rem;
+            font-family:'Poppins';
+            color:var(--primary-color);
+        }
+
+        .tags {
+            display:flex;
+            gap:.5rem;
+            flex-wrap:wrap;
+            margin:1rem 0 1.5rem;
+        }
+
+        .tag {
+            background:var(--gray-light);
+            padding:8px 14px;
+            border-radius:20px;
+            color:var(--primary-color);
+        }
+
+        .results-grid {
+            display:grid;
+            gap:2rem;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+        }
+
+        .result-item {
+            background:var(--secondary-color);
+            color:white;
+            padding:1.5rem;
+            border-radius:12px;
+            text-align:center;
+            font-size:1.3rem;
+            font-weight:bold;
+        }
+
+        .cta { text-align:center; padding:60px 0; }
+        .btn-primary {
+            background:var(--secondary-color);
+            color:white;
+            padding:15px 40px;
+            border-radius:50px;
+            text-decoration:none;
+            font-size:1.2rem;
+        }
+
+        footer {
+            background:var(--primary-color);
+            color:white;
+            text-align:center;
+            padding:40px 0 20px;
+            margin-top:3rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Constru<span>Code</span></a>
+        </div>
+    </div>
+</header>
+
+<section class="hero-case">
+    <div class="container">
+        <h1>Case: ERP Contábil Pro</h1>
+        <p>Sistema completo com dashboard, automações e integração com sistemas governamentais.</p>
+    </div>
+</section>
+
+<div class="container">
+    <div class="project-cover">📊</div>
+
+    <div class="content-box">
+        <h2 class="section-title">Sobre o Projeto</h2>
+        <p>
+            Este ERP foi desenvolvido para empresas contábeis que precisam de organização, automação e relatórios avançados.
+            Criamos um sistema robusto, rápido e seguro.
+        </p>
+        <div class="tags">
+            <span class="tag">ERP</span>
+            <span class="tag">Dashboard</span>
+            <span class="tag">Relatórios</span>
+            <span class="tag">Integração Gov</span>
+            <span class="tag">Segurança</span>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Objetivos</h2>
+        <ul>
+            <li>Automatizar processos contábeis</li>
+            <li>Gerar relatórios inteligentes</li>
+            <li>Integrar com sistemas do governo</li>
+            <li>Centralizar informações em um dashboard simples</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Resultados</h2>
+
+        <div class="results-grid">
+            <div class="result-item">–70% tempo em processos</div>
+            <div class="result-item">Automação total</div>
+            <div class="result-item">98% menos erros</div>
+            <div class="result-item">Dashboard inteligente</div>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Depoimento</h2>
+        <p>
+            “O ERP mudou totalmente nossa operação. Automatizou tarefas que levavam horas e agora acontecem em segundos.”
+        </p>
+        <strong>— Mariana Alves, Diretora Contábil Pro</strong>
+    </div>
+</div>
+
+<section class="cta">
+    <h2>Quer um sistema como esse?</h2>
+    <p>Fale com nossa equipe para criar o seu.</p>
+    <a href="../contato.html" class="btn-primary">Solicitar Orçamento</a>
+</section>
+
+<footer>© 2024 ConstruCode</footer>
+
+</body>
+</html>

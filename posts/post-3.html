@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversão: Do Clic ao Cliente - Estratégias Comprovadas - ConstruCode Blog</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Estratégias avançadas de CRO (Conversion Rate Optimization) que podem aumentar suas vendas em até 300%. Aprenda a transformar visitantes em clientes.">
+    <meta name="keywords" content="CRO, conversão, otimização, vendas, marketing, taxa de conversão, landing page">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .article-header {
+            padding: 4rem 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-category {
+            background: var(--accent-color);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, var(--accent-color), #c0392b);
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .conversion-funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .funnel-step {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: var(--gray-light);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .conversion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .conversion-card {
+            background: white;
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .conversion-card h4 {
+            color: var(--primary-color);
+            margin: 0 0 1rem 0;
+        }
+
+        .conversion-rate {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .testimonial-box {
+            background: linear-gradient(135deg, var(--primary-color), #34495e);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .testimonial-box:before {
+            content: '"';
+            font-size: 5rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            opacity: 0.2;
+        }
+
+        .ab-testing {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .variant-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .variant {
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .variant.winner {
+            border: 3px solid #28a745;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 2rem;
+            }
+
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .variant-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .funnel-step {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+
+        /* Estilos específicos para CRO */
+        .cta-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .cta-example {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cta-example:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .cta-example.good {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .cta-example.bad {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .heatmap-visual {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to right, #d4edda, #fff3cd, #f8d7da);
+            border-radius: 10px;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .heatmap-hotspot {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(220, 53, 69, 0.7);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="../index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Artigo -->
+    <article>
+        <div class="container">
+            <!-- Cabeçalho -->
+            <div class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">5 de Março, 2024</span>
+                    <span class="article-author">Por: Pedro Costa</span>
+                    <a href="../blog.html" class="article-category">Conversão</a>
+                </div>
+                <h1 class="article-title">Conversão: Do Clic ao Cliente - Estratégias Comprovadas</h1>
+                <p class="article-subtitle">Técnicas avançadas de CRO (Conversion Rate Optimization) que podem aumentar suas vendas em até 300%</p>
+            </div>
+
+            <!-- Imagem do Artigo -->
+            <div class="article-image">
+                💰 CONVERSÃO
+            </div>
+
+            <!-- Conteúdo -->
+            <div class="article-content">
+                <p>Ter tráfego no site é importante, mas converter visitantes em clientes é essencial. Muitas empresas investem fortunas em tráfego mas negligenciam a otimização da conversão. Neste guia completo, vou mostrar estratégias comprovadas que transformaram empresas e podem transformar a sua também.</p>
+
+                <div class="testimonial-box">
+                    <p>"Depois de aplicar as técnicas de CRO neste artigo, nossa taxa de conversão subiu de 1.2% para 4.7% em apenas 3 meses. Isso significa R$ 250.000 a mais em vendas sem aumentar o orçamento de marketing."</p>
+                    <p style="text-align: right; margin-top: 1rem; font-style: italic;">- Carla Mendes, Diretora de Marketing</p>
+                </div>
+
+                <h2>O Funnel de Conversão Perfeito</h2>
+                
+                <div class="conversion-funnel">
+                    <div class="funnel-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Atração</h4>
+                            <p>O visitante chega ao seu site através de tráfego pago, orgânico ou social.</p>
+                            <p><strong>Métrica-chave:</strong> Taxa de rejeição (Bounce Rate)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="funnel-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Engajamento</h4>
+                            <p>O visitante interage com seu conteúdo, navega por várias páginas.</p>
+                            <p><strong>Métrica-chave:</strong> Tempo na página, páginas por sessão</p>
+                        </div>
+                    </div>
+                    
+                    <div class="funnel-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Consideração</h4>
+                            <p>O visitante demonstra interesse real, talvez adicione algo ao carrinho.</p>
+                            <p><strong>Métrica-chave:</strong> Taxa de adição ao carrinho</p>
+                        </div>
+                    </div>
+                    
+                    <div class="funnel-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Conversão</h4>
+                            <p>O visitante se torna cliente, realiza a compra ou preenche formulário.</p>
+                            <p><strong>Métrica-chave:</strong> Taxa de conversão</p>
+                        </div>
+                    </div>
+                    
+                    <div class="funnel-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Retenção</h4>
+                            <p>O cliente retorna, faz novas compras, recomenda para amigos.</p>
+                            <p><strong>Métrica-chave:</strong> LTV (Lifetime Value)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Taxas de Conversão por Indústria</h2>
+                
+                <div class="conversion-grid">
+                    <div class="conversion-card">
+                        <h4>E-commerce</h4>
+                        <div class="conversion-rate">2.3%</div>
+                        <p>Média global</p>
+                    </div>
+                    
+                    <div class="conversion-card">
+                        <h4>Serviços B2B</h4>
+                        <div class="conversion-rate">7.2%</div>
+                        <p>Lead para cliente</p>
+                    </div>
+                    
+                    <div class="conversion-card">
+                        <h4>Software SaaS</h4>
+                        <div class="conversion-rate">3.1%</div>
+                        <p>Teste para pagante</p>
+                    </div>
+                    
+                    <div class="conversion-card">
+                        <h4>Imobiliário</h4>
+                        <div class="conversion-rate">1.9%</div>
+                        <p>Visita para venda</p>
+                    </div>
+                </div>
+
+                <h2>7 Estratégias de CRO que Funcionam em 2024</h2>
+
+                <h3>1. Testes A/B Científicos</h3>
+                <p>Não adivinhe - teste! Use dados, não opiniões.</p>
+                
+                <div class="ab-testing">
+                    <p><strong>Exemplo: Botão de Call-to-Action</strong></p>
+                    <div class="variant-comparison">
+                        <div class="variant">
+                            <p><strong>Variante A</strong></p>
+                            <p style="padding: 10px; background: #007bff; color: white; border-radius: 5px;">Comprar Agora</p>
+                            <p>Taxa de conversão: 2.1%</p>
+                        </div>
+                        <div class="variant winner">
+                            <p><strong>Variante B (Vencedora)</strong></p>
+                            <p style="padding: 10px; background: #28a745; color: white; border-radius: 5px;">Quero Economizar 30%</p>
+                            <p>Taxa de conversão: 3.8%</p>
+                            <p style="color: #28a745; font-weight: bold;">+81% de conversão!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>2. Otimização de Landing Pages</h3>
+                <p>Sua página de destino precisa ser perfeita. Segue o checklist:</p>
+                
+                <ul>
+                    <li><strong>Título claro e benefício-driven</strong> (não apenas descritivo)</li>
+                    <li><strong>Subtítulo que complementa</strong> (responde "e daí?")</li>
+                    <li><strong>Imagem/vídeo demonstrando o produto</strong> em uso</li>
+                    <li><strong>Bullet points de benefícios</strong> (não características)</li>
+                    <li><strong>Social proof</strong> (depoimentos, selos, número de clientes)</li>
+                    <li><strong>Call-to-Action primário</strong> acima da dobra (fold)</li>
+                    <li><strong>Garantia/segurança</strong> (reduz risco percebido)</li>
+                    <li><strong>Formulário simplificado</strong> (apenas o necessário)</li>
+                </ul>
+
+                <h3>3. Psicologia da Conversão</h3>
+                <p>Use princípios psicológicos comprovados:</p>
+
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h4 style="margin-top: 0;">Princípios Comprovados:</h4>
+                    <ul>
+                        <li><strong>Escassez:</strong> "Apenas 3 unidades restantes"</li>
+                        <li><strong>Urgência:</strong> "Oferta termina em 2 horas"</li>
+                        <li><strong>Prova Social:</strong> "5.247 clientes satisfeitos"</li>
+                        <li><strong>Autoridade:</strong> "Recomendado por especialistas"</li>
+                        <li><strong>Reciprocidade:</strong> "E-book gratuito em troca do e-mail"</li>
+                        <li><strong>Consistência:</strong> Pequenos compromissos levam a grandes</li>
+                    </ul>
+                </div>
+
+                <h3>4. Otimização de CTAs (Call-to-Action)</h3>
+                <p>Seu botão de ação é a porta da conversão. Compare:</p>
+                
+                <div class="cta-examples">
+                    <div class="cta-example bad">
+                        <p><strong>❌ Ruim</strong></p>
+                        <p style="padding: 10px; background: #6c757d; color: white; border-radius: 5px;">Enviar</p>
+                        <p>Genérico, sem benefício</p>
+                    </div>
+                    
+                    <div class="cta-example">
+                        <p><strong>⚠️ Médio</strong></p>
+                        <p style="padding: 10px; background: #007bff; color: white; border-radius: 5px;">Baixar E-book</p>
+                        <p>Descreve a ação</p>
+                    </div>
+                    
+                    <div class="cta-example good">
+                        <p><strong>✅ Excelente</strong></p>
+                        <p style="padding: 10px; background: #28a745; color: white; border-radius: 5px;">Quero Aumentar Minhas Vendas em 30%</p>
+                        <p>Focado no benefício, ação orientada</p>
+                    </div>
+                </div>
+
+                <h3>5. Análise de Heatmaps</h3>
+                <p>Entenda onde os usuários clicam, rolam e passam o mouse:</p>
+                
+                <div class="heatmap-visual">
+                    <div class="heatmap-hotspot" style="top: 20px; left: 30%;"></div>
+                    <div class="heatmap-hotspot" style="top: 80px; left: 60%;"></div>
+                    <div class="heatmap-hotspot" style="top: 150px; left: 40%;"></div>
+                </div>
+                
+                <p><strong>Insights comuns:</strong></p>
+                <ul>
+                    <li>Usuários não clicam em banners (banner blindness)</li>
+                    <li>Formulários longos são abandonados</li>
+                    <li>Botões acima da dobra convertem mais</li>
+                    <li>Imagens de pessoas olhando para CTA aumentam cliques</li>
+                </ul>
+
+                <h3>6. Redução de Fricção</h3>
+                <p>Identifique e remova obstáculos na jornada do cliente:</p>
+                
+                <div style="border-left: 4px solid var(--accent-color); padding-left: 1.5rem; margin: 2rem 0;">
+                    <p><strong>Fontes comuns de fricção:</strong></p>
+                    <ul>
+                        <li>Formulários muito longos</li>
+                        <li>Processo de checkout complexo</li>
+                        <li>Página de carregamento lenta</li>
+                        <li>Falta de opções de pagamento</li>
+                        <li>Informações de entrega/custo escondidas</li>
+                    </ul>
+                </div>
+
+                <h3>7. Personalização em Tempo Real</h3>
+                <p>Mostre o conteúdo certo para a pessoa certa:</p>
+                
+                <div style="background: #e3f2fd; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h4 style="margin-top: 0;">Exemplos de Personalização:</h4>
+                    <ul>
+                        <li><strong>Geolocalização:</strong> Mostre preços em moeda local</li>
+                        <li><strong>Comportamento anterior:</strong> "Continue de onde parou"</li>
+                        <li><strong>Fonte de tráfego:</strong> Mensagem diferente para rede social vs. Google</li>
+                        <li><strong>Dispositivo:</strong> Experiência otimizada para mobile</li>
+                        <li><strong>Hora do dia:</strong> "Bom dia" vs. "Boa noite"</li>
+                    </ul>
+                </div>
+
+                <h2>Ferramentas Essenciais de CRO</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                    <div style="padding: 1rem; background: white; border: 1px solid #ddd; border-radius: 8px;">
+                        <strong>Google Optimize</strong>
+                        <div style="font-size: 0.9rem; color: #666;">Testes A/B gratuitos</div>
+                    </div>
+                    <div style="padding: 1rem; background: white; border: 1px solid #ddd; border-radius: 8px;">
+                        <strong>Hotjar</strong>
+                        <div style="font-size: 0.9rem; color: #666;">Heatmaps e gravações</div>
+                    </div>
+                    <div style="padding: 1rem; background: white; border: 1px solid #ddd; border-radius: 8px;">
+                        <strong>Optimizely</strong>
+                        <div style="font-size: 0.9rem; color: #666;">CRO empresarial</div>
+                    </div>
+                    <div style="padding: 1rem; background: white; border: 1px solid #ddd; border-radius: 8px;">
+                        <strong>VWO</strong>
+                        <div style="font-size: 0.9rem; color: #666;">Testes e insights</div>
+                    </div>
+                </div>
+
+                <h2>Caso Real: Aumentando Conversões em 247%</h2>
+                
+                <div style="background: linear-gradient(135deg, var(--primary-color), #2c3e50); color: white; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="color: white; margin-top: 0;">📈 E-commerce de Moda</h3>
+                    <p><strong>Situação Inicial:</strong> Taxa de conversão de 1.2%, carrinho abandonado em 78%</p>
+                    <p><strong>Ações Implementadas:</strong></p>
+                    <ol style="margin: 1rem 0;">
+                        <li>Reduziu campos do formulário de 12 para 5</li>
+                        <li>Adicionou trust badges (selos de segurança)</li>
+                        <li>Implementou carrinho persistente entre dispositivos</li>
+                        <li>Adicionou frete grátis acima de R$ 150</li>
+                        <li>Criou sequência de e-mail para carrinho abandonado</li>
+                    </ol>
+                    <p><strong>Resultado Final:</strong> Conversão subiu para 4.1% (+247%) em 60 dias</p>
+                </div>
+
+                <h2>Plano de Ação: Primeiros 30 Dias de CRO</h2>
+                
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">Semana 1: Diagnóstico</h3>
+                    <ul>
+                        <li>Analisar taxas de conversão atuais</li>
+                        <li>Mapear jornada do cliente</li>
+                        <li>Identificar pontos de fricção</li>
+                        <li>Configurar ferramentas de analytics</li>
+                    </ul>
+                    
+                    <h3>Semana 2-3: Implementação Rápida</h3>
+                    <ul>
+                        <li>Otimizar CTAs principais</li>
+                        <li>Simplificar formulários</li>
+                        <li>Adicionar prova social</li>
+                        <li>Criar primeiro teste A/B</li>
+                    </ul>
+                    
+                    <h3>Semana 4: Análise e Escala</h3>
+                    <ul>
+                        <li>Analisar resultados dos testes</li>
+                        <li>Implementar vencedores</li>
+                        <li>Planejar próximos testes</li>
+                        <li>Documentar aprendizados</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, var(--accent-color), #c0392b); color: white; border-radius: 10px;">
+                    <h3 style="margin-top: 0; color: white;">Pronto para Aumentar Suas Conversões?</h3>
+                    <p>Agende uma análise gratuita do seu funnel de vendas e descubra oportunidades específicas para seu negócio.</p>
+                    <a href="../contato.html?assunto=cro" style="display: inline-block; background: white; color: var(--accent-color); padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 1rem;">Agendar Análise Gratuita</a>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div style="display: flex; justify-content: space-between; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 3rem 0;">
+                <div style="max-width: 45%;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">← Artigo Anterior</div>
+                    <a href="post-2.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">SEO em 2024: Novas Estratégias</a>
+                </div>
+                <div style="max-width: 45%; text-align: right;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Próximo Artigo →</div>
+                    <a href="post-4.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Design Responsivo vs Mobile First</a>
+                </div>
+            </div>
+
+            <!-- Comentários -->
+            <div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 3rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">💬 Compartilhe Sua Experiência</h2>
+                
+                <form style="margin-bottom: 3rem;" id="commentForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" placeholder="Seu nome" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        <input type="email" placeholder="Seu e-mail" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea placeholder="Qual sua maior dificuldade com conversões?..." required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 120px; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" style="background: var(--accent-color); color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer;">Compartilhar Experiência</button>
+                </form>
+
+                <div id="commentList">
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Gestor de E-commerce</span>
+                            <span style="color: #666; font-size: 0.9rem;">06/03/2024 11:20</span>
+                        </div>
+                        <p>Implementei os testes A/B sugeridos no artigo e nossa conversão aumentou 65% em um mês! O que mais funcionou foi mudar o texto do botão de "Comprar" para "Quero Economizar R$ 50".</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Analista de Marketing</span>
+                            <span style="color: #666; font-size: 0.9rem;">05/03/2024 19:45</span>
+                        </div>
+                        <p>Alguém tem experiência com ferramentas de heatmap gratuitas? Estou começando com CRO e o orçamento é limitado.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Consultor CRO</span>
+                            <span style="color: #666; font-size: 0.9rem;">05/03/2024 16:30</span>
+                        </div>
+                        <p>Ótimo artigo! Só acrescentaria a importância de testar em dispositivos mobile primeiro, já que mais de 60% do tráfego vem de celulares hoje em dia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Otimização de Conversão</h3>
+                    <p>Transforme visitantes em clientes com estratégias comprovadas de CRO.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Serviços CRO</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Auditoria de Conversão</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Testes A/B</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Otimização de Landing Pages</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Consultoria CRO</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Ferramentas Úteis</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Calculadora de ROI</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Gerador de CTAs</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Checklist de Conversão</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Modelos de Landing Pages</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Contato Especialista</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">📧 cro@construcode.com</li>
+                        <li style="margin-bottom: 0.8rem;">📱 (11) 98765-4321</li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contato.html" style="color: var(--accent-color); text-decoration: none; font-weight: 500;">Falar com Especialista CRO</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem;">
+                <p>&copy; 2024 ConstruCode CRO. Artigo escrito por Pedro Costa, especialista em otimização de conversão com mais de 150 projetos.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Tempo de leitura: 12 minutos | 750 visualizações | Baseado em dados reais de clientes
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const inputs = commentForm.querySelectorAll('input, textarea');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const comment = inputs[2].value;
+            
+            if (!name || !email || !comment) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            const now = new Date();
+            const newComment = document.createElement('div');
+            newComment.style.padding = '1.5rem 0';
+            newComment.style.borderBottom = '1px solid #eee';
+            
+            newComment.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-weight: 600; color: var(--primary-color);">${name}</span>
+                    <span style="color: #666; font-size: 0.9rem;">${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}</span>
+                </div>
+                <p>${comment}</p>
+            `;
+            
+            commentList.prepend(newComment);
+            commentForm.reset();
+            
+            alert('Obrigado por compartilhar sua experiência com CRO!');
+        });
+
+        // Contador de visualizações
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = localStorage.getItem('post-3-views') || 750;
+            localStorage.setItem('post-3-views', parseInt(views) + 1);
+            
+            const viewsElement = document.querySelector('footer p:nth-child(2)');
+            if (viewsElement) {
+                viewsElement.innerHTML = `Tempo de leitura: 12 minutos | ${parseInt(views) + 1} visualizações | Baseado em dados reais de clientes`;
+            }
+        });
+
+        // Calculadora de ROI de CRO
+        const calculatorBtn = document.createElement('button');
+        calculatorBtn.textContent = '🧮 Calcular ROI do CRO';
+        calculatorBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        `;
+        
+        calculatorBtn.addEventListener('click', () => {
+            const traffic = prompt('Tráfego mensal do site:');
+            const currentConversion = prompt('Taxa de conversão atual (%):');
+            const averageTicket = prompt('Ticket médio (R$):');
+            
+            if (traffic && currentConversion && averageTicket) {
+                const currentSales = (parseInt(traffic) * parseFloat(currentConversion) / 100) * parseFloat(averageTicket);
+                const potentialSales = currentSales * 2; // Supondo 100% de aumento
+                const potentialGain = potentialSales - currentSales;
+                
+                alert(`💰 Potencial de Ganho com CRO:\n\n` +
+                      `Vendas atuais: R$ ${currentSales.toFixed(2)}\n` +
+                      `Vendas potenciais: R$ ${potentialSales.toFixed(2)}\n` +
+                      `Ganho possível: R$ ${potentialGain.toFixed(2)} por mês\n\n` +
+                      `*Baseado em aumento médio de 100% na taxa de conversão`);
+            }
+        });
+        
+        document.body.appendChild(calculatorBtn);
+    </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case – App Delivery Gourmet | ConstruCode</title>
+    <link rel="manifest" href="../manifest.json">
+
+    <style>
+        :root {
+            --primary-color:#2c3e50;
+            --secondary-color:#3498db;
+            --accent-color:#e74c3c;
+            --light-color:#ecf0f1;
+            --gray-light:#f8f9fa;
+            --shadow:0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body { font-family:'Inter'; margin:0; padding-top:80px; background:var(--light-color); }
+
+        header {
+            background:white; box-shadow:var(--shadow);
+            position:fixed; top:0; width:100%; z-index:999;
+        }
+
+        .container { max-width:1200px; margin:auto; padding:0 20px; }
+
+        .nav-container {
+            display:flex; justify-content:space-between;
+            align-items:center; padding:1rem 0;
+        }
+
+        .logo { font-size:1.8rem; color:var(--primary-color); text-decoration:none; font-weight:700; }
+        .logo span { color:var(--secondary-color); }
+
+        .hero-case {
+            background:linear-gradient(135deg,#3498db,#2c3e50);
+            padding:100px 0 70px;
+            text-align:center; color:white;
+        }
+
+        .hero-case h1 { font-size:3rem; font-family:'Poppins'; }
+
+        .project-cover {
+            height:350px;
+            background:linear-gradient(45deg,var(--secondary-color),var(--primary-color));
+            border-radius:15px;
+            margin:3rem 0;
+            display:flex; align-items:center; justify-content:center;
+            color:white; font-size:4rem;
+        }
+
+        .content-box {
+            background:white; padding:2rem;
+            border-radius:15px; margin-bottom:3rem;
+            box-shadow:var(--shadow);
+        }
+
+        .section-title { font-size:2rem; font-family:'Poppins'; color:var(--primary-color); }
+
+        .tags { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+        .tag { background:var(--gray-light); padding:8px 14px; border-radius:20px; }
+
+        .results-grid { display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); }
+        .result-item {
+            background:var(--secondary-color);
+            color:white; padding:1.5rem;
+            border-radius:12px;
+            text-align:center; font-weight:bold; font-size:1.3rem;
+        }
+
+        .cta { text-align:center; padding:60px 0; }
+        .btn-primary { padding:15px 40px; text-decoration:none; color:white; background:var(--secondary-color); border-radius:40px; font-size:1.2rem; }
+
+        footer { background:var(--primary-color); color:white; text-align:center; padding:40px 0 20px; margin-top:3rem; }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Constru<span>Code</span></a>
+        </div>
+    </div>
+</header>
+
+<section class="hero-case">
+    <h1>Case: App Delivery Gourmet</h1>
+    <p>PWA + marketing com push notifications e alto engajamento.</p>
+</section>
+
+<div class="container">
+    <div class="project-cover">📱</div>
+
+    <div class="content-box">
+        <h2 class="section-title">Sobre o Projeto</h2>
+        <p>
+            Criamos um aplicativo PWA de alta performance voltado para delivery gourmet,
+            com campanhas inteligentes e notificações push para retenção.
+        </p>
+        <div class="tags">
+            <span class="tag">Delivery</span>
+            <span class="tag">PWA</span>
+            <span class="tag">Push</span>
+            <span class="tag">Marketing</span>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Objetivos</h2>
+        <ul>
+            <li>Aumentar pedidos repetidos</li>
+            <li>Criar campanhas automatizadas</li>
+            <li>Melhorar experiência mobile</li>
+            <li>Adicionar push notifications</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Resultados</h2>
+        <div class="results-grid">
+            <div class="result-item">4x mais retenção</div>
+            <div class="result-item">+55% pedidos mobile</div>
+            <div class="result-item">App instalável</div>
+            <div class="result-item">Campanhas automatizadas</div>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Depoimento</h2>
+        <p>
+            “O PWA transformou nosso delivery. As notificações nos deram poder de reengajar clientes e aumentar as vendas.”
+        </p>
+        <strong>— Roberto Novaes, CEO Delivery Gourmet</strong>
+    </div>
+</div>
+
+<section class="cta">
+    <h2>Quer um app como esse?</h2>
+    <p>Vamos criar sua solução personalizada.</p>
+    <a href="../contato.html" class="btn-primary">Solicitar Orçamento</a>
+</section>
+
+<footer>© 2024 ConstruCode</footer>
+
+</body>
+</html>

@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO em 2024: Novas Estratégias que Realmente Funcionam - ConstruCode Blog</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Descubra as estratégias de SEO que estão funcionando em 2024. Aprenda técnicas atualizadas para melhorar seu posicionamento no Google.">
+    <meta name="keywords" content="SEO 2024, otimização, Google, tráfego orgânico, marketing digital, search engine optimization">
+    
+    <style>
+        /* Reutilizando estilos do post-1.html com ajustes */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .article-header {
+            padding: 4rem 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-category {
+            background: #28a745;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .highlight-box {
+            background: var(--gray-light);
+            border-left: 4px solid #28a745;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .checklist li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist li:before {
+            content: "✅";
+            color: #28a745;
+            flex-shrink: 0;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        /* Responsividade e outros estilos similares ao post-1.html */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 2rem;
+            }
+
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Estilos específicos para este artigo */
+        .seo-pillar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .pillar-card {
+            background: white;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .pillar-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pillar-card h4 {
+            color: var(--primary-color);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .timeline-seo {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 2.5rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #28a745;
+            border-radius: 50%;
+        }
+
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: #28a745;
+        }
+
+        .timeline-item:last-child:after {
+            display: none;
+        }
+
+        .tool-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tool-item {
+            background: var(--gray-light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .tool-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .tool-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="../index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Artigo -->
+    <article>
+        <div class="container">
+            <!-- Cabeçalho -->
+            <div class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">10 de Março, 2024</span>
+                    <span class="article-author">Por: Maria Santos</span>
+                    <a href="../blog.html" class="article-category">SEO</a>
+                </div>
+                <h1 class="article-title">SEO em 2024: Novas Estratégias que Realmente Funcionam</h1>
+                <p class="article-subtitle">Com as constantes atualizações do Google, descubra o que realmente importa para rankear bem em 2024</p>
+            </div>
+
+            <!-- Imagem do Artigo -->
+            <div class="article-image">
+                🔍 SEO 2024
+            </div>
+
+            <!-- Conteúdo -->
+            <div class="article-content">
+                <p>O SEO está em constante evolução, e 2024 não é diferente. Com o lançamento do algoritmo "Helpful Content Update" e as crescentes integrações de IA, as regras do jogo mudaram novamente. Neste artigo, vou compartilhar as estratégias que estão funcionando agora e que vão fazer a diferença no seu posicionamento.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">87%</div>
+                        <div class="stat-label">das buscas começam online</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">53%</div>
+                        <div class="stat-label">do tráfego vem de orgânico</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">75%</div>
+                        <div class="stat-label">dos clics vão para 1ª página</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0.78%</div>
+                        <div class="stat-label">clics vão para 2ª página</div>
+                    </div>
+                </div>
+
+                <h2>Os 4 Pilares do SEO em 2024</h2>
+                
+                <div class="seo-pillar">
+                    <div class="pillar-card">
+                        <div class="pillar-icon">👤</div>
+                        <h4>Experiência do Usuário</h4>
+                        <p>Core Web Vitals, velocidade e usabilidade são fatores críticos</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon">🤖</div>
+                        <h4>Inteligência Artificial</h4>
+                        <p>Google Bard e IA generativa estão mudando as SERPs</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon">🎯</div>
+                        <h4>Intenção de Busca</h4>
+                        <p>Entender o que o usuário realmente quer é fundamental</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon">🔗</div>
+                        <h4>Autoridade Digital</h4>
+                        <p>E-E-A-T: Experiência, Expertise, Autoridade e Confiança</p>
+                    </div>
+                </div>
+
+                <h2>1. Core Web Vitals: Não é Mais uma Opção</h2>
+                <p>Em 2024, os Core Web Vitals são fatores de ranking diretos. Seu site precisa carregar rápido e ser responsivo:</p>
+                
+                <ul>
+                    <li><strong>LCP (Largest Contentful Paint):</strong> &lt; 2.5s</li>
+                    <li><strong>FID (First Input Delay):</strong> &lt; 100ms</li>
+                    <li><strong>CLS (Cumulative Layout Shift):</strong> &lt; 0.1</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>⚡ Dica Rápida:</strong>
+                    "Use o PageSpeed Insights do Google para analisar seu site. Foque primeiro em otimizar imagens e remover JavaScript desnecessário."
+                </div>
+
+                <h2>2. Conteúdo com E-E-A-T</h2>
+                <p>O Google valoriza conteúdo escrito por especialistas. Siga estas diretrizes:</p>
+                
+                <div class="checklist">
+                    <li>Inclua credenciais do autor</li>
+                    <li>Cite fontes confiáveis</li>
+                    <li>Atualize conteúdo regularmente</li>
+                    <li>Mostre experiência prática</li>
+                    <li>Adicione datas de publicação</li>
+                </div>
+
+                <h2>3. SEO para IA Generativa</h2>
+                <p>Com a ascensão do ChatGPT e Bard, precisamos otimizar para estas novas interfaces:</p>
+
+                <div class="timeline-seo">
+                    <div class="timeline-item">
+                        <h3>Busca Conversacional</h3>
+                        <p>Otimize para perguntas completas, não apenas palavras-chave. Ex: "Como fazer SEO em 2024" ao invés de "SEO 2024".</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Respostas Diretas</h3>
+                        <p>Estruture conteúdo para ser facilmente extraído por IAs. Use FAQs e esquemas claros.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Conteúdo Multiformato</h3>
+                        <p>Crie vídeos, infográficos e podcasts que complementem seu conteúdo escrito.</p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Atenção:</strong>
+                    "Não tente enganar os algoritmos com conteúdo gerado por IA de baixa qualidade. O Google está cada vez melhor em detectar isso."
+                </div>
+
+                <h2>4. Estratégias de Link Building que Funcionam</h2>
+                <p>Em 2024, qualidade supera quantidade. Foque em:</p>
+                
+                <ul>
+                    <li><strong>Guest Posting:</strong> Em sites relevantes e de alta autoridade</li>
+                    <li><strong>Estudos de Caso:</strong> Dados únicos atraem links naturalmente</li>
+                    <li><strong>Recursos Gráficos:</strong> Infográficos e ferramentas interativas</li>
+                    <li><strong>Parcerias Estratégicas:</strong> Colabore com empresas complementares</li>
+                </ul>
+
+                <h2>5. SEO Técnico Essencial</h2>
+                <p>Não ignore os fundamentos técnicos:</p>
+
+                <div class="checklist">
+                    <li>Estrutura de URL amigável</li>
+                                        <li>Esquemas JSON-LD implementados</li>
+                    <li>SiteMap XML atualizado</li>
+                    <li>Robots.txt configurado corretamente</li>
+                    <li>SSL/HTTPS ativo em todo o site</li>
+                    <li>URLs canônicas definidas</li>
+                    <li>Redirecionamentos 301 para conteúdo movido</li>
+                    <li>Arquivos CSS e JS otimizados e minificados</li>
+                </div>
+
+                <h2>Ferramentas Essenciais para 2024</h2>
+                
+                <div class="tool-list">
+                    <div class="tool-item">
+                        <strong>Google Search Console</strong>
+                        <div>Monitoramento básico gratuito</div>
+                    </div>
+                    <div class="tool-item">
+                        <strong>Ahrefs</strong>
+                        <div>Análise de backlinks e palavras-chave</div>
+                    </div>
+                    <div class="tool-item">
+                        <strong>SEMrush</strong>
+                        <div>Análise competitiva completa</div>
+                    </div>
+                    <div class="tool-item">
+                        <strong>Screaming Frog</strong>
+                        <div>Auditoria técnica avançada</div>
+                    </div>
+                    <div class="tool-item">
+                        <strong>AnswerThePublic</strong>
+                        <div>Geração de ideias de conteúdo</div>
+                    </div>
+                    <div class="tool-item">
+                        <strong>SurferSEO</strong>
+                        <div>Otimização baseada em IA</div>
+                    </div>
+                </div>
+
+                <h2>Cronograma de SEO: Primeiros 90 Dias</h2>
+
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">Semana 1-4: Diagnóstico e Planejamento</h3>
+                    <ul>
+                        <li>Auditoria técnica completa</li>
+                        <li>Análise de concorrentes</li>
+                        <li>Pesquisa de palavras-chave</li>
+                        <li>Mapa de conteúdo</li>
+                    </ul>
+                    
+                    <h3>Semana 5-8: Implementação Técnica</h3>
+                    <ul>
+                        <li>Correções de Core Web Vitals</li>
+                        <li>Otimização on-page</li>
+                        <li>Implementação de schema markup</li>
+                        <li>Criação de conteúdo pilares</li>
+                    </ul>
+                    
+                    <h3>Semana 9-12: Link Building e Monitoramento</h3>
+                    <ul>
+                        <li>Campanha de link building</li>
+                        <li>Análise de resultados</li>
+                        <li>Ajustes baseados em dados</li>
+                        <li>Planejamento para os próximos meses</li>
+                    </ul>
+                </div>
+
+                <h2>Erros que Você Deve Evitar em 2024</h2>
+                
+                <div class="warning-box">
+                    <strong>🚫 Não Faça:</strong>
+                    <ul style="margin: 0.5rem 0 0 1.5rem;">
+                        <li>Keyword stuffing (excesso de palavras-chave)</li>
+                        <li>Comprar backlinks de baixa qualidade</li>
+                        <li>Ignorar a experiência mobile</li>
+                        <li>Criar conteúdo duplicado</li>
+                        <li>Esquecer de otimizar para voz e IA</li>
+                    </ul>
+                </div>
+
+                <h2>Métricas para Acompanhar</h2>
+                
+                <div style="overflow-x: auto; margin: 2rem 0;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: var(--gray-light);">
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Métrica</th>
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Objetivo</th>
+                                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Frequência</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Posições orgânicas</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Top 3 para palavras-chave principais</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Semanal</td>
+                            </tr>
+                            <tr style="background: #f9f9f9;">
+                                <td style="padding: 12px; border: 1px solid #ddd;">Tráfego orgânico</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Aumento de 20% trimestral</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Diário</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Taxa de conversão</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Mínimo 2% do tráfego orgânico</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Mensal</td>
+                            </tr>
+                            <tr style="background: #f9f9f9;">
+                                <td style="padding: 12px; border: 1px solid #ddd;">Backlinks</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">+10 links de qualidade/mês</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Semanal</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Core Web Vitals</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Todas as métricas "Boa"</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">Mensal</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Conclusão: O Futuro do SEO</h2>
+                <p>Em 2024, o SEO é mais sobre <strong>experiência humana</strong> do que sobre algoritmos. O Google está se tornando cada vez mais inteligente em entender intenção e qualidade.</p>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Resumo Final:</strong>
+                    "Foque em criar conteúdo verdadeiramente útil, otimize a experiência do usuário, construa autoridade de forma orgânica e esteja preparado para a integração com IA. Esses são os pilares do SEO que vão funcionar não só em 2024, mas nos próximos anos."
+                </div>
+
+                <p>Lembre-se: SEO é uma maratona, não uma corrida de 100 metros. Resultados consistentes vêm de trabalho consistente.</p>
+
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #28a745, #20c997); color: white; border-radius: 10px;">
+                    <h3 style="margin-top: 0; color: white;">Pronto para Transformar seu SEO?</h3>
+                    <p>Entre em contato para uma auditoria gratuita do seu site e descubra as oportunidades específicas para seu negócio.</p>
+                    <a href="../contato.html" style="display: inline-block; background: white; color: #28a745; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 1rem;">Solicitar Auditoria Gratuita</a>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div style="display: flex; justify-content: space-between; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 3rem 0;">
+                <div style="max-width: 45%;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">← Artigo Anterior</div>
+                    <a href="post-1.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Por que PWA é o Futuro dos Sites</a>
+                </div>
+                <div style="max-width: 45%; text-align: right;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Próximo Artigo →</div>
+                    <a href="post-3.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Conversão: Do Clic ao Cliente</a>
+                </div>
+            </div>
+
+            <!-- Comentários -->
+            <div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 3rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">💬 Discussão sobre SEO</h2>
+                
+                <form style="margin-bottom: 3rem;" id="commentForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif;" placeholder="Seu nome" required>
+                        <input type="email" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif;" placeholder="Seu e-mail" required>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; min-height: 120px; resize: vertical;" placeholder="Qual sua maior dificuldade com SEO?..." required></textarea>
+                    </div>
+                    <button type="submit" style="background: #28a745; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: var(--transition);">Participar da Discussão</button>
+                </form>
+
+                <div id="commentList">
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Roberto Marketing</span>
+                            <span style="color: #666; font-size: 0.9rem;">11/03/2024 09:15</span>
+                        </div>
+                        <p>Excelente artigo! Estou implementando essas estratégias e já vejo resultados em 30 dias. A parte sobre Core Web Vitals foi crucial para meu e-commerce.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Ana Desenvolvedora</span>
+                            <span style="color: #666; font-size: 0.9rem;">10/03/2024 18:30</span>
+                        </div>
+                        <p>Alguém tem experiência com SurferSEO? Vale o investimento para um blog com 10k visitas/mês?</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Consultor SEO</span>
+                            <span style="color: #666; font-size: 0.9rem;">10/03/2024 15:45</span>
+                        </div>
+                        <p>Ótimo conteúdo! Acho que faltou falar sobre a importância do schema markup para rich snippets. Em 2024, isso faz uma diferença enorme no CTR.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">ConstruCode SEO</h3>
+                    <p>Especialistas em otimização para mecanismos de busca desde 2018.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Serviços SEO</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8; transition: var(--transition);">Auditoria SEO</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8; transition: var(--transition);">Otimização On-Page</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8; transition: var(--transition);">Link Building</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8; transition: var(--transition);">SEO Técnico</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Recursos Grátis</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../blog.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8; transition: var(--transition);">Blog SEO</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8; transition: var(--transition);">Checklist SEO 2024</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8; transition: var(--transition);">Ferramentas Gratuitas</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8; transition: var(--transition);">Webinars</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Contato Rápido</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">📧 seo@construcode.com</li>
+                        <li style="margin-bottom: 0.8rem;">📱 (11) 98765-4321</li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contato.html" style="color: var(--secondary-color); text-decoration: none;">Agendar Consultoria</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem;">
+                <p>&copy; 2024 ConstruCode SEO. Artigo escrito por Maria Santos, especialista em SEO com 8 anos de experiência.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Tempo de leitura: 10 minutos | 980 visualizações | Atualizado em 10/03/2024
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const inputs = commentForm.querySelectorAll('input, textarea');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const comment = inputs[2].value;
+            
+            if (!name || !email || !comment) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            // Criar novo comentário
+            const now = new Date();
+            const newComment = document.createElement('div');
+            newComment.style.padding = '1.5rem 0';
+            newComment.style.borderBottom = '1px solid #eee';
+            
+            newComment.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-weight: 600; color: var(--primary-color);">${name}</span>
+                    <span style="color: #666; font-size: 0.9rem;">${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}</span>
+                </div>
+                <p>${comment}</p>
+            `;
+            
+            // Adicionar no início da lista
+            commentList.prepend(newComment);
+            
+            // Limpar formulário
+            commentForm.reset();
+            
+            // Feedback
+            alert('Obrigado por compartilhar sua experiência! Seu comentário foi adicionado.');
+        });
+
+        // Contador de visualizações
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = localStorage.getItem('post-2-views') || 980;
+            localStorage.setItem('post-2-views', parseInt(views) + 1);
+            
+            // Atualizar contador no footer
+            const viewsElement = document.querySelector('footer p:nth-child(2)');
+            if (viewsElement) {
+                viewsElement.innerHTML = `Tempo de leitura: 10 minutos | ${parseInt(views) + 1} visualizações | Atualizado em 10/03/2024`;
+            }
+        });
+
+        // Download do Checklist SEO
+        const downloadChecklist = document.createElement('button');
+        downloadChecklist.textContent = '📥 Baixar Checklist SEO 2024';
+        downloadChecklist.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        `;
+        
+        downloadChecklist.addEventListener('click', () => {
+            alert('Checklist SEO 2024 enviado para seu e-mail! (Simulação)');
+            // Em produção, aqui seria o download real
+        });
+        
+        document.body.appendChild(downloadChecklist);
+    </script>
+</body>
+</html>

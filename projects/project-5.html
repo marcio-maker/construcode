@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case – Ferramentas Industriais | ConstruCode</title>
+    <link rel="manifest" href="../manifest.json">
+
+    <style>
+        :root {
+            --primary-color:#2c3e50;
+            --secondary-color:#3498db;
+            --accent-color:#e74c3c;
+            --light-color:#ecf0f1;
+            --gray-light:#f8f9fa;
+            --shadow:0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body { font-family:'Inter'; margin:0; padding-top:80px; background:var(--light-color); }
+
+        header {
+            background:white; box-shadow:var(--shadow);
+            position:fixed; top:0; width:100%; z-index:999;
+        }
+
+        .container { max-width:1200px; margin:auto; padding:0 20px; }
+
+        .nav-container {
+            display:flex; justify-content:space-between;
+            align-items:center; padding:1rem 0;
+        }
+
+        .logo {
+            font-size:1.8rem; font-weight:700;
+            color:var(--primary-color); text-decoration:none;
+        }
+        .logo span { color:var(--secondary-color); }
+
+        .hero-case {
+            background:linear-gradient(135deg,#2c3e50,#3498db);
+            padding:100px 0 70px;
+            text-align:center; color:white;
+        }
+
+        .hero-case h1 { font-size:3rem; font-family:'Poppins'; }
+
+        .project-cover {
+            height:350px; background:linear-gradient(45deg,#3498db,#2c3e50);
+            border-radius:15px; margin:3rem 0;
+            display:flex; justify-content:center; align-items:center;
+            color:white; font-size:4rem;
+        }
+
+        .content-box {
+            background:white; padding:2rem;
+            border-radius:15px; margin-bottom:3rem;
+            box-shadow:var(--shadow);
+        }
+
+        .section-title {
+            font-size:2rem; font-family:'Poppins';
+            color:var(--primary-color);
+        }
+
+        .tags { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+        .tag {
+            background:var(--gray-light); padding:8px 14px;
+            border-radius:20px; color:var(--primary-color);
+        }
+
+        .results-grid {
+            display:grid; gap:2rem;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+        }
+
+        .result-item {
+            background:var(--secondary-color);
+            color:white; padding:1.5rem;
+            border-radius:12px; text-align:center;
+            font-size:1.3rem; font-weight:700;
+        }
+
+        .cta { text-align:center; padding:60px 0; }
+        .btn-primary {
+            background:var(--secondary-color); color:white;
+            padding:15px 40px; border-radius:40px;
+            text-decoration:none; font-size:1.2rem;
+        }
+
+        footer {
+            background:var(--primary-color); color:white;
+            text-align:center; padding:40px 0 20px;
+            margin-top:3rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Constru<span>Code</span></a>
+        </div>
+    </div>
+</header>
+
+<section class="hero-case">
+    <h1>Case: Ferramentas Industriais</h1>
+    <p>E-commerce B2B completo com catálogo complexo e integração com estoque.</p>
+</section>
+
+<div class="container">
+    <div class="project-cover">🔧</div>
+
+    <div class="content-box">
+        <h2 class="section-title">Sobre o Projeto</h2>
+        <p>
+            Criamos um e-commerce robusto focado no segmento industrial B2B,
+            com orçamentos automatizados, catálogo avançado e integração 
+            direta com o sistema de estoque da fábrica.
+        </p>
+
+        <div class="tags">
+            <span class="tag">B2B</span>
+            <span class="tag">Industrial</span>
+            <span class="tag">Integração</span>
+            <span class="tag">Catálogo Avançado</span>
+            <span class="tag">Orçamentos</span>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Objetivos</h2>
+        <ul>
+            <li>Criar catálogo com milhares de itens</li>
+            <li>Automatizar solicitação de orçamento</li>
+            <li>Integrar estoque via API</li>
+            <li>Melhorar conversão no B2B</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Resultados</h2>
+
+        <div class="results-grid">
+            <div class="result-item">R$ 500k/mês em vendas</div>
+            <div class="result-item">Integração total com estoque</div>
+            <div class="result-item">+80% pedidos recorrentes</div>
+            <div class="result-item">Processo 3x mais rápido</div>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Depoimento</h2>
+        <p>
+            “Nosso catálogo é enorme, e mesmo assim o site ficou rápido e fácil de navegar.
+            A integração com estoque salvou nosso time!”
+        </p>
+        <strong>— Ricardo Souza, Diretor Industrial</strong>
+    </div>
+</div>
+
+<section class="cta">
+    <h2>Quer um e-commerce assim?</h2>
+    <p>Seu projeto pode ser o próximo case de sucesso.</p>
+    <a href="../contato.html" class="btn-primary">Solicitar Orçamento</a>
+</section>
+
+<footer>
+    © 2024 ConstruCode — Todos os direitos reservados.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Por que PWA é o Futuro dos Sites - ConstruCode Blog</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description"
+        content="Descubra como Progressive Web Apps estão revolucionando a experiência mobile, aumentando conversões em até 40% e proporcionando uma experiência similar a apps nativos.">
+    <meta name="keywords" content="PWA, Progressive Web App, desenvolvimento web, mobile, conversão, performance">
+    <meta property="og:title" content="Por que PWA é o Futuro dos Sites">
+    <meta property="og:description"
+        content="Aprenda como PWA pode transformar seu site em uma experiência mobile excepcional.">
+    <meta property="og:type" content="article">
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Cabeçalho do Artigo */
+        .article-header {
+            padding: 4rem 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-category {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        /* Conteúdo do Artigo */
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 1.5rem 0 1.5rem 2rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.8rem;
+        }
+
+        .highlight-box {
+            background: var(--gray-light);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: var(--gray-light);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* Navegação do Artigo */
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            margin: 3rem 0;
+        }
+
+        .nav-item {
+            max-width: 45%;
+        }
+
+        .nav-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-title {
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .nav-title:hover {
+            text-decoration: underline;
+        }
+
+        /* Comentários */
+        .comments-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .comments-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .comment-form {
+            margin-bottom: 3rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-color);
+        }
+
+        .comment-list {
+            margin-top: 3rem;
+        }
+
+        .comment-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .comment-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+        }
+
+        /* AdSense no Artigo */
+        .article-ad {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            margin: 3rem 0;
+            border-radius: 8px;
+        }
+
+        .in-article-ad {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Artigo -->
+    <article>
+        <div class="container">
+            <!-- Cabeçalho -->
+            <div class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">15 de Março, 2024</span>
+                    <span class="article-author">Por: João Silva</span>
+                    <a href="../blog.html" class="article-category">PWA</a>
+                </div>
+                <h1 class="article-title">Por que PWA é o Futuro dos Sites e Como Implementar</h1>
+                <p class="article-subtitle">Como Progressive Web Apps estão revolucionando a experiência mobile e
+                    aumentando conversões em até 40%</p>
+            </div>
+
+            <!-- Imagem do Artigo -->
+            <div class="article-image">
+                🚀 PWA
+            </div>
+
+            <!-- AdSense Top -->
+            <div class="article-ad">
+                Espaço para AdSense (728x90)
+            </div>
+
+            <!-- Conteúdo -->
+            <div class="article-content">
+                <p>Nos últimos anos, testemunhamos uma verdadeira revolução na forma como os usuários interagem com a
+                    web. Com a massificação dos smartphones, a experiência mobile tornou-se crucial para o sucesso de
+                    qualquer negócio online. É nesse contexto que os Progressive Web Apps (PWAs) emergem como a solução
+                    mais promissora para quem busca performance, engajamento e conversões.</p>
+
+                <h2>O que é um PWA?</h2>
+                <p>Um Progressive Web App é um site que utiliza tecnologias web modernas para proporcionar uma
+                    experiência semelhante a um aplicativo nativo. A grande vantagem? Você não precisa baixar nada da
+                    App Store ou Google Play - o PWA funciona diretamente no navegador, mas com capacidades avançadas.
+                </p>
+
+                <div class="highlight-box">
+                    <strong>📱 Definição Prática:</strong>
+                    "Um PWA é como transformar seu site em um aplicativo que pode ser instalado no celular do usuário,
+                    funciona offline, envia notificações push e carrega instantaneamente."
+                </div>
+
+                <h2>As 5 Principais Vantagens dos PWAs</h2>
+
+                <h3>1. Performance Excepcional</h3>
+                <p>PWAs carregam praticamente instantaneamente, mesmo em conexões 3G. Isso acontece porque eles utilizam
+                    Service Workers para cache inteligente de recursos.</p>
+
+                <div class="code-block">
+                    // Exemplo de Service Worker básico
+                    self.addEventListener('install', (event) => {
+                    event.waitUntil(
+                    caches.open('v1').then((cache) => {
+                    return cache.addAll([
+                    '/',
+                    '/index.html',
+                    '/styles.css',
+                    '/app.js'
+                    ]);
+                    })
+                    );
+                    });
+                </div>
+
+                <h3>2. Funcionalidade Offline</h3>
+                <p>Seus usuários podem acessar conteúdo mesmo sem internet. Perfeito para áreas com conexão instável ou
+                    para quem está em trânsito.</p>
+
+                <h3>3. Instalação no Celular</h3>
+                <p>Com um simples clique, o usuário pode "instalar" seu PWA na tela inicial, aumentando drasticamente o
+                    engajamento e a retenção.</p>
+
+                <h3>4. Notificações Push</h3>
+                <p>Mantenha seus usuários engajados com notificações personalizadas, semelhantes aos apps nativos.</p>
+
+                <h3>5. SEO Amigável</h3>
+                <p>Diferente de apps nativos, PWAs são indexáveis pelo Google, o que significa mais visibilidade
+                    orgânica.</p>
+
+                <!-- AdSense In-Article -->
+                <div class="in-article-ad">
+                    Espaço para AdSense In-Article (728x90)
+                </div>
+
+                <h2>Comparativo: PWA vs Site Tradicional vs App Nativo</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Recurso</th>
+                            <th>Site Tradicional</th>
+                            <th>PWA</th>
+                            <th>App Nativo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Instalação</td>
+                            <td>❌ Não</td>
+                            <td>✅ Sim</td>
+                            <td>✅ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>Funciona Offline</td>
+                            <td>❌ Não</td>
+                            <td>✅ Sim</td>
+                            <td>✅ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>Notificações Push</td>
+                            <td>❌ Não</td>
+                            <td>✅ Sim</td>
+                            <td>✅ Sim</td>
+                        </tr>
+                        <tr>
+                            <td>Acesso a Hardware</td>
+                            <td>⚠️ Limitado</td>
+                            <td>✅ Boa</td>
+                            <td>✅ Excelente</td>
+                        </tr>
+                        <tr>
+                            <td>Indexação Google</td>
+                            <td>✅ Sim</td>
+                            <td>✅ Sim</td>
+                            <td>❌ Não</td>
+                        </tr>
+                        <tr>
+                            <td>Custo Desenvolvimento</td>
+                            <td>💰 Baixo</td>
+                            <td>💰💰 Médio</td>
+                            <td>💰💰💰 Alto</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Resultados Reais com PWAs</h2>
+                <p>Empresas que implementaram PWAs relataram resultados impressionantes:</p>
+                <ul>
+                    <li><strong>Twitter Lite:</strong> +65% de páginas por sessão, -70% no tamanho</li>
+                    <li><strong>Forbes:</strong> +100% em engajamento, +20% em receita</li>
+                    <li><strong>OLX:</strong> +250% em reengajamento, -80% na taxa de rejeição</li>
+                    <li><strong>Uber:</strong> Carrega em 3s mesmo em 2G</li>
+                </ul>
+
+                <h2>Como Implementar um PWA Passo a Passo</h2>
+
+                <h3>Passo 1: HTTPS Obrigatório</h3>
+                <p>PWAs exigem conexão segura. Certifique-se de ter SSL ativo em seu domínio.</p>
+
+                <h3>Passo 2: Manifest.json</h3>
+                <p>Crie um arquivo manifest.json para definir metadados do app:</p>
+
+                <div class="code-block">
+                    {
+                    "name": "Meu App",
+                    "short_name": "App",
+                    "start_url": "/",
+                    "display": "standalone",
+                    "background_color": "#2c3e50",
+                    "theme_color": "#3498db",
+                    "icons": [...]
+                    }
+                </div>
+
+                <h3>Passo 3: Service Worker</h3>
+                <p>Implemente um Service Worker para cache e funcionalidade offline.</p>
+
+                <h3>Passo 4: Design Responsivo</h3>
+                <p>Garanta que seu site funcione perfeitamente em todos os dispositivos.</p>
+
+                <h3>Passo 5: Teste e Validação</h3>
+                <p>Use o Lighthouse do Chrome para testar se seu PWA atende a todos os requisitos.</p>
+
+                <div class="highlight-box">
+                    <strong>💡 Dica Profissional:</strong>
+                    "Comece convertendo apenas as funcionalidades principais para PWA. Não precisa transformar todo o
+                    site de uma vez. Foque nas páginas mais importantes para mobile."
+                </div>
+
+                <h2>Ferramentas e Recursos Recomendados</h2>
+                <ul>
+                    <li><strong>Workbox:</strong> Biblioteca do Google para criar Service Workers</li>
+                    <li><strong>Lighthouse:</strong> Ferramenta de auditoria do Chrome</li>
+                    <li><strong>PWA Builder:</strong> Gerador de manifest e Service Workers</li>
+                    <li><strong>Firebase Hosting:</strong> Hospedagem ideal para PWAs</li>
+                </ul>
+
+                <h2>Conclusão</h2>
+                <p>Os Progressive Web Apps representam o futuro da web mobile. Eles combinam o melhor dos dois mundos: a
+                    acessibilidade e indexabilidade dos sites tradicionais com a experiência rica e engajadora dos
+                    aplicativos nativos.</p>
+                <p>Se você busca aumentar conversões, melhorar a experiência do usuário e se destacar da concorrência,
+                    investir em um PWA não é mais uma opção - é uma necessidade estratégica.</p>
+
+                <div class="highlight-box">
+                    <strong>🚀 Próximo Passo:</strong>
+                    "Entre em contato com nossa equipe para uma análise gratuita do seu site e descubra como um PWA pode
+                    transformar seus resultados."
+                </div>
+            </div>
+
+            <!-- AdSense Middle -->
+            <div class="article-ad">
+                Espaço para AdSense (300x600)
+            </div>
+
+            <!-- Navegação -->
+            <div class="article-navigation">
+                <div class="nav-item">
+                    <div class="nav-label">← Artigo Anterior</div>
+                    <a href="../blog.html" class="nav-title">Voltar para o Blog</a>
+                </div>
+                <div class="nav-item" style="text-align: right;">
+                    <div class="nav-label">Próximo Artigo →</div>
+                    <a href="post-2.html" class="nav-title">SEO em 2024: Novas Estratégias</a>
+                </div>
+            </div>
+
+            <!-- Comentários -->
+            <div class="comments-section">
+                <h2>💬 Deixe seu Comentário</h2>
+
+                <form class="comment-form" id="commentForm">
+                    <div class="form-row">
+                        <input type="text" class="form-input" placeholder="Seu nome" required>
+                        <input type="email" class="form-input" placeholder="Seu e-mail (não será publicado)" required>
+                    </div>
+                    <div>
+                        <textarea class="form-textarea" placeholder="Seu comentário..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Enviar Comentário</button>
+                </form>
+
+                <div class="comment-list">
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <span class="comment-author">Carlos Ferreira</span>
+                            <span class="comment-date">16/03/2024 10:30</span>
+                        </div>
+                        <p>Excelente artigo! Implementamos PWA na nossa loja e as vendas mobile aumentaram 35% no
+                            primeiro mês. A experiência do usuário melhorou muito.</p>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <span class="comment-author">Mariana Silva</span>
+                            <span class="comment-date">15/03/2024 16:45</span>
+                        </div>
+                        <p>Muito bom o passo a passo. Alguém tem experiência com Workbox? Queria saber se vale a pena
+                            para um site de médio porte.</p>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <span class="comment-author">Tech Solutions</span>
+                            <span class="comment-date">15/03/2024 14:20</span>
+                        </div>
+                        <p>Ótimo conteúdo! Estamos desenvolvendo PWAs para nossos clientes e os resultados estão sendo
+                            impressionantes. A retenção aumentou em média 40%.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>ConstruCode Blog</h3>
+                    <p>Conteúdo especializado em desenvolvimento web, PWA e tecnologia.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="../blog.html#pwa">PWA</a></li>
+                        <li><a href="../blog.html#seo">SEO</a></li>
+                        <li><a href="../blog.html#marketing">Marketing Digital</a></li>
+                        <li><a href="../blog.html#desenvolvimento">Desenvolvimento Web</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="../servicos.html">Serviços PWA</a></li>
+                        <li><a href="../portfolio.html">Cases de Sucesso</a></li>
+                        <li><a href="../contato.html">Orçamento</a></li>
+                        <li><a href="../legal.html">Legal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Receba artigos como este no seu e-mail.</p>
+                    <a href="../blog.html"
+                        style="color: var(--secondary-color); text-decoration: none; font-weight: 500;">Inscrever-se
+                        →</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ConstruCode Blog. Este artigo foi escrito por João Silva, especialista em PWA.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Tempo de leitura: 8 minutos | 1.2k visualizações
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.querySelector('.comment-list');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = commentForm.querySelector('input[type="text"]').value;
+            const email = commentForm.querySelector('input[type="email"]').value;
+            const comment = commentForm.querySelector('textarea').value;
+
+            if (!name || !email || !comment) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            // Criar novo comentário
+            const newComment = document.createElement('div');
+            newComment.className = 'comment-item';
+            newComment.innerHTML = `
+                <div class="comment-header">
+                    <span class="comment-author">${name}</span>
+                    <span class="comment-date">${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                </div>
+                <p>${comment}</p>
+            `;
+
+            // Adicionar no início da lista
+            commentList.prepend(newComment);
+
+            // Limpar formulário
+            commentForm.reset();
+
+            // Feedback
+            alert('Comentário enviado com sucesso! Obrigado por contribuir.');
+        });
+
+        // Contador de visualizações
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simular contagem de visualizações
+            const views = localStorage.getItem('post-1-views') || 1200;
+            localStorage.setItem('post-1-views', parseInt(views) + 1);
+
+            // Atualizar contador no footer
+            const viewsElement = document.querySelector('.copyright p:nth-child(2)');
+            if (viewsElement) {
+                viewsElement.innerHTML = `Tempo de leitura: 8 minutos | ${parseInt(views) + 1} visualizações`;
+            }
+        });
+
+        // Compartilhamento social
+        function shareArticle(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+
+            let shareUrl = '';
+
+            switch (platform) {
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${title} ${url}`;
+                    break;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+        }
+
+        // Botões de compartilhamento (adicionar ao HTML se necessário)
+        const shareButtons = `
+            <div style="position: fixed; left: 20px; top: 50%; transform: translateY(-50%); background: white; padding: 1rem; border-radius: 10px; box-shadow: var(--shadow); z-index: 999;">
+                <div style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--primary-color); font-weight: 500;">Compartilhar:</div>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <button onclick="shareArticle('twitter')" style="background: #1DA1F2; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer;">🐦</button>
+                    <button onclick="shareArticle('linkedin')" style="background: #0077B5; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer;">in</button>
+                    <button onclick="shareArticle('facebook')" style="background: #4267B2; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer;">f</button>
+                    <button onclick="shareArticle('whatsapp')" style="background: #25D366; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer;">💬</button>
+                </div>
+            </div>
+        `;
+
+        // Inserir botões de compartilhamento
+        document.body.insertAdjacentHTML('beforeend', shareButtons);
+    </script>
+</body>
+
+</html>

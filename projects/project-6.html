@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case – Plataforma Educacional | ConstruCode</title>
+    <link rel="manifest" href="../manifest.json">
+
+    <style>
+        :root {
+            --primary-color:#2c3e50;
+            --secondary-color:#3498db;
+            --gray-light:#f8f9fa;
+            --light-color:#ecf0f1;
+            --shadow:0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body { margin:0; font-family:'Inter'; padding-top:80px; background:var(--light-color); }
+
+        header {
+            position:fixed; top:0; width:100%;
+            background:white; box-shadow:var(--shadow);
+            z-index:999;
+        }
+
+        .container { max-width:1200px; margin:auto; padding:0 20px; }
+
+        .nav-container {
+            display:flex; justify-content:space-between;
+            align-items:center; padding:1rem 0;
+        }
+
+        .logo { font-size:1.8rem; color:var(--primary-color); text-decoration:none; font-weight:700; }
+        .logo span { color:var(--secondary-color); }
+
+        .hero-case {
+            background:linear-gradient(135deg,#3498db,#2c3e50);
+            color:white; text-align:center; padding:100px 0 70px;
+        }
+
+        .hero-case h1 { font-size:3rem; font-family:'Poppins'; }
+
+        .project-cover {
+            height:350px; border-radius:15px;
+            background:linear-gradient(45deg,#3498db,#2c3e50);
+            margin:3rem 0;
+            display:flex; justify-content:center; align-items:center;
+            color:white; font-size:4rem;
+        }
+
+        .content-box {
+            background:white; padding:2rem;
+            border-radius:15px; box-shadow:var(--shadow);
+            margin-bottom:3rem;
+        }
+
+        .section-title { font-size:2rem; font-family:'Poppins'; color:var(--primary-color); }
+
+        .tags { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.5rem; }
+        .tag { background:var(--gray-light); padding:8px 14px; border-radius:20px; color:var(--primary-color); }
+
+        .results-grid { display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); }
+        .result-item {
+            background:var(--secondary-color);
+            color:white; padding:1.5rem;
+            border-radius:12px; text-align:center;
+            font-size:1.3rem; font-weight:bold;
+        }
+
+        .cta { text-align:center; padding:60px 0; }
+        .btn-primary {
+            background:var(--secondary-color); color:white;
+            padding:15px 40px; border-radius:50px;
+            text-decoration:none; font-size:1.2rem;
+        }
+
+        footer { background:var(--primary-color); color:white; text-align:center; padding:40px 0 20px; margin-top:3rem; }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <div class="nav-container">
+            <a class="logo" href="../index.html">Constru<span>Code</span></a>
+        </div>
+    </div>
+</header>
+
+<section class="hero-case">
+    <h1>Case: Plataforma Educacional</h1>
+    <p>Site institucional com blog, captação de leads e integração EAD.</p>
+</section>
+
+<div class="container">
+    <div class="project-cover">🎓</div>
+
+    <div class="content-box">
+        <h2 class="section-title">Sobre o Projeto</h2>
+        <p>
+            Desenvolvemos uma plataforma completa focada em educação digital,
+            unindo site institucional, blog ativo e integrações com ferramentas EAD.
+        </p>
+
+        <div class="tags">
+            <span class="tag">Educação</span>
+            <span class="tag">Blog</span>
+            <span class="tag">SEO</span>
+            <span class="tag">Leads</span>
+            <span class="tag">EAD</span>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Objetivos</h2>
+        <ul>
+            <li>Capturar leads automaticamente</li>
+            <li>Gerar tráfego orgânico com blog</li>
+            <li>Integrar sistema EAD</li>
+            <li>Aumentar conversão em matrículas</li>
+        </ul>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Resultados</h2>
+
+        <div class="results-grid">
+            <div class="result-item">+200 leads/mês</div>
+            <div class="result-item">SEO otimizado</div>
+            <div class="result-item">Conteúdo ativo</div>
+            <div class="result-item">Integração EAD</div>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h2 class="section-title">Depoimento</h2>
+        <p>
+            “A plataforma trouxe novos alunos todos os dias. O blog e a captação automatizada mudaram nosso jogo.”
+        </p>
+        <strong>— Fernanda Alves, Diretora Educacional</strong>
+    </div>
+</div>
+
+<section class="cta">
+    <h2>Quer criar sua plataforma educacional?</h2>
+    <p>Vamos tirar seu projeto do papel.</p>
+    <a href="../contato.html" class="btn-primary">Solicitar Orçamento</a>
+</section>
+
+<footer>
+    © 2024 ConstruCode — Todos os direitos reservados.
+</footer>
+
+</body>
+</html>

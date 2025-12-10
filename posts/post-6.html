@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Moderno: Novos Recursos que Você Precisa Conhecer - ConstruCode Blog</title>
+    <link rel="manifest" href="../manifest.json">
+    <meta name="description" content="ECMAScript 2024 trouxe recursos incríveis para o JavaScript. Descubra as novas funcionalidades e como implementá-las em seus projetos.">
+    <meta name="keywords" content="JavaScript, ECMAScript 2024, ES2024, Desenvolvimento Web, Novas Funcionalidades">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .article-header {
+            padding: 4rem 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-category {
+            background: #3498db;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin: 0 0 1rem 0;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .comparison-table th {
+            background: #3498db;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #3498db15, #2980b915);
+            border-left: 4px solid #3498db;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .compatibility-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0 5px 5px 0;
+        }
+
+        .compatibility-good {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .compatibility-partial {
+            background: #f39c12;
+            color: white;
+        }
+
+        .compatibility-bad {
+            background: #e74c3c;
+            color: white;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 2rem;
+            }
+
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="../index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Artigo -->
+    <article>
+        <div class="container">
+            <!-- Cabeçalho -->
+            <div class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">15 de Fevereiro, 2024</span>
+                    <span class="article-author">Por: João Silva</span>
+                    <a href="../blog.html" class="article-category">Desenvolvimento Web</a>
+                </div>
+                <h1 class="article-title">JavaScript Moderno: Novos Recursos que Você Precisa Conhecer</h1>
+                <p class="article-subtitle">ECMAScript 2024 trouxe recursos incríveis para o JavaScript. Descubra as novas funcionalidades e como implementá-las em seus projetos.</p>
+            </div>
+
+            <!-- Imagem do Artigo -->
+            <div class="article-image">
+                💻 ES2024
+            </div>
+
+            <!-- Conteúdo -->
+            <div class="article-content">
+                <p><strong>JavaScript não para de evoluir.</strong> Com a especificação ECMAScript 2024 (ES15), temos recursos que tornam nosso código mais limpo, eficiente e expressivo. Neste guia, vamos explorar as funcionalidades mais importantes e como aplicá-las no dia a dia.</p>
+
+                <div class="highlight-box">
+                    <strong>🚀 Atualização Rápida:</strong>
+                    "O JavaScript moderno traz melhorias significativas na performance, legibilidade e manutenibilidade do código. Desenvolvedores que dominam esses recursos têm vantagem competitiva no mercado."
+                </div>
+
+                <h2>1. Pipeline Operator (|>) - A Grande Estrela</h2>
+                <p>O pipeline operator permite encadear operações de forma muito mais legível, similar ao que temos em linguagens como Elixir e F#.</p>
+
+                <div class="code-block">
+// ANTES - Aninhamento confuso
+const result = Math.round(
+  Math.max(0, 
+    Math.min(100, 
+      parseFloat(value)
+    )
+  )
+);
+
+// DEPOIS - Com Pipeline Operator
+const result = value
+  |> parseFloat
+  |> x => Math.min(100, x)
+  |> x => Math.max(0, x)
+  |> Math.round;
+
+// Outro exemplo prático
+const cleanData = userInput
+  |> trim
+  |> toLowerCase
+  |> removeSpecialChars
+  |> validate;
+                </div>
+
+                <div class="compatibility-badge compatibility-partial">🚧 Em Desenvolvimento</div>
+
+                <h2>2. Records & Tuples - Imutabilidade Nativa</h2>
+                <p>Estruturas de dados imutáveis por padrão, com sintaxe de objetos e arrays mas comportamento de valores.</p>
+
+                <div class="code-block">
+// Records (objetos imutáveis)
+const config = #{
+  apiUrl: "https://api.example.com",
+  timeout: 5000,
+  retries: 3
+};
+
+// Tuples (arrays imutáveis)
+const point = #[10, 20, 30];
+
+// Tentar modificar gera erro
+config.apiUrl = "novo-url"; // TypeError
+point.push(40); // TypeError
+
+// Comparação por valor (não por referência)
+const config1 = #{ theme: "dark" };
+const config2 = #{ theme: "dark" };
+console.log(config1 === config2); // true ✅
+
+// Uso com React
+function Component({ position = #[0, 0] }) {
+  const [x, y] = position;
+  return &lt;div&gt;Position: {x}, {y}&lt;/div&gt;;
+}
+                </div>
+
+                <div class="compatibility-badge compatibility-good">✅ Estável (Stage 3)</div>
+
+                <h2>3. Pattern Matching - O Match Chegou no JavaScript</h2>
+                <p>Sintaxe poderosa para fazer matching de padrões, eliminando múltiplos if/else ou switch.</p>
+
+                <div class="code-block">
+// Pattern Matching básico
+const result = match(response) {
+  when { status: 200, body } => processData(body),
+  when { status: 404 } => showNotFound(),
+  when { status: 500 } => showServerError(),
+  when { status } if (status >= 400) => showClientError(),
+  _ => showUnknownError()
+};
+
+// Com arrays
+const processArray = (arr) => match(arr) {
+  when [] => "Array vazio",
+  when [x] => `Um elemento: ${x}`,
+  when [x, ...rest] => `Primeiro: ${x}, Resto: ${rest.length}`
+};
+
+// Com expressões regulares
+const extractInfo = (text) => match(text) {
+  when /Hello, (\w+)!/ => `Olá, ${$1}!`,
+  when /^\d+$/ => `Número: ${text}`,
+  _ => "Formato desconhecido"
+};
+                </div>
+
+                <h2>4. Decorators - Finalmente Padronizados</h2>
+                <p>Após anos em estágio experimental, os decorators agora são uma proposta estável para ES2024.</p>
+
+                <div class="code-block">
+// Decorator de classe
+@logExecutionTime
+@autobind
+class UserService {
+  @memoize
+  async getUser(id) {
+    // chamada de API
+  }
+
+  @validateParams
+  updateUser(@required id, @minLength(3) name) {
+    // atualização
+  }
+}
+
+// Decorators customizados
+function logExecutionTime(target, context) {
+  const methodName = context.name;
+  
+  return function (...args) {
+    console.time(methodName);
+    const result = target.call(this, ...args);
+    console.timeEnd(methodName);
+    return result;
+  };
+}
+
+function memoize(target, context) {
+  const cache = new Map();
+  
+  return function (...args) {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) return cache.get(key);
+    
+    const result = target.call(this, ...args);
+    cache.set(key, result);
+    return result;
+  };
+}
+                </div>
+
+                <div class="compatibility-badge compatibility-good">✅ Estável (Stage 3)</div>
+
+                <h2>5. Temporal API - Datas Sem Dor de Cabeça</h2>
+                <p>Uma nova API para manipulação de datas e horas, muito mais intuitiva que o Date tradicional.</p>
+
+                <div class="code-block">
+// Criando datas
+const meeting = Temporal.PlainDateTime.from({
+  year: 2024,
+  month: 2,
+  day: 15,
+  hour: 14,
+  minute: 30
+});
+
+// Operações
+const nextWeek = meeting.add({ days: 7 });
+const duration = nextWeek.since(meeting);
+
+console.log(duration.days); // 7
+
+// Formatação
+console.log(meeting.toLocaleString('pt-BR', {
+  dateStyle: 'full',
+  timeStyle: 'short'
+})); // quinta-feira, 15 de fevereiro de 2024 14:30
+
+// Comparações
+const now = Temporal.Now.plainDateTimeISO();
+const isPast = meeting.compare(now) < 0;
+
+// Durações
+const projectDuration = Temporal.Duration.from({
+  hours: 40,
+  minutes: 30
+});
+                </div>
+
+                <h2>6. Array.fromAsync & Array.groupBy</h2>
+                <p>Novos métodos estáticos para arrays que facilitam operações comuns.</p>
+
+                <div class="code-block">
+// Array.fromAsync - cria arrays a partir de async iterables
+async function* fetchPages() {
+  for (let page = 1; page <= 5; page++) {
+    const response = await fetch(`/api/data?page=${page}`);
+    yield response.json();
+  }
+}
+
+// Converte todos os resultados de uma vez
+const allData = await Array.fromAsync(fetchPages());
+
+// Array.groupBy - agrupa elementos por critério
+const products = [
+  { category: 'electronics', name: 'TV', price: 1000 },
+  { category: 'electronics', name: 'Phone', price: 500 },
+  { category: 'clothing', name: 'Shirt', price: 50 }
+];
+
+const grouped = Object.groupBy(products, ({ category }) => category);
+// Resultado:
+// {
+//   electronics: [...],
+//   clothing: [...]
+// }
+                </div>
+
+                <h2>Comparativo de Compatibilidade</h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Recurso</th>
+                            <th>Status</th>
+                            <th>Chrome</th>
+                            <th>Firefox</th>
+                            <th>Safari</th>
+                            <th>Node.js</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pipeline Operator</td>
+                            <td><span class="compatibility-badge compatibility-partial">Stage 2</span></td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td>Records & Tuples</td>
+                            <td><span class="compatibility-badge compatibility-good">Stage 3</span></td>
+                            <td>🚧 Experimental</td>
+                            <td>🚧 Experimental</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td>Pattern Matching</td>
+                            <td><span class="compatibility-badge compatibility-partial">Stage 1</span></td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td>Decorators</td>
+                            <td><span class="compatibility-badge compatibility-good">Stage 3</span></td>
+                            <td>✅ 120+</td>
+                            <td>✅ 123+</td>
+                            <td>✅ 17.4+</td>
+                            <td>✅ 19.0+</td>
+                        </tr>
+                        <tr>
+                            <td>Temporal API</td>
+                            <td><span class="compatibility-badge compatibility-good">Stage 3</span></td>
+                            <td>✅ 84+</td>
+                            <td>✅ 115+</td>
+                            <td>✅ 17.0+</td>
+                            <td>✅ 16.0+</td>
+                        </tr>
+                        <tr>
+                            <td>Array.fromAsync</td>
+                            <td><span class="compatibility-badge compatibility-good">Estável</span></td>
+                            <td>✅ 117+</td>
+                            <td>✅ 115+</td>
+                            <td>✅ 16.4+</td>
+                            <td>✅ 21.0+</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Recursos que Você Pode Usar Hoje</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🔄 Top-Level Await</h4>
+                        <p>Use await fora de funções async em módulos ES.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎯 Optional Chaining</h4>
+                        <p>obj?.prop?.nested evita erros de propriedade nula.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>❓ Nullish Coalescing</h4>
+                        <p>valor ?? fallback usa fallback apenas para null/undefined.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔄 Promise.any()</h4>
+                        <p>Resolve quando a primeira promise é cumprida.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎯 Private Fields</h4>
+                        <p>Campos privados em classes com #field.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📦 Error Cause</h4>
+                        <p>throw new Error("msg", { cause: error });</p>
+                    </div>
+                </div>
+
+                <h2>Estratégia de Adoção Gradual</h2>
+                
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">Fase 1: Implantação Imediata</h3>
+                    <ul>
+                        <li>Optional Chaining (?.)</li>
+                        <li>Nullish Coalescing (??)</li>
+                        <li>Promise.any() e Promise.allSettled()</li>
+                        <li>String.prototype.replaceAll()</li>
+                    </ul>
+                    
+                    <h3>Fase 2: Planejamento para 6 meses</h3>
+                    <ul>
+                        <li>Decorators (com polyfill)</li>
+                        <li>Temporal API (para novos projetos)</li>
+                        <li>Array.fromAsync</li>
+                        <li>Error Cause</li>
+                    </ul>
+                    
+                    <h3>Fase 3: Monitoramento</h3>
+                    <ul>
+                        <li>Records & Tuples (aguardando suporte)</li>
+                        <li>Pipeline Operator</li>
+                        <li>Pattern Matching</li>
+                    </ul>
+                </div>
+
+                <h2>Ferramentas de Build e Transpilação</h2>
+                
+                <div class="code-block">
+// Babel configuration (.babelrc)
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "chrome": "100",
+        "firefox": "115",
+        "safari": "16"
+      },
+      "useBuiltIns": "usage",
+      "corejs": "3.35"
+    }]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-decorators",
+    "@babel/plugin-proposal-pipeline-operator",
+    "@babel/plugin-syntax-record-and-tuple"
+  ]
+}
+
+// TypeScript configuration (tsconfig.json)
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "experimentalDecorators": true,
+    "useDefineForClassFields": true,
+    // Para novas features experimentais
+    "plugins": [
+      {
+        "name": "@babel/plugin-proposal-decorators",
+        "legacy": true
+      }
+    ]
+  }
+}
+                </div>
+
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #3498db, #2980b9); color: white; border-radius: 10px;">
+                    <h3 style="margin-top: 0; color: white;">💻 Quer Aprofundar em JavaScript Moderno?</h3>
+                    <p>Participe do nosso workshop gratuito sobre ECMAScript 2024 com exemplos práticos e exercícios.</p>
+                    <a href="../contato.html?assunto=javascript" style="display: inline-block; background: white; color: #3498db; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 1rem;">Inscrever-se no Workshop</a>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div style="display: flex; justify-content: space-between; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 3rem 0;">
+                <div style="max-width: 45%;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">← Artigo Anterior</div>
+                    <a href="post-5.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Otimização de Performance</a>
+                </div>
+                <div style="max-width: 45%; text-align: right;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Próximo Artigo →</div>
+                    <a href="post-7.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">WordPress vs CMS Personalizado</a>
+                </div>
+            </div>
+
+            <!-- Comentários -->
+            <div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 3rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">💬 Compartilhe Suas Experiências</h2>
+                
+                <form style="margin-bottom: 3rem;" id="commentForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" placeholder="Seu nome" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        <input type="email" placeholder="Seu e-mail" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea placeholder="Qual recurso do JavaScript moderno você mais usa?..." required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 120px; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" style="background: #3498db; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer;">Compartilhar Experiência</button>
+                </form>
+
+                <div id="commentList">
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Dev Full-Stack</span>
+                            <span style="color: #666; font-size: 0.9rem;">16/02/2024 14:20</span>
+                        </div>
+                        <p>Optional Chaining e Nullish Coalescing mudaram completamente minha vida! Código muito mais limpo e seguro. Ansioso pelo Pipeline Operator!</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Tech Lead</span>
+                            <span style="color: #666; font-size: 0.9rem;">15/02/2024 21:10</span>
+                        </div>
+                        <p>Estamos migrando para Temporal API em todos os novos projetos. A diferença para o Date tradicional é absurda! Muito mais intuitivo e menos propenso a erros.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">React Developer</span>
+                            <span style="color: #666; font-size: 0.9rem;">15/02/2024 18:45</span>
+                        </div>
+                        <p>Decorators no JavaScript nativo vai ser um game changer! Já uso com TypeScript há tempos, mas ter isso padronizado vai facilitar muito.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">JavaScript Moderno</h3>
+                    <p>Explore as novas funcionalidades do ECMAScript 2024 e mantenha-se atualizado no desenvolvimento web.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Recursos ES2024</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Pipeline Operator</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Records & Tuples</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Decorators</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Temporal API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Ferramentas Dev</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Babel Playground</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Can I Use</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">ES Compatibility Table</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">TypeScript Sandbox</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Suporte Dev</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">📧 javascript@construcode.com</li>
+                        <li style="margin-bottom: 0.8rem;">💬 Discord: construecode/dev</li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contato.html" style="color: #3498db; text-decoration: none; font-weight: 500;">Consultoria JavaScript</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem;">
+                <p>&copy; 2024 ConstruCode JavaScript. Artigo escrito por João Silva, especialista em JavaScript com mais de 10 anos de experiência.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Tempo de leitura: 11 minutos | <span id="views">1,892</span> visualizações | Atualizado com ES2024
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const inputs = commentForm.querySelectorAll('input, textarea');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const comment = inputs[2].value;
+            
+            if (!name || !email || !comment) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            const now = new Date();
+            const newComment = document.createElement('div');
+            newComment.style.padding = '1.5rem 0';
+            newComment.style.borderBottom = '1px solid #eee';
+            
+            newComment.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-weight: 600; color: var(--primary-color);">${name}</span>
+                    <span style="color: #666; font-size: 0.9rem;">${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}</span>
+                </div>
+                <p>${comment}</p>
+            `;
+            
+            commentList.prepend(newComment);
+            commentForm.reset();
+            
+            alert('Obrigado por compartilhar sua experiência!');
+        });
+
+        // Contador de visualizações
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = localStorage.getItem('post-6-views') || 1892;
+            localStorage.setItem('post-6-views', parseInt(views) + 1);
+            
+            const viewsElement = document.getElementById('views');
+            if (viewsElement) {
+                viewsElement.textContent = (parseInt(views) + 1).toLocaleString();
+            }
+        });
+
+        // Simulador de Pipeline Operator
+        const simulatorBtn = document.createElement('button');
+        simulatorBtn.textContent = '🔧 Testar Pipeline Operator';
+        simulatorBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        `;
+        
+        simulatorBtn.addEventListener('click', () => {
+            const code = prompt('Digite um valor para processar (ex: "  HELLO  "):', '  HELLO  ');
+            if (code) {
+                // Simulação do Pipeline Operator
+                const processSteps = [
+                    { name: 'Original', value: code },
+                    { name: 'Trim', value: code.trim() },
+                    { name: 'Lowercase', value: code.trim().toLowerCase() },
+                    { name: 'Capitalize', value: code.trim().toLowerCase().replace(/^\w/, c => c.toUpperCase()) }
+                ];
+                
+                let result = `🔧 Processamento Simulado:\n\n`;
+                processSteps.forEach(step => {
+                    result += `${step.name}: "${step.value}"\n`;
+                });
+                
+                result += `\nEquivalente com Pipeline Operator:\n`;
+                result += `"${code}" |> trim |> toLowerCase |> capitalize`;
+                
+                alert(result);
+            }
+        });
+        
+        document.body.appendChild(simulatorBtn);
+    </script>
+</body>
+</html>

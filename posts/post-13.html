@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segurança Web: Protegendo Seu Site de Ataques - ConstruCode Blog</title>
+    <link rel="manifest" href="../manifest.json">
+    <meta name="description" content="Principais vulnerabilidades e como proteger seu site. Medidas essenciais de segurança que todo desenvolvedor deve conhecer.">
+    <meta name="keywords" content="Segurança Web, Proteção de Sites, OWASP, HTTPS, Firewall, SQL Injection, XSS">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .article-header {
+            padding: 4rem 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-category {
+            background: #e74c3c;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .threat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .threat-card {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .threat-card h4 {
+            color: var(--primary-color);
+            margin: 0 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .severity-critical { background: #e74c3c; color: white; }
+        .severity-high { background: #e67e22; color: white; }
+        .severity-medium { background: #f39c12; color: white; }
+        .severity-low { background: #3498db; color: white; }
+
+        .code-example {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .protection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .protection-table th {
+            background: #e74c3c;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .protection-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .protection-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .checklist {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #e74c3c;
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .stat-box {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #e74c3c15, #c0392b15);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e74c3c;
+            min-width: 60px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e74c3c15, #c0392b15);
+            border-left: 4px solid #e74c3c;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tool-card {
+            padding: 1.5rem;
+            background: white;
+            border: 2px solid #e74c3c;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 2rem;
+            }
+
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .threat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="../index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Artigo -->
+    <article>
+        <div class="container">
+            <!-- Cabeçalho -->
+            <div class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">10 de Janeiro, 2024</span>
+                    <span class="article-author">Por: Pedro Costa</span>
+                    <a href="../blog.html" class="article-category">Desenvolvimento Web</a>
+                </div>
+                <h1 class="article-title">Segurança Web: Protegendo Seu Site de Ataques</h1>
+                <p class="article-subtitle">Principais vulnerabilidades e como proteger seu site. Medidas essenciais de segurança que todo desenvolvedor deve conhecer.</p>
+            </div>
+
+            <!-- Imagem do Artigo -->
+            <div class="article-image">
+                🔒 WEB SECURITY
+            </div>
+
+            <!-- Conteúdo -->
+            <div class="article-content">
+                <p><strong>Um site é atacado a cada 39 segundos.</strong> Dados da Verizon mostram que 43% dos ataques cibernéticos têm como alvo pequenas empresas. E o custo médio de uma violação de dados no Brasil? R$ 5,8 milhões. Segurança web não é mais opcional - é obrigatória.</p>
+
+                <div class="stat-box">
+                    <div class="stat-number">94%</div>
+                    <div class="stat-text">dos ataques bem-sucedidos exploram vulnerabilidades conhecidas que já tinham correção disponível. A maioria falha em atualizações básicas.</div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>⚠️ Alerta Crítico:</strong>
+                    "A LGPD (Lei Geral de Proteção de Dados) estabelece multas de até 2% do faturamento da empresa (limitado a R$ 50 milhões) por violação de dados. Proteger seu site não é só técnica - é obrigação legal."
+                </div>
+
+                <h2>Top 10 Vulnerabilidades OWASP 2023</h2>
+                
+                <div class="threat-grid">
+                    <div class="threat-card">
+                        <h4>1. Quebra de Controle de Acesso
+                            <span class="severity-badge severity-critical">Crítico</span>
+                        </h4>
+                        <p>Usuários acessam funcionalidades ou dados sem permissão.</p>
+                        <small><strong>Proteção:</strong> RBAC, autenticação forte, auditoria de logs</small>
+                    </div>
+                    
+                    <div class="threat-card">
+                        <h4>2. Falhas Criptográficas
+                            <span class="severity-badge severity-high">Alto</span>
+                        </h4>
+                        <p>Dados sensíveis expostos por criptografia fraca ou ausente.</p>
+                        <small><strong>Proteção:</strong> HTTPS, algoritmos fortes, gestão de chaves</small>
+                    </div>
+                    
+                    <div class="threat-card">
+                        <h4>3. Injeção (SQL, NoSQL, OS)
+                            <span class="severity-badge severity-critical">Crítico</span>
+                        </h4>
+                        <p>Código malicioso injetado em interpretadores.</p>
+                        <small><strong>Proteção:</strong> Prepared statements, ORM, validação de entrada</small>
+                    </div>
+                    
+                    <div class="threat-card">
+                        <h4>4. Design Inseguro
+                            <span class="severity-badge severity-high">Alto</span>
+                        </h4>
+                        <p>Falhas arquiteturais que permitem bypass de segurança.</p>
+                        <small><strong>Proteção:</strong> Threat modeling, secure-by-design</small>
+                    </div>
+                </div>
+
+                <h2>Proteções Essenciais: Implementação Prática</h2>
+                
+                <table class="protection-table">
+                    <thead>
+                        <tr>
+                            <th>Proteção</th>
+                            <th>O que Faz</th>
+                            <th>Implementação</th>
+                            <th>Impacto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>HTTPS/TLS 1.3</strong></td>
+                            <td>Criptografa comunicação cliente-servidor</td>
+                            <td>Certificado SSL (Let's Encrypt grátis)</td>
+                            <td>Previne MITM, exigido pelo Google</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WAF (Firewall)</strong></td>
+                            <td>Filtra tráfego malicioso antes do servidor</td>
+                            <td>Cloudflare, AWS WAF, ModSecurity</td>
+                            <td>Bloqueia 99% ataques automatizados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CSP (Content Security Policy)</strong></td>
+                            <td>Controla recursos que página pode carregar</td>
+                            <td>Header HTTP Content-Security-Policy</td>
+                            <td>Previne XSS e injection</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HSTS</strong></td>
+                            <td>Força navegador usar apenas HTTPS</td>
+                            <td>Header Strict-Transport-Security</td>
+                            <td>Previne downgrade para HTTP</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CORS Configurado</strong></td>
+                            <td>Controla acesso entre diferentes origens</td>
+                            <td>Headers Access-Control-Allow-Origin</td>
+                            <td>Previne CSRF e data theft</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Exemplos de Código Seguro vs Inseguro</h2>
+                
+                <div class="code-example">
+// ❌ INSECURE - SQL Injection vulnerável
+const query = `SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`;
+db.query(query, (err, result) => { ... });
+
+// ✅ SECURE - Prepared Statements
+const query = 'SELECT * FROM users WHERE email = ? AND password = ?';
+db.query(query, [email, password], (err, result) => { ... });
+
+// ❌ INSECURE - XSS vulnerável
+app.get('/search', (req, res) => {
+    const query = req.query.q;
+    res.send(`<h1>Resultados para: ${query}</h1>`);
+});
+
+// ✅ SECURE - Escape output
+app.get('/search', (req, res) => {
+    const query = escapeHtml(req.query.q);
+    res.send(`<h1>Resultados para: ${query}</h1>`);
+});
+                </div>
+
+                <h2>Checklist de Segurança em 30 Minutos</h2>
+                
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>✅ HTTPS obrigatório</strong>
+                            <p>Redirecionar todo HTTP para HTTPS, certificado válido</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>✅ Atualizações de software</strong>
+                            <p>CMS, plugins, frameworks na última versão estável</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>✅ Backups automáticos</strong>
+                            <p>Backup diário offsite, teste de restauração mensal</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>✅ Senhas fortes</strong>
+                            <p>Mínimo 12 caracteres, 2FA habilitado onde possível</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>✅ WAF configurado</strong>
+                            <p>Firewall de aplicação web básico (Cloudflare free)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>✅ Headers de segurança</strong>
+                            <p>CSP, HSTS, X-Frame-Options, X-XSS-Protection</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Configuração de Headers de Segurança</h2>
+                
+                <div class="code-example">
+# Nginx Configuration
+server {
+    # HSTS - Force HTTPS for 1 year
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    
+    # X-Frame-Options - Prevent clickjacking
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    
+    # X-XSS-Protection
+    add_header X-XSS-Protection "1; mode=block" always;
+    
+    # Content-Security-Policy (Basic)
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://ajax.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;" always;
+    
+    # Referrer-Policy
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+}
+
+# .htaccess para Apache
+&lt;IfModule mod_headers.c&gt;
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+&lt;/IfModule&gt;
+                </div>
+
+                <h2>Case Study: E-commerce Atacado</h2>
+                
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="color: white; margin-top: 0;">🛒 LojaVirtualSegura.com.br</h3>
+                    
+                    <p><strong>Situação Inicial:</strong> Site WordPress com 50 plugins, sem HTTPS, backup manual, múltiplas vulnerabilidades OWASP.</p>
+                    
+                    <p><strong>Incidente:</strong> Ataque de SQL Injection + XSS. Dados de 15.000 clientes vazados. Site offline por 3 dias.</p>
+                    
+                    <p><strong>Custo do Incidente:</strong></p>
+                    <ul>
+                        <li>Multa preliminar LGPD: R$ 250.000</li>
+                        <li>Perda de vendas: R$ 180.000 (3 dias offline)</li>
+                        <li>Recuperação de dados: R$ 45.000</li>
+                        <li>Consultoria de segurança: R$ 35.000</li>
+                        <li><strong>Total:</strong> R$ 510.000</li>
+                    </ul>
+
+                    <p><strong>Solução Implementada:</strong></p>
+                    <ol>
+                        <li>Migração para HTTPS com certificado wildcard</li>
+                        <li>Implementação de WAF (Cloudflare Pro)</li>
+                        <li>Redução de 50 para 12 plugins (apenas essenciais)</li>
+                        <li>Backup automático diário com versionamento</li>
+                        <li>Auditoria de segurança trimestral</li>
+                        <li>Treinamento da equipe em segurança</li>
+                    </ol>
+
+                    <p><strong>Resultado (12 meses depois):</strong> 0 incidentes de segurança, redução de 85% em tentativas de ataque bloqueadas, site 40% mais rápido.</p>
+                </div>
+
+                <h2>Ferramentas de Teste Gratuitas</h2>
+                
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <strong>🔍 OWASP ZAP</strong>
+                        <div>Scanner de segurança open source</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>🛡️ SSL Labs Test</strong>
+                        <div>Teste de configuração SSL/TLS</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>📊 Security Headers</strong>
+                        <div>Análise de headers de segurança</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>🐛 Snyk</strong>
+                        <div>Scanner de dependências vulneráveis</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>🔐 Have I Been Pwned</strong>
+                        <div>Verificação de vazamento de credenciais</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>🌐 Mozilla Observatory</strong>
+                        <div>Teste completo de segurança web</div>
+                    </div>
+                </div>
+
+                <h2>Plano de Segurança em 4 Fases</h2>
+                
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">Fase 1: Proteções Básicas (1 semana)</h3>
+                    <ul>
+                        <li>Implementar HTTPS obrigatório</li>
+                        <li>Configurar WAF básico</li>
+                        <li>Atualizar todo o software</li>
+                        <li>Criar backup automático</li>
+                        <li>Implementar 2FA para admin</li>
+                    </ul>
+                    
+                    <h3>Fase 2: Fortificação (2-4 semanas)</h3>
+                    <ul>
+                        <li>Configurar headers de segurança</li>
+                        <li>Implementar rate limiting</li>
+                        <li>Auditar plugins/extensões</li>
+                        <li>Configurar logging e monitoramento</li>
+                        <li>Treinar equipe em práticas seguras</li>
+                    </ul>
+                    
+                    <h3>Fase 3: Testes (Semanas 5-8)</h3>
+                    <ul>
+                        <li>Testes de penetração básicos</li>
+                        <li>Scanner de vulnerabilidades</li>
+                        <li>Teste de backup e recovery</li>
+                        <li>Auditoria de código (se aplicável)</li>
+                        <li>Teste de carga com foco em segurança</li>
+                    </ul>
+                    
+                    <h3>Fase 4: Manutenção (Contínuo)</h3>
+                    <ul>
+                        <li>Atualizações semanais de segurança</li>
+                        <li>Monitoramento 24/7</li>
+                        <li>Auditorias trimestrais</li>
+                        <li>Revisão de políticas</li>
+                        <li>Treinamentos contínuos</li>
+                    </ul>
+                </div>
+
+                <h2>Estatísticas Alarmantes (2024)</h2>
+                
+                <div class="stat-box">
+                    <div class="stat-number">30%</div>
+                    <div class="stat-text">dos sites WordPress têm pelo menos 1 vulnerabilidade crítica. Plugins desatualizados são a causa principal.</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-number">53%</div>
+                    <div class="stat-text">das empresas levam mais de 6 meses para detectar uma violação. Média global é 207 dias.</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-number">R$ 5,8M</div>
+                    <div class="stat-text">é o custo médio de uma violação de dados no Brasil. 60% das pequenas empresas fecham em 6 meses após ataque.</div>
+                </div>
+
+                <h2>Erros Fatais de Segurança</h2>
+                
+                <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0;">
+                    <h4 style="color: #856404; margin-top: 0;">⚠️ 10 Erros que Convidam Ataques</h4>
+                    
+                    <ol>
+                        <li><strong>Usar senhas padrão</strong> (admin/admin123)</li>
+                        <li><strong>Não atualizar software</strong> (plugins, CMS, OS)</li>
+                        <li><strong>HTTP em vez de HTTPS</strong></li>
+                        <li><strong>Backups no mesmo servidor</strong></li>
+                        <li><strong>Permissões de arquivo muito abertas</strong> (777)</li>
+                        <li><strong>Expor informações sensíveis</strong> (erros, logs, .git)</li>
+                        <li><strong>Usar plugins/softwares abandonados</strong></li>
+                        <li><strong>Sem rate limiting</strong> (permite brute force)</li>
+                        <li><strong>Input não validado</strong> (abre porta para injection)</li>
+                        <li><strong>Falta de monitoramento</strong> (não sabe se foi atacado)</li>
+                    </ol>
+                </div>
+
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border-radius: 10px;">
+                    <h3 style="margin-top: 0; color: white;">🔐 Quer Saber Quão Seguro Está Seu Site?</h3>
+                    <p>Faça uma auditoria gratuita de segurança e receba um relatório detalhado com vulnerabilidades e plano de correção.</p>
+                    <a href="../contato.html?assunto=seguranca" style="display: inline-block; background: white; color: #e74c3c; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 1rem;">Solicitar Auditoria Gratuita</a>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div style="display: flex; justify-content: space-between; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 3rem 0;">
+                <div style="max-width: 45%;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">← Artigo Anterior</div>
+                    <a href="post-12.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Marketing de Conteúdo</a>
+                </div>
+                <div style="max-width: 45%; text-align: right;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Próximo Artigo →</div>
+                    <a href="post-14.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Analytics: Extrair Insights</a>
+                </div>
+            </div>
+
+            <!-- Comentários -->
+            <div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 3rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">💬 Compartilhe Suas Experiências</h2>
+                
+                <form style="margin-bottom: 3rem;" id="commentForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" placeholder="Seu nome" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        <input type="email" placeholder="Seu e-mail" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea placeholder="Já enfrentou algum ataque ou vulnerabilidade? Como resolveu?..." required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 120px; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" style="background: #e74c3c; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer;">Compartilhar Experiência</button>
+                </form>
+
+                <div id="commentList">
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">DevOps Engineer</span>
+                            <span style="color: #666; font-size: 0.9rem;">11/01/2024 15:20</span>
+                        </div>
+                        <p>Implementamos o checklist de 30 minutos em todos os nossos clientes. A diferença é absurda! Sites que antes tinham 50+ tentativas de ataque por dia agora têm 2-3. O WAF do Cloudflare free já bloqueia 99%.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Dono de Agência</span>
+                            <span style="color: #666; font-size: 0.9rem;">10/01/2024 22:45</span>
+                        </div>
+                        <p>Perdi um cliente grande por falta de segurança. Site invadido, dados vazados. Aprendi da pior forma. Hoje tenho processo padrão: HTTPS obrigatório, Cloudflare em tudo, backup automatizado, auditoria mensal.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Security Analyst</span>
+                            <span style="color: #666; font-size: 0.9rem;">10/01/2024 19:10</span>
+                        </div>
+                        <p>Excelente artigo! As estatísticas sobre LGPD são importantes. Muitas empresas ainda não entenderam que segurança digital é questão de sobrevivência empresarial, não apenas técnica. A multa pode quebrar o negócio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Segurança Web</h3>
+                    <p>Proteja seu site contra ataques e evite prejuízos financeiros e de reputação.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Serviços de Segurança</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Auditoria de Segurança</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Implementação de WAF</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Configuração HTTPS</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Monitoramento 24/7</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Ferramentas Grátis</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Scanner de Vulnerabilidades</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Teste de Headers</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Checklist de Segurança</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Calculadora de Risco LGPD</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Especialista em Segurança</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">📧 seguranca@construcode.com</li>
+                        <li style="margin-bottom: 0.8rem;">🔒 Signal: (11) 98765-4321</li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contato.html" style="color: #e74c3c; text-decoration: none; font-weight: 500;">Consultoria de Segurança</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem;">
+                <p>&copy; 2024 ConstruCode Security. Artigo escrito por Pedro Costa, especialista em segurança web com certificações OSCP e CEH, mais de 8 anos de experiência em pentest.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Tempo de leitura: 10 minutos | <span id="views">3,150</span> visualizações | Baseado em OWASP 2023
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const inputs = commentForm.querySelectorAll('input, textarea');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const comment = inputs[2].value;
+            
+            if (!name || !email || !comment) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            const now = new Date();
+            const newComment = document.createElement('div');
+            newComment.style.padding = '1.5rem 0';
+            newComment.style.borderBottom = '1px solid #eee';
+            
+            newComment.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-weight: 600; color: var(--primary-color);">${name}</span>
+                    <span style="color: #666; font-size: 0.9rem;">${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}</span>
+                </div>
+                <p>${comment}</p>
+            `;
+            
+            commentList.prepend(newComment);
+            commentForm.reset();
+            
+            alert('Obrigado por compartilhar sua experiência!');
+        });
+
+        // Contador de visualizações
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = localStorage.getItem('post-13-views') || 3150;
+            localStorage.setItem('post-13-views', parseInt(views) + 1);
+            
+            const viewsElement = document.getElementById('views');
+            if (viewsElement) {
+                viewsElement.textContent = (parseInt(views) + 1).toLocaleString();
+            }
+        });
+
+        // Teste de Headers de Segurança
+        const headerTestBtn = document.createElement('button');
+        headerTestBtn.textContent = '🔍 Testar Headers';
+        headerTestBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        `;
+        
+        headerTestBtn.addEventListener('click', () => {
+            const url = prompt('Digite a URL do site (com https://):', 'https://seusite.com');
+            
+            if (url) {
+                const fakeResults = `
+🔍 Resultados do Teste de Headers de Segurança
+
+URL: ${url}
+
+📊 Headers Encontrados:
+
+✅ HTTPS: Sim (Conexão segura)
+✅ HSTS: Configurado (max-age=31536000)
+✅ X-Frame-Options: SAMEORIGIN
+✅ X-XSS-Protection: 1; mode=block
+✅ X-Content-Type-Options: nosniff
+⚠️ Content-Security-Policy: Parcialmente configurado
+❌ Referrer-Policy: Não encontrado
+
+🎯 Pontuação: 78/100
+
+📋 Recomendações:
+
+1. Implementar CSP completo
+2. Adicionar Referrer-Policy
+3. Considerar Feature-Policy
+4. Verificar permissions-policy
+
+🔧 Como Corrigir:
+
+# Nginx Configuration
+add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:;";
+add_header Referrer-Policy "strict-origin-when-cross-origin";
+
+⚠️ Atenção: Teste simulado. Para análise real, use securityheaders.com
+                `;
+                
+                const textArea = document.createElement('textarea');
+                textArea.value = fakeResults;
+                textArea.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 80%;
+                    height: 60%;
+                    padding: 20px;
+                    font-family: monospace;
+                    font-size: 14px;
+                    background: #282c34;
+                    color: white;
+                    border: 2px solid #e74c3c;
+                    border-radius: 10px;
+                    z-index: 10000;
+                    resize: none;
+                `;
+                
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.7);
+                    z-index: 9999;
+                `;
+                
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = 'Fechar';
+                closeBtn.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #e74c3c;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    z-index: 10001;
+                    font-weight: bold;
+                `;
+                
+                closeBtn.addEventListener('click', () => {
+                    document.body.removeChild(textArea);
+                    document.body.removeChild(overlay);
+                    document.body.removeChild(closeBtn);
+                });
+                
+                overlay.addEventListener('click', () => {
+                    document.body.removeChild(textArea);
+                    document.body.removeChild(overlay);
+                    document.body.removeChild(closeBtn);
+                });
+                
+                document.body.appendChild(overlay);
+                document.body.appendChild(textArea);
+                document.body.appendChild(closeBtn);
+            }
+        });
+        
+        document.body.appendChild(headerTestBtn);
+    </script>
+</body>
+</html>

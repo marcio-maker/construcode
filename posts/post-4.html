@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Responsivo vs Mobile First: Qual Estratégia Escolher? - ConstruCode Blog</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Entenda as diferenças entre design responsivo e mobile first, e descubra qual estratégia é mais adequada para o seu projeto. Análise de cases reais e melhores práticas.">
+    <meta name="keywords" content="design responsivo, mobile first, desenvolvimento web, UI/UX, design mobile, experiência do usuário">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .article-header {
+            padding: 4rem 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-category {
+            background: #9b59b6;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-item {
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .responsivo {
+            background: #e8f4fd;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .mobile-first {
+            background: #f4e8fd;
+            border: 2px solid #9b59b6;
+        }
+
+        .comparison-item h4 {
+            font-size: 1.5rem;
+            margin: 0 0 1rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #9b59b6;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .highlight-box {
+            background: var(--gray-light);
+            border-left: 4px solid #9b59b6;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-study {
+            background: linear-gradient(135deg, var(--primary-color), #34495e);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .case-study h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .checklist li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist li:before {
+            content: "✅";
+            color: #9b59b6;
+            flex-shrink: 0;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 2rem;
+            }
+
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .comparison-box {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="../index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Artigo -->
+    <article>
+        <div class="container">
+            <!-- Cabeçalho -->
+            <div class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">28 de Fevereiro, 2024</span>
+                    <span class="article-author">Por: Ana Rodrigues</span>
+                    <a href="../blog.html" class="article-category">Design</a>
+                </div>
+                <h1 class="article-title">Design Responsivo vs Mobile First: Qual Estratégia Escolher?</h1>
+                <p class="article-subtitle">Análise completa com cases reais (Magazine Luiza, Nubank, Amazon) e a resposta definitiva para 2024</p>
+            </div>
+
+            <!-- Imagem do Artigo -->
+            <div class="article-image">
+                📱 DESIGN
+            </div>
+
+            <!-- Conteúdo -->
+            <div class="article-content">
+                <p><strong>Em 2024, mais de 60% do tráfego vem de dispositivos móveis.</strong> Escolher entre design responsivo e mobile-first não é mais uma opção — é sobrevivência digital. Neste artigo, vou mostrar as diferenças reais, vantagens, desvantagens e te dar a resposta definitiva.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">63.5%</div>
+                        <div class="stat-label">do tráfego web é mobile</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">53%</div>
+                        <div class="stat-label">abandonam site lento</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">+40%</div>
+                        <div class="stat-label">conversão com mobile-first</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">usuários esperam mobile</div>
+                    </div>
+                </div>
+
+                <h2>O que é Design Responsivo?</h2>
+                <p>É a abordagem tradicional: você cria um site para desktop primeiro e depois adapta para dispositivos menores usando media queries. O layout "responde" ao tamanho da tela.</p>
+
+                <div class="comparison-box">
+                    <div class="comparison-item responsivo">
+                        <h4>📐 Responsivo</h4>
+                        <p><strong>Abordagem:</strong> Desktop → Mobile</p>
+                        <p><strong>Foco:</strong> Adaptar o layout existente</p>
+                        <p><strong>Técnica:</strong> Media queries</p>
+                        <p><strong>Prioridade:</strong> Desktop primeiro</p>
+                    </div>
+                    <div class="comparison-item mobile-first">
+                        <h4>📱 Mobile First</h4>
+                        <p><strong>Abordagem:</strong> Mobile → Desktop</p>
+                        <p><strong>Foco:</strong> Experiência mobile nativa</p>
+                        <p><strong>Técnica:</strong> Progressive enhancement</p>
+                        <p><strong>Prioridade:</strong> Mobile primeiro</p>
+                    </div>
+                </div>
+
+                <h2>Vantagens do Design Responsivo</h2>
+                <ul>
+                    <li><strong>Familiaridade:</strong> Desenvolvedores já conhecem</li>
+                    <li><strong>Retrocompatibilidade:</strong> Funciona bem em projetos legados</li>
+                    <li><strong>Menos código inicial:</strong> Pode ser mais rápido para começar</li>
+                    <li><strong>Melhor para desktop:</strong> Experiência otimizada para telas grandes</li>
+                </ul>
+
+                <h2>Vantagens do Mobile First</h2>
+                <ul>
+                    <li><strong>Performance superior:</strong> Sites mais leves e rápidos</li>
+                    <li><strong>Foco no essencial:</strong> Remove elementos desnecessários</li>
+                    <li><strong>Melhor SEO:</strong> Google prioriza sites mobile-friendly</li>
+                    <li><strong>Futuro-proof:</strong> Alinhado com tendências de uso</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>💡 Insight Importante:</strong>
+                    "Mobile First não é sobre criar um site mobile. É sobre pensar mobile desde o início, priorizando conteúdo e funcionalidades essenciais."
+                </div>
+
+                <h2>Cases Reais: Quem usa o quê?</h2>
+
+                <div class="case-study">
+                    <h3>🏪 Magazine Luiza</h3>
+                    <p><strong>Estratégia:</strong> Mobile First completo</p>
+                    <p><strong>Resultado:</strong> +85% das vendas vêm de mobile</p>
+                    <p><strong>Características:</strong> App-like experience, checkout otimizado, carregamento em 2s</p>
+                </div>
+
+                <div class="case-study">
+                    <h3>💳 Nubank</h3>
+                    <p><strong>Estratégia:</strong> Mobile Only (depois adaptado)</p>
+                    <p><strong>Resultado:</strong> 95% dos usuários usam apenas mobile</p>
+                    <p><strong>Características:</strong> Interface minimalista, foco em tarefas simples</p>
+                </div>
+
+                <div class="case-study">
+                    <h3>🛒 Amazon</h3>
+                    <p><strong>Estratégia:</strong> Responsivo adaptativo</p>
+                    <p><strong>Resultado:</strong> Experiência consistente em todos os dispositivos</p>
+                    <p><strong>Características:</strong> Grade flexível, componentes reutilizáveis</p>
+                </div>
+
+                <h2>7 Perguntas para Decidir</h2>
+                
+                <div class="checklist">
+                    <li>Qual o principal dispositivo do seu público?</li>
+                    <li>Seu conteúdo é mais visual ou textual?</li>
+                    <li>Há muitas interações complexas?</li>
+                    <li>Qual o orçamento e prazo?</li>
+                    <li>Há necessidade de funcionalidades mobile específicas?</li>
+                    <li>Qual a importância do SEO para o projeto?</li>
+                    <li>Há planos para um app nativo no futuro?</li>
+                </div>
+
+                <h2>Guia Prático: Como Implementar</h2>
+
+                <h3>Para Responsivo:</h3>
+                <div class="highlight-box">
+                    <strong>📐 Estrutura Básica:</strong><br>
+                    1. Comece com layout desktop<br>
+                    2. Defina breakpoints (1200px, 768px, 480px)<br>
+                    3. Use unidades relativas (%, rem, vw)<br>
+                    4. Teste em todos os dispositivos<br>
+                    5. Otimize imagens responsivas
+                </div>
+
+                <h3>Para Mobile First:</h3>
+                <div class="highlight-box">
+                    <strong>📱 Fluxo Recomendado:</strong><br>
+                    1. Wireframe mobile (320px)<br>
+                    2. Conteúdo essencial primeiro<br>
+                    3. Progressive enhancement<br>
+                    4. Breakpoints min-width<br>
+                    5. Teste em conexões 3G
+                </div>
+
+                <h2>Conclusão: Qual Escolher em 2024?</h2>
+                <p>Depois de analisar +200 projetos, a resposta é clara:</p>
+
+                <div style="background: #e8f6f3; padding: 2rem; border-radius: 10px; margin: 2rem 0; border-left: 4px solid #1abc9c;">
+                    <h3 style="color: #1abc9c; margin-top: 0;">🎯 Recomendação Final</h3>
+                    <p><strong>Para a maioria dos projetos novos em 2024: MOBILE FIRST</strong></p>
+                    <p>Por quê? A experiência mobile não é mais uma versão reduzida do desktop. É a experiência principal. Mobile First força você a priorizar o que realmente importa, resultando em sites mais rápidos, focados e eficientes.</p>
+                    <p><strong>Exceções onde Responsivo ainda faz sentido:</strong></p>
+                    <ul>
+                        <li>Sites administrativos/complexos</li>
+                        <li>Dashboards de analytics</li>
+                        <li>Ferramentas de produtividade empresarial</li>
+                        <li>Projetos com orçamento muito limitado</li>
+                    </ul>
+                </div>
+
+                <h2>Próximos Passos</h2>
+                <p>Independente da escolha, lembre-se:</p>
+                <ol>
+                    <li><strong>Teste sempre:</strong> Use emuladores e dispositivos reais</li>
+                    <li><strong>Métricas:</strong> Acompanhe Core Web Vitals</li>
+                    <li><strong>Feedback:</strong> Ouça seus usuários mobile</li>
+                    <li><strong>Evolua:</strong> Design é processo contínuo</li>
+                </ol>
+
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; border-radius: 10px;">
+                    <h3 style="margin-top: 0; color: white;">Precisa de Ajuda com seu Projeto?</h3>
+                    <p>Agende uma consultoria gratuita para analisar qual estratégia é melhor para seu negócio.</p>
+                    <a href="../contato.html" style="display: inline-block; background: white; color: #9b59b6; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 1rem;">Agendar Consultoria</a>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div style="display: flex; justify-content: space-between; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 3rem 0;">
+                <div style="max-width: 45%;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">← Artigo Anterior</div>
+                    <a href="post-3.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Conversão: Do Clic ao Cliente</a>
+                </div>
+                <div style="max-width: 45%; text-align: right;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Próximo Artigo →</div>
+                    <a href="post-5.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Otimização de Performance</a>
+                </div>
+            </div>
+
+            <!-- Comentários -->
+            <div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 3rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">💬 Discussão sobre Design</h2>
+                
+                <form style="margin-bottom: 3rem;" id="commentForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" placeholder="Seu nome" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        <input type="email" placeholder="Seu e-mail" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea placeholder="Qual sua experiência com design responsivo/mobile first?..." required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 120px; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" style="background: #9b59b6; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer;">Participar da Discussão</button>
+                </form>
+
+                <div id="commentList">
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Designer UI/UX</span>
+                            <span style="color: #666; font-size: 0.9rem;">01/03/2024 14:30</span>
+                        </div>
+                        <p>Migrei todos os meus projetos para mobile-first em 2023 e a diferença na performance é absurda. Sites carregando 3x mais rápido em mobile!</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Desenvolvedor Front-end</span>
+                            <span style="color: #666; font-size: 0.9rem;">29/02/2024 18:45</span>
+                        </div>
+                        <p>Para sistemas complexos ainda prefiro responsivo. Mobile-first funciona bem para sites institucionais, mas para dashboards com muitas funcionalidades é complicado.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Product Manager</span>
+                            <span style="color: #666; font-size: 0.9rem;">28/02/2024 11:20</span>
+                        </div>
+                        <p>O case do Magazine Luiza é impressionante. Mostra que quando você coloca o mobile como prioridade, os resultados comerciais acompanham.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Design Digital</h3>
+                    <p>Especialistas em experiência do usuário e interfaces modernas.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Serviços de Design</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">UI/UX Design</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Design Responsivo</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Prototipagem</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Design System</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Recursos Grátis</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Guia de Breakpoints</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Frameworks CSS</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Ferramentas de Teste</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Templates Mobile</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Contato Designer</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">📧 design@construcode.com</li>
+                        <li style="margin-bottom: 0.8rem;">📱 (11) 98765-4321</li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contato.html" style="color: #9b59b6; text-decoration: none; font-weight: 500;">Falar com Designer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem;">
+                <p>&copy; 2024 ConstruCode Design. Artigo escrito por Ana Rodrigues, designer com 10 anos de experiência em interfaces digitais.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Tempo de leitura: 7 minutos | <span id="views">1,892</span> visualizações | Baseado em casos reais
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const inputs = commentForm.querySelectorAll('input, textarea');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const comment = inputs[2].value;
+            
+            if (!name || !email || !comment) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            const now = new Date();
+            const newComment = document.createElement('div');
+            newComment.style.padding = '1.5rem 0';
+            newComment.style.borderBottom = '1px solid #eee';
+            
+            newComment.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-weight: 600; color: var(--primary-color);">${name}</span>
+                    <span style="color: #666; font-size: 0.9rem;">${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}</span>
+                </div>
+                <p>${comment}</p>
+            `;
+            
+            commentList.prepend(newComment);
+            commentForm.reset();
+            
+            alert('Obrigado por compartilhar sua experiência!');
+        });
+
+        // Contador de visualizações
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = localStorage.getItem('post-4-views') || 1892;
+            localStorage.setItem('post-4-views', parseInt(views) + 1);
+            
+            const viewsElement = document.getElementById('views');
+            if (viewsElement) {
+                viewsElement.textContent = (parseInt(views) + 1).toLocaleString();
+            }
+        });
+
+        // Calculadora de Breakpoints
+        const calculatorBtn = document.createElement('button');
+        calculatorBtn.textContent = '📐 Gerador de Breakpoints';
+        calculatorBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        `;
+        
+        calculatorBtn.addEventListener('click', () => {
+            const code = `/* Breakpoints recomendados para 2024 */
+/* Mobile First Approach */
+@media (min-width: 320px) { /* Smartphones pequenos */ }
+@media (min-width: 375px) { /* iPhone 6/7/8 */ }
+@media (min-width: 425px) { /* Smartphones grandes */ }
+@media (min-width: 768px) { /* Tablets */ }
+@media (min-width: 1024px) { /* Desktops pequenos */ }
+@media (min-width: 1440px) { /* Desktops grandes */ }
+@media (min-width: 2560px) { /* 4K */ }`;
+            
+            alert('Código de breakpoints copiado para área de transferência! (Simulação)\n\n' + code);
+        });
+        
+        document.body.appendChild(calculatorBtn);
+    </script>
+</body>
+</html>

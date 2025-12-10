@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModaExpress - Case Completo | ConstruCode</title>
+    <link rel="manifest" href="../manifest.json">
+    <meta name="description" content="Case completo: Como transformamos um e-commerce tradicional em PWA e aumentamos vendas em 250%. Detalhes técnicos e resultados.">
+    <meta name="keywords" content="case estudo, PWA, e-commerce, moda, progressive web app, performance, conversão">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero do Case */
+        .case-hero {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+
+        .case-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .case-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .case-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+        }
+
+        /* Layout do Case */
+        .case-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 3rem;
+            padding: 3rem 0;
+        }
+
+        /* Conteúdo Principal */
+        .case-section {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .case-section h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Stats em Destaque */
+        .highlight-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+            padding-left: 2rem;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: var(--shadow);
+        }
+
+        /* Comparação Antes/Depois */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-item {
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .before {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+        }
+
+        .after {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+        }
+
+        /* Sidebar */
+        .case-sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .tech-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tech-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .tech-list li:before {
+            content: "⚙️";
+        }
+
+        .btn-back {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: var(--transition);
+        }
+
+        .btn-back:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .case-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .case-sidebar {
+                position: static;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .case-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .case-section {
+                padding: 2rem;
+            }
+            
+            .highlight-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .case-meta {
+                gap: 1rem;
+            }
+            
+            .meta-item {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="../index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero do Case -->
+    <section class="case-hero">
+        <div class="container">
+            <h1>ModaExpress - Transformação PWA</h1>
+            <p>Como aumentamos as vendas mobile em 250% com Progressive Web App</p>
+            
+            <div class="case-meta">
+                <div class="meta-item">📅 Duração: 3 meses</div>
+                <div class="meta-item">🏷️ Setor: Moda & E-commerce</div>
+                <div class="meta-item">📍 Cliente: São Paulo, SP</div>
+                <div class="meta-item">👥 Equipe: 5 especialistas</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="case-layout">
+            <!-- Conteúdo Principal -->
+            <main class="case-content">
+                
+                <!-- Resumo Executivo -->
+                <section class="case-section">
+                    <h2>📊 Resumo Executivo</h2>
+                    <p>A <strong>ModaExpress</strong> é uma rede de lojas de moda com 12 unidades físicas e um e-commerce que representava apenas 15% do faturamento total. O principal problema: <strong>85% do tráfego era mobile, mas apenas 20% das vendas</strong> vinham de dispositivos móveis.</p>
+                    
+                    <p>O site tradicional era lento (8.5s de carregamento), não era responsivo e tinha uma experiência de checkout complexa. Os clientes mobile simplesmente abandonavam o carrinho.</p>
+                    
+                    <div class="highlight-stats">
+                        <div class="stat-box">
+                            <div class="stat-number">+250%</div>
+                            <div>Vendas Mobile</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">2.1s</div>
+                            <div>LCP (Carregamento)</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">-78%</div>
+                            <div>Taxa de Rejeição</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">4.8⭐</div>
+                            <div>Avaliação Usuários</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Desafio -->
+                <section class="case-section">
+                    <h2>🎯 O Desafio</h2>
+                    <ul>
+                        <li><strong>Site lento:</strong> Carregamento de 8.5s em 3G (acima dos 3s recomendados)</li>
+                        <li><strong>Experiência ruim:</strong> Checkout complexo com 12 etapas diferentes</li>
+                        <li><strong>Sem engajamento:</strong> 0% de retorno espontâneo dos usuários</li>
+                        <li><strong>Alto abandono:</strong> 82% dos carrinhos abandonados no mobile</li>
+                        <li><strong>Custo alto:</strong> Manutenção de 3 apps nativos diferentes (iOS, Android, Windows)</li>
+                        <li><strong>SEO ruim:</strong> Google penalizava o site por lentidão</li>
+                    </ul>
+                </section>
+
+                <!-- Solução -->
+                <section class="case-section">
+                    <h2>💡 Nossa Solução</h2>
+                    <p>Desenvolvemos um <strong>Progressive Web App completo</strong> que substituiu o site tradicional e os 3 apps nativos por uma única solução multiplataforma.</p>
+                    
+                    <div class="comparison">
+                        <div class="comparison-item before">
+                            <h3>Antes (Site Tradicional)</h3>
+                            <ul>
+                                <li>Carregamento: 8.5s em 3G</li>
+                                <li>Checkout: 12 etapas complexas</li>
+                                <li>Funciona apenas online</li>
+                                <li>Sem notificações push</li>
+                                <li>Não instalável como app</li>
+                                <li>SEO: Posição 7 no Google</li>
+                                <li>Conversão mobile: 1.2%</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item after">
+                            <h3>Depois (PWA)</h3>
+                            <ul>
+                                <li>Carregamento: 2.1s em 3G</li>
+                                <li>Checkout: 3 etapas simplificadas</li>
+                                <li>Funciona offline parcial</li>
+                                <li>Notificações push personalizadas</li>
+                                <li>Instalável como app nativo</li>
+                                <li>SEO: Posição 1 no Google</li>
+                                <li>Conversão mobile: 4.7%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Implementação Técnica -->
+                <section class="case-section">
+                    <h2>⚙️ Implementação Técnica</h2>
+                    
+                    <h3>Service Worker Avançado</h3>
+                    <p>Implementamos um Service Worker inteligente que:</p>
+                    <ul>
+                        <li>Cache de recursos estáticos (CSS, JS, imagens)</li>
+                        <li>Cache estratégico de páginas frequentemente acessadas</li>
+                        <li>Fallback para modo offline com página personalizada</li>
+                        <li>Background sync para envio de formulários offline</li>
+                    </ul>
+                    
+                    <h3>Manifest.json Otimizado</h3>
+                    <p>Criamos um manifest.json completo que permite instalação como app:</p>
+                    <ul>
+                        <li>Ícones em todos os tamanhos necessários</li>
+                        <li>Splash screen personalizada</li>
+                        <li>Orientação de tela definida</li>
+                        <li>Theme color matching com a marca</li>
+                    </ul>
+                    
+                    <h3>Performance Otimizada</h3>
+                    <p>Técnicas implementadas para máxima velocidade:</p>
+                    <ul>
+                        <li>Lazy loading de imagens e componentes</li>
+                        <li>Code splitting do JavaScript</li>
+                        <li>Compressão Brotli ativada no servidor</li>
+                        <li>CDN global para entrega de assets</li>
+                    </ul>
+                </section>
+
+                <!-- Timeline -->
+                <section class="case-section">
+                    <h2>📅 Cronograma do Projeto</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>Semana 1-2: Análise e Planejamento</h3>
+                            <p>Auditoria completa do site existente, mapeamento da jornada do usuário, definição de métricas KPIs e criação de wireframes detalhados.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Semana 3-6: Desenvolvimento PWA</h3>
+                            <p>Implementação do Service Worker, manifest.json, otimização de performance, integração com API existente e desenvolvimento de features offline.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Semana 7-8: Testes e Otimização</h3>
+                            <p>Testes em 20+ dispositivos diferentes, otimização de Core Web Vitals, ajustes de UX baseados em feedback e testes de usabilidade.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Semana 9-12: Lançamento e Monitoramento</h3>
+                            <p>Lançamento gradual (canary release), campanha de incentivo à instalação do PWA, monitoramento contínuo de métricas e ajustes em tempo real.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Resultados -->
+                <section class="case-section">
+                    <h2>📈 Resultados Mensuráveis</h2>
+                    
+                    <h3>Performance Técnica</h3>
+                    <ul>
+                        <li>✅ <strong>LCP (Largest Contentful Paint):</strong> 8.5s → 2.1s (-75%)</li>
+                        <li>✅ <strong>FID (First Input Delay):</strong> 320ms → 45ms (-86%)</li>
+                        <li>✅ <strong>CLS (Cumulative Layout Shift):</strong> 0.42 → 0.08 (-81%)</li>
+                        <li>✅ <strong>Tamanho da página:</strong> 4.2MB → 890KB (-79%)</li>
+                        <li>✅ <strong>Tempo até interativo:</strong> 6.8s → 1.9s (-72%)</li>
+                    </ul>
+                    
+                    <h3>Resultados de Negócio</h3>
+                    <ul>
+                        <li>💰 <strong>Vendas mobile:</strong> R$ 45k/mês → R$ 157k/mês (+250%)</li>
+                        <li>📱 <strong>Instalações PWA:</strong> 34% dos usuários instalaram como app</li>
+                        <li>🔄 <strong>Retorno espontâneo:</strong> +65% através de notificações push</li>
+                        <li>⭐ <strong>Satisfação do cliente:</strong> 4.8/5 nas avaliações do Google</li>
+                        <li>💸 <strong>ROI do projeto:</strong> 420% em 6 meses</li>
+                        <li>📈 <strong>Faturamento total:</strong> +38% no período</li>
+                    </ul>
+                    
+                    <h3>Métricas de Engajamento</h3>
+                    <ul>
+                        <li>📊 <strong>Sessões por usuário:</strong> 1.2 → 3.8 (+217%)</li>
+                        <li>⏱️ <strong>Tempo na página:</strong> 48s → 3m 22s (+321%)</li>
+                        <li>🛒 <strong>Taxa de abandono:</strong> 82% → 29% (-65%)</li>
+                        <li>📲 <strong>Taxa de conversão mobile:</strong> 1.2% → 4.7% (+292%)</li>
+                    </ul>
+                </section>
+
+                <!-- Depoimento -->
+                <section class="case-section" style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white;">
+                    <h2 style="color: white;">💬 Depoimento do Cliente</h2>
+                    <blockquote style="font-size: 1.2rem; font-style: italic; border-left: 4px solid var(--secondary-color); padding-left: 1.5rem; margin: 1.5rem 0;">
+                        "O PWA transformou completamente nosso negócio digital. Em apenas 3 meses, o mobile deixou de ser um problema para ser nossa principal fonte de receita. A experiência é tão boa e fluida que muitos clientes nos perguntam como baixar nosso 'app' na App Store, e ficam surpresos quando explicamos que é apenas o site otimizado!"
+                    </blockquote>
+                    <p style="text-align: right; margin-top: 1rem;">
+                        <strong>— Maria Silva,</strong> Diretora de E-commerce da ModaExpress
+                    </p>
+                </section>
+
+                <!-- Call to Action -->
+                <section class="case-section" style="text-align: center;">
+                    <h2>Quer Resultados Semelhantes para seu E-commerce?</h2>
+                    <p>Entre em contato para uma análise gratuita do seu site e descubra como um PWA pode transformar seus resultados.</p>
+                    <a href="../contato.html?case=modaexpress" class="btn-back">Solicitar Análise Gratuita →</a>
+                    <p style="margin-top: 2rem;">
+                        <a href="../portfolio.html" style="color: var(--secondary-color); text-decoration: none; font-weight: 600;">
+                            ← Voltar para o Portfólio Completo
+                        </a>
+                    </p>
+                </section>
+
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="case-sidebar">
+                
+                <!-- Informações do Projeto -->
+                <div class="info-card">
+                    <h3>📋 Detalhes do Projeto</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Cliente:</strong> ModaExpress</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Setor:</strong> Varejo de Moda</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Duração:</strong> 3 meses</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Orçamento:</strong> R$ 45.000</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>ROI:</strong> 420% em 6 meses</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Equipe:</strong> 5 especialistas</li>
+                        <li style="padding: 0.5rem 0;"><strong>Data de entrega:</strong> Março 2024</li>
+                    </ul>
+                </div>
+
+                <!-- Tecnologias -->
+                <div class="info-card">
+                    <h3>⚙️ Tecnologias Utilizadas</h3>
+                    <ul class="tech-list">
+                        <li>React 18 + Next.js 14</li>
+                        <li>Service Workers (Workbox)</li>
+                        <li>PWA Manifest</li>
+                        <li>Vtex IO (Plataforma E-commerce)</li>
+                        <li>Google Analytics 4</li>
+                        <li>Lighthouse CI/CD</li>
+                        <li>WebP + AVIF para imagens</li>
+                        <li>Brotli Compression</li>
+                        <li>Cloudflare CDN</li>
+                    </ul>
+                </div>
+
+                <!-- Métricas -->
+                <div class="info-card">
+                    <h3>📊 Métricas Chave</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>LCP:</strong> 2.1s</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>FID:</strong> 45ms</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>CLS:</strong> 0.08</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Conversão:</strong> 4.7%</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Instalações:</strong> 34%</li>
+                        <li style="padding: 0.5rem 0;"><strong>Satisfação:</strong> 4.8/5</li>
+                    </ul>
+                </div>
+
+                <!-- Download do Case -->
+                <div class="info-card" style="text-align: center;">
+                    <h3>📥 Material Completo</h3>
+                    <p style="margin-bottom: 1.5rem;">Baixe o case completo com todos os dados e análise detalhada.</p>
+                    <a href="#" style="display: inline-block; background: var(--primary-color); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: var(--transition);" 
+                       onmouseover="this.style.backgroundColor='var(--secondary-color)'" 
+                       onmouseout="this.style.backgroundColor='var(--primary-color)'">
+                        📄 Baixar PDF do Case
+                    </a>
+                </div>
+
+                <!-- Links Relacionados -->
+                <div class="info-card">
+                    <h3>🔗 Cases Similares</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                            <a href="project-4.html" style="color: var(--secondary-color); text-decoration: none;">AppDelivery - PWA para Delivery</a>
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                            <a href="project-5.html" style="color: var(--secondary-color); text-decoration: none;">PetShop Online - Migração E-commerce</a>
+                        </li>
+                        <li style="padding: 0.5rem 0;">
+                            <a href="../blog.html" style="color: var(--secondary-color); text-decoration: none;">Blog: Artigos sobre PWA</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background-color: var(--primary-color); color: white; padding: 60px 0 30px; margin-top: 4rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Cases de Sucesso</h3>
+                    <p>Transformamos negócios através da tecnologia com resultados mensuráveis.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Nossos Serviços</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Desenvolvimento PWA</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Otimização SEO</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">CRO & Conversão</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Consultoria Tecnológica</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Entre em Contato</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">📧 cases@construcode.com</li>
+                        <li style="margin-bottom: 0.8rem;">📱 (11) 98765-4321</li>
+                        <li style="margin-bottom: 0.8rem;">📍 São Paulo, SP</li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contato.html" style="color: var(--secondary-color); text-decoration: none; font-weight: 500;">Agendar Análise Gratuita</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem;">
+                <p>&copy; 2024 ConstruCode. Case real com dados modificados para confidencialidade.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    <a href="../legal.html#privacidade" style="color: white; opacity: 0.8;">Política de Privacidade</a> |
+                    <a href="../legal.html#termos" style="color: white; opacity: 0.8;">Termos de Uso</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Fechar menu ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    hamburger.textContent = '☰';
+                }
+            });
+        }
+
+        // Contador de visualizações do case
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = localStorage.getItem('project-1-views') || 1250;
+            localStorage.setItem('project-1-views', parseInt(views) + 1);
+            
+            // Pode adicionar um elemento para mostrar as visualizações se quiser
+            // Ex: document.getElementById('case-views').textContent = parseInt(views) + 1;
+        });
+
+        // Smooth scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Download do PDF (simulação)
+        document.querySelector('a[href="#"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('PDF do case "ModaExpress - Transformação PWA" enviado para seu email! (Simulação)');
+            // Em produção, aqui seria o download real do PDF
+        });
+    </script>
+</body>
+</html>

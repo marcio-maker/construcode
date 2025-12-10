@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inteligência Artificial no Marketing Digital: Como Aplicar - ConstruCode Blog</title>
+    <link rel="manifest" href="../manifest.json">
+    <meta name="description" content="Como usar ferramentas de IA para otimizar suas campanhas de marketing, criar conteúdo e analisar dados de forma mais eficiente.">
+    <meta name="keywords" content="Inteligência Artificial, Marketing Digital, IA, ChatGPT, Automação, Análise de Dados">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #9b59b6;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .article-header {
+            padding: 4rem 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-category {
+            background: #9b59b6;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .ai-tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .ai-tool-card {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #9b59b6;
+        }
+
+        .ai-tool-card h4 {
+            color: var(--primary-color);
+            margin: 0 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .use-case-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .use-case-table th {
+            background: #9b59b6;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .use-case-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .use-case-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .prompt-example {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .stat-highlight {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #9b59b615, #8e44ad15);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #9b59b6;
+            min-width: 60px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #9b59b615, #8e44ad15);
+            border-left: 4px solid #9b59b6;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .implementation-step {
+            counter-increment: step-counter;
+            margin: 1.5rem 0;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .implementation-step:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #9b59b6;
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #9b59b6;
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin: 0 0 1rem 0;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 2rem;
+            }
+
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .ai-tool-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="../index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Artigo -->
+    <article>
+        <div class="container">
+            <!-- Cabeçalho -->
+            <div class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">5 de Fevereiro, 2024</span>
+                    <span class="article-author">Por: Pedro Costa</span>
+                    <a href="../blog.html" class="article-category">Marketing Digital</a>
+                </div>
+                <h1 class="article-title">Inteligência Artificial no Marketing Digital: Como Aplicar</h1>
+                <p class="article-subtitle">Como usar ferramentas de IA para otimizar suas campanhas de marketing, criar conteúdo e analisar dados de forma mais eficiente.</p>
+            </div>
+
+            <!-- Imagem do Artigo -->
+            <div class="article-image">
+                🤖 AI MARKETING
+            </div>
+
+            <!-- Conteúdo -->
+            <div class="article-content">
+                <p><strong>A Inteligência Artificial não é mais o futuro do marketing digital - é o presente.</strong> Empresas que dominam essas ferramentas estão atingindo resultados 3x melhores com menos esforço. Neste guia prático, vou mostrar como implementar IA em cada etapa do seu funil de marketing.</p>
+
+                <div class="stat-highlight">
+                    <div class="stat-number">64%</div>
+                    <div class="stat-text">das empresas que usam IA no marketing reportam aumento significativo na conversão e redução de custos.</div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>🚀 Insight Importante:</strong>
+                    "A IA não vai substituir profissionais de marketing, mas profissionais de marketing que usam IA vão substituir quem não usa. A diferença na produtividade e resultados é abismal."
+                </div>
+
+                <h2>1. Criação de Conteúdo com IA</h2>
+                <p>Esqueça o bloqueio criativo. Ferramentas de IA podem gerar ideias, esboços e até conteúdo completo em minutos.</p>
+
+                <div class="ai-tool-grid">
+                    <div class="ai-tool-card">
+                        <h4>📝 ChatGPT 4</h4>
+                        <p>Redação de blogs, emails, roteiros e copywriting. Use prompts específicos para melhor qualidade.</p>
+                    </div>
+                    <div class="ai-tool-card">
+                        <h4>🖼️ Midjourney/DALL-E</h4>
+                        <p>Criação de imagens para posts, banners e materiais visuais sem necessidade de designer.</p>
+                    </div>
+                    <div class="ai-tool-card">
+                        <h4>🎬 Pictory/Synthesia</h4>
+                        <p>Criação de vídeos a partir de scripts textuais, com avatares e vozes realistas.</p>
+                    </div>
+                    <div class="ai-tool-card">
+                        <h4>📊 Jasper AI</h4>
+                        <p>Especializado em marketing copy, gera textos persuasivos para campanhas e anúncios.</p>
+                    </div>
+                </div>
+
+                <h3>Prompts Eficazes para Conteúdo</h3>
+                
+                <div class="prompt-example">
+# Blog Post sobre [TEMA]
+Você é um especialista em marketing digital com 10 anos de experiência.
+Escreva um artigo de 1500 palavras sobre "[TEMA]" com:
+1. Título persuasivo com poder de clique
+2. Introdução que captura atenção
+3. 5 seções principais com subtítulos
+4. Estatísticas atualizadas de 2024
+5. Conclusão com call-to-action
+6. Meta description otimizada para SEO
+Tone: [profissional, casual, técnico, inspirador]
+                </div>
+
+                <h2>2. Segmentação e Personalização Avançada</h2>
+                
+                <table class="use-case-table">
+                    <thead>
+                        <tr>
+                            <th>Ferramenta</th>
+                            <th>Funcionalidade</th>
+                            <th>Resultado Típico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Google Analytics 4 + AI</strong></td>
+                            <td>Previsão de comportamento do usuário</td>
+                            <td>+35% em taxas de conversão</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Facebook Meta AI</strong></td>
+                            <td>Otimização automática de públicos</td>
+                            <td>-40% no custo por aquisição</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HubSpot AI</strong></td>
+                            <td>Scoring de leads inteligente</td>
+                            <td>+50% em qualificação de leads</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Salesforce Einstein</strong></td>
+                            <td>Recomendações de next-best-action</td>
+                            <td>+28% em vendas fechadas</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="implementation-step">
+                    <h4>Implementação Passo a Passo:</h4>
+                    <p>1. Conecte seu CRM com ferramentas de análise de IA<br>
+                    2. Configure regras de segmentação automática<br>
+                    3. Crie fluxos de email personalizados baseados em comportamento<br>
+                    4. Teste diferentes mensagens A/B com otimização automática<br>
+                    5. Monitore resultados e ajuste parâmetros</p>
+                </div>
+
+                <h2>3. Chatbots e Atendimento Inteligente</h2>
+                
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">💬 Como Implementar um Chatbot Eficiente</h3>
+                    
+                    <div class="stat-highlight">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-text">das interações com clientes serão gerenciadas por IA até 2025, sem intervenção humana.</div>
+                    </div>
+
+                    <p><strong>Plataformas Recomendadas:</strong></p>
+                    <ul>
+                        <li><strong>Dialogflow (Google):</strong> Integração nativa com outros produtos Google</li>
+                        <li><strong>IBM Watson Assistant:</strong> Para casos complexos com múltiplas integrações</li>
+                        <li><strong>ManyChat:</strong> Focado em WhatsApp e Messenger</li>
+                        <li><strong>Drift:</strong> Especializado em qualificação de leads B2B</li>
+                    </ul>
+                </div>
+
+                <h2>4. Otimização de Anúncios com Machine Learning</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🎯 Google Ads Smart Bidding</h4>
+                        <p>Otimização automática de lances baseada em conversões em tempo real.</p>
+                        <small><strong>Resultado:</strong> Até 20% mais conversões com mesmo orçamento</small>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📱 Facebook Advantage+</h4>
+                        <p>Criação e otimização automática de campanhas em múltiplos formatos.</p>
+                        <small><strong>Resultado:</strong> Custo por resultado até 35% menor</small>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔍 LinkedIn Campaign Manager</h4>
+                        <p>Segmentação inteligente por cargo, indústria e comportamento.</p>
+                        <small><strong>Resultado:</strong> Lead quality score 40% maior</small>
+                    </div>
+                </div>
+
+                <h2>5. Análise de Sentimento e Reputação Online</h2>
+                
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="color: white; margin-top: 0;">📊 Monitoramento Inteligente de Marca</h3>
+                    
+                    <p><strong>Ferramentas Essenciais:</strong></p>
+                    <ul>
+                        <li><strong>Brandwatch:</strong> Análise de sentimentos em redes sociais</li>
+                        <li><strong>Mention:</strong> Monitoramento de citações da marca</li>
+                        <li><strong>Hootsuite Insights:</strong> Análise de desempenho e tendências</li>
+                        <li><strong>Awario:</strong> Detecção de crises antes que aconteçam</li>
+                    </ul>
+
+                    <div class="stat-highlight" style="background: rgba(255,255,255,0.1);">
+                        <div class="stat-number" style="color: white;">92%</div>
+                        <div class="stat-text">dos consumidores confiam mais em recomendações de outros clientes do que em propaganda tradicional.</div>
+                    </div>
+                </div>
+
+                <h2>Comparativo de Ferramentas de IA para Marketing</h2>
+                
+                <table class="use-case-table">
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Melhor Opção</th>
+                            <th>Custo Mensal</th>
+                            <th>Dificuldade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Conteúdo Textual</strong></td>
+                            <td>ChatGPT Plus</td>
+                            <td>$20</td>
+                            <td>Fácil</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Imagens e Design</strong></td>
+                            <td>Midjourney</td>
+                            <td>$10-60</td>
+                            <td>Médio</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vídeos</strong></td>
+                            <td>Synthesia</td>
+                            <td>$30-500</td>
+                            <td>Fácil</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anúncios</strong></td>
+                            <td>Facebook Advantage+</td>
+                            <td>Grátis*</td>
+                            <td>Fácil</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Análise de Dados</strong></td>
+                            <td>GA4 Insights</td>
+                            <td>Grátis</td>
+                            <td>Médio</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chatbots</strong></td>
+                            <td>Dialogflow</td>
+                            <td>Grátis-$1500</td>
+                            <td>Difícil</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Riscos e Como Mitigar</h2>
+                
+                <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 1.5rem; margin: 2rem 0; border-radius: 0 8px 8px 0;">
+                    <h4 style="color: #856404; margin-top: 0;">⚠️ Atenção: Erros Comuns com IA</h4>
+                    
+                    <p><strong>1. Perda de Autenticidade:</strong></p>
+                    <p><strong>Solução:</strong> Use IA como assistente, não como substituto. Sempre revise e personalize o conteúdo gerado.</p>
+                    
+                    <p><strong>2. Viés Algorítmico:</strong></p>
+                    <p><strong>Solução:</strong> Monitore regularmente os resultados e ajuste parâmetros. Teste com públicos diversos.</p>
+                    
+                    <p><strong>3. Dependência Excessiva:</strong></p>
+                    <p><strong>Solução:</strong> Mantenha controle humano sobre decisões estratégicas. Use IA para execução, não para estratégia.</p>
+                </div>
+
+                <h2>Ferramentas Gratuitas para Começar Hoje</h2>
+                
+                <div class="ai-tool-grid">
+                    <div class="ai-tool-card">
+                        <h4>🤖 ChatGPT 3.5</h4>
+                        <p>Grátis para criação de conteúdo básico e ideias</p>
+                    </div>
+                    <div class="ai-tool-card">
+                        <h4>🎨 Canva AI</h4>
+                        <p>Design com IA no plano gratuito</p>
+                    </div>
+                    <div class="ai-tool-card">
+                        <h4>📈 Google Analytics 4</h4>
+                        <p>Insights preditivos gratuitos</p>
+                    </div>
+                    <div class="ai-tool-card">
+                        <h4>📧 HubSpot Free</h4>
+                        <p>CRM básico com automação de email</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; border-radius: 10px;">
+                    <h3 style="margin-top: 0; color: white;">🤖 Quer Implementar IA no Seu Marketing?</h3>
+                    <p>Baixe nosso kit gratuito com templates de prompts, checklist de implementação e case studies reais.</p>
+                    <a href="../contato.html?assunto=ia-marketing" style="display: inline-block; background: white; color: #9b59b6; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 1rem;">Baixar Kit Gratuito</a>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div style="display: flex; justify-content: space-between; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 3rem 0;">
+                <div style="max-width: 45%;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">← Artigo Anterior</div>
+                    <a href="post-7.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">WordPress vs CMS Personalizado</a>
+                </div>
+                <div style="max-width: 45%; text-align: right;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Próximo Artigo →</div>
+                    <a href="post-9.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Acessibilidade Web</a>
+                </div>
+            </div>
+
+            <!-- Comentários -->
+            <div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 3rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">💬 Compartilhe Suas Experiências com IA</h2>
+                
+                <form style="margin-bottom: 3rem;" id="commentForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" placeholder="Seu nome" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        <input type="email" placeholder="Seu e-mail" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea placeholder="Como você está usando IA no seu marketing? Quais resultados obteve?..." required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 120px; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" style="background: #9b59b6; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer;">Compartilhar Experiência</button>
+                </form>
+
+                <div id="commentList">
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Marketing Manager</span>
+                            <span style="color: #666; font-size: 0.9rem;">06/02/2024 15:20</span>
+                        </div>
+                        <p>Implementamos ChatGPT para redação de emails de nurture. A produtividade da equipe aumentou 300%! Agora conseguimos criar campanhas completas em horas, não mais em dias.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">E-commerce Owner</span>
+                            <span style="color: #666; font-size: 0.9rem;">05/02/2024 22:45</span>
+                        </div>
+                        <p>Usando Google Ads Smart Bidding + nossa própria IA para prever demanda. Reduzimos CPA em 45% e aumentamos conversões em 60%. A IA literalmente paga a si mesma!</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Agency Director</span>
+                            <span style="color: #666; font-size: 0.9rem;">05/02/2024 19:10</span>
+                        </div>
+                        <p>Excelente artigo! Estamos treinando nosso próprio modelo de IA para análise de sentimentos de marcas. Os insights que estamos extraindo de redes sociais são incríveis - conseguimos prever tendências com 85% de acurácia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">IA no Marketing</h3>
+                    <p>Estratégias práticas para implementar Inteligência Artificial em suas campanhas de marketing digital.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Ferramentas de IA</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">ChatGPT para Marketing</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">IA para Anúncios</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Chatbots Inteligentes</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Análise Preditiva</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Recursos Grátis</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Templates de Prompts</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Checklist de Implementação</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Case Studies Reais</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Comparador de Ferramentas</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Consultoria IA</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">📧 ia@construcode.com</li>
+                        <li style="margin-bottom: 0.8rem;">🤖 Discord: construecode/ai</li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contato.html" style="color: #9b59b6; text-decoration: none; font-weight: 500;">Agendar Demonstração</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem;">
+                <p>&copy; 2024 ConstruCode AI Marketing. Artigo escrito por Pedro Costa, especialista em marketing digital com IA e mais de 50 implementações bem-sucedidas.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Tempo de leitura: 10 minutos | <span id="views">3,215</span> visualizações | Atualizado com as últimas ferramentas
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const inputs = commentForm.querySelectorAll('input, textarea');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const comment = inputs[2].value;
+            
+            if (!name || !email || !comment) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            const now = new Date();
+            const newComment = document.createElement('div');
+            newComment.style.padding = '1.5rem 0';
+            newComment.style.borderBottom = '1px solid #eee';
+            
+            newComment.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-weight: 600; color: var(--primary-color);">${name}</span>
+                    <span style="color: #666; font-size: 0.9rem;">${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}</span>
+                </div>
+                <p>${comment}</p>
+            `;
+            
+            commentList.prepend(newComment);
+            commentForm.reset();
+            
+            alert('Obrigado por compartilhar sua experiência!');
+        });
+
+        // Contador de visualizações
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = localStorage.getItem('post-8-views') || 3215;
+            localStorage.setItem('post-8-views', parseInt(views) + 1);
+            
+            const viewsElement = document.getElementById('views');
+            if (viewsElement) {
+                viewsElement.textContent = (parseInt(views) + 1).toLocaleString();
+            }
+        });
+
+        // Assistente de Prompts de IA
+        const promptAssistant = document.createElement('button');
+        promptAssistant.textContent = '💡 Gerador de Prompts';
+        promptAssistant.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        `;
+        
+        promptAssistant.addEventListener('click', () => {
+            const options = [
+                "Criação de conteúdo para blog",
+                "Copywriting para anúncios",
+                "Estratégia de redes sociais",
+                "Email marketing",
+                "Roteiro de vídeo",
+                "Análise de dados"
+            ];
+            
+            const selected = prompt(`Para qual área você precisa de um prompt?\n\n${options.map((opt, i) => `${i+1}. ${opt}`).join('\n')}\n\nDigite o número:`, "1");
+            
+            if (selected) {
+                const index = parseInt(selected) - 1;
+                if (index >= 0 && index < options.length) {
+                    let prompt = "";
+                    
+                    switch(index) {
+                        case 0: // Blog
+                            prompt = `# Prompt para Artigo de Blog\n\nVocê é um especialista em [SEU NÍVEL DE EXPERIÊNCIA] sobre [TEMA]. Escreva um artigo de [NÚMERO] palavras sobre "[TÍTULO DO ARTIGO]" com:\n\n1. Um título persuasivo que gere cliques\n2. Introdução que captura atenção em 30 segundos\n3. [NÚMERO] seções principais com subtítulos H2\n4. Pelo menos 3 estatísticas atualizadas (2024)\n5. Exemplos práticos e estudos de caso\n6. Conclusão com call-to-action claro\n7. 5 meta-tags para SEO\n\nTom: [profissional/casual/inspirador/técnico]\nPúblico-alvo: [DESCREVA SEU PÚBLICO]\nObjetivo: [educar/persuadir/entreter/converter]`;
+                            break;
+                        case 1: // Anúncios
+                            prompt = `# Prompt para Copy de Anúncio\n\nCrie copy para um anúncio de [REDE SOCIAL] sobre [PRODUTO/SERVIÇO] com:\n\n1. Headline principal (até 40 caracteres)\n2. Texto principal (até 125 caracteres)\n3. 3 variações de call-to-action\n4. Hashtags relevantes\n5. Descrição do link (até 30 caracteres)\n\nBenefício principal: [PRINCIPAIS BENEFÍCIOS]\nDiferencial competitivo: [O QUE TE DIFERENCIA]\nTom de voz: [urgente/exclusivo/confiável/amigável]\nPúblico: [idade, interesses, dor principal]`;
+                            break;
+                        case 2: // Redes sociais
+                            prompt = `# Prompt para Post em Redes Sociais\n\nGere [NÚMERO] ideias de posts para [PLATAFORMA] sobre [TEMA] com:\n\n1. Título/legenda envolvente\n2. Chamada para engajamento (pergunta ou pedido)\n3. 3 hashtags estratégicas\n4. Sugestão de formato (carrossel, vídeo, imagem)\n5. Hora ideal para postar\n\nTom: [inspirador/educativo/divertido/provocativo]\nFrequência: [diário/semanal]\nObjetivo: [aumentar seguidores/gerar leads/vendas]`;
+                            break;
+                        case 3: // Email marketing
+                            prompt = `# Prompt para Email Marketing\n\nEscreva um email sobre [ASSUNTO] com:\n\n1. Assunto (até 50 caracteres, taxa de abertura alta)\n2. Pré-cabeçalho (até 100 caracteres)\n3. Saudação personalizável\n4. Corpo dividido em [NÚMERO] parágrafos\n5. Call-to-action claro e urgente\n6. Assinatura profissional\n7. PS. com oferta adicional\n\nTipo de email: [nurture/promocional/newsletter/abandono]\nTaxa de conversão desejada: [X]%\nSegmentação: [novos leads/clientes ativos/ex-clientes]`;
+                            break;
+                        case 4: // Roteiro de vídeo
+                            prompt = `# Prompt para Roteiro de Vídeo\n\nCrie um roteiro para um vídeo de [DURAÇÃO] sobre [TEMA] com:\n\n1. Hook nos primeiros [SEGUNDOS] segundos\n2. Apresentação do problema\n3. Apresentação da solução\n4. Demonstração prática\n5. Social proof/testemunhos\n6. Call-to-action claro\n7. Encerramento que incentiva like/compartilhamento\n\nPlataforma: [YouTube/Instagram/TikTok/LinkedIn]\nFormato: [tutorial/case study/unboxing/entrevista]\nTom: [energético/calmo/técnico/divertido]`;
+                            break;
+                        case 5: // Análise de dados
+                            prompt = `# Prompt para Análise de Dados\n\nAnalise os seguintes dados de marketing e forneça insights:\n\n[COLE SEUS DADOS AQUI OU DESCREVA]\n\nPor favor, analise:\n1. Principais métricas de desempenho\n2. Tendências identificadas\n3. Pontos de otimização\n4. Recomendações específicas\n5. Previsões para próximo período\n\nPeríodo analisado: [DATA INICIAL] até [DATA FINAL]\nObjetivo principal: [aumentar conversões/reduzir custos/melhorar engajamento]\nSegmentos relevantes: [LISTE SEGMENTOS IMPORTANTES]`;
+                            break;
+                    }
+                    
+                    const textArea = document.createElement('textarea');
+                    textArea.value = prompt;
+                    textArea.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 80%;
+                        height: 60%;
+                        padding: 20px;
+                        font-family: monospace;
+                        font-size: 14px;
+                        background: #282c34;
+                        color: white;
+                        border: 2px solid #9b59b6;
+                        border-radius: 10px;
+                        z-index: 10000;
+                        resize: none;
+                    `;
+                    
+                    const overlay = document.createElement('div');
+                    overlay.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0,0,0,0.7);
+                        z-index: 9999;
+                    `;
+                    
+                    const closeBtn = document.createElement('button');
+                    closeBtn.textContent = 'Copiar e Fechar';
+                    closeBtn.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: #9b59b6;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        z-index: 10001;
+                        font-weight: bold;
+                    `;
+                    
+                    closeBtn.addEventListener('click', () => {
+                        textArea.select();
+                        document.execCommand('copy');
+                        alert('Prompt copiado para a área de transferência!');
+                        document.body.removeChild(textArea);
+                        document.body.removeChild(overlay);
+                        document.body.removeChild(closeBtn);
+                    });
+                    
+                    overlay.addEventListener('click', () => {
+                        document.body.removeChild(textArea);
+                        document.body.removeChild(overlay);
+                        document.body.removeChild(closeBtn);
+                    });
+                    
+                    document.body.appendChild(overlay);
+                    document.body.appendChild(textArea);
+                    document.body.appendChild(closeBtn);
+                }
+            }
+        });
+        
+        document.body.appendChild(promptAssistant);
+    </script>
+</body>
+</html>

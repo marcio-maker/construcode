@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otimização de Performance: Como Reduzir o Carregamento em 70% - ConstruCode Blog</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="A velocidade do site impacta diretamente nas conversões e no SEO. Aprenda técnicas avançadas que podem reduzir drasticamente o tempo de carregamento.">
+    <meta name="keywords" content="performance, otimização, velocidade, Core Web Vitals, SEO técnico, carregamento">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .article-header {
+            padding: 4rem 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-category {
+            background: #f39c12;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .highlight-box {
+            background: var(--gray-light);
+            border-left: 4px solid #f39c12;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .technique-card {
+            background: white;
+            border: 2px solid #f39c12;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .technique-card h4 {
+            color: var(--primary-color);
+            margin: 0 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .impact-meter {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .impact-bar {
+            flex-grow: 1;
+            height: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .impact-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f39c12, #e74c3c);
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 2rem;
+            }
+
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="../index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Artigo -->
+    <article>
+        <div class="container">
+            <!-- Cabeçalho -->
+            <div class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">20 de Fevereiro, 2024</span>
+                    <span class="article-author">Por: Carlos Mendes</span>
+                    <a href="../blog.html" class="article-category">Performance</a>
+                </div>
+                <h1 class="article-title">Otimização de Performance: Como Reduzir o Carregamento em 70%</h1>
+                <p class="article-subtitle">Cada segundo de carregamento a mais = 7% a menos de conversão. Técnicas avançadas com código real.</p>
+            </div>
+
+            <!-- Imagem do Artigo -->
+            <div class="article-image">
+                ⚡ PERFORMANCE
+            </div>
+
+            <!-- Conteúdo -->
+            <div class="article-content">
+                <p><strong>Cada segundo de carregamento a mais = 7% a menos de conversão.</strong> Este não é apenas um dado alarmante, é um alerta urgente para qualquer negócio digital. Neste guia completo, vou mostrar técnicas que reduziram o tempo de carregamento de sites de 8s para 2.3s.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">53%</div>
+                        <div class="stat-label">abandonam site lento</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">-7%</div>
+                        <div class="stat-label">conversão por segundo</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">+70%</div>
+                        <div class="stat-label">melhora possível</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2.5s</div>
+                        <div class="stat-label">ideal LCP</div>
+                    </div>
+                </div>
+
+                <h2>Por que Performance Importa em 2024?</h2>
+                <p>Performance não é mais "bom ter". É obrigatório por 3 razões:</p>
+                <ol>
+                    <li><strong>SEO:</strong> Core Web Vitals são fatores de ranking do Google</li>
+                    <li><strong>Conversão:</strong> Sites rápidos convertem mais</li>
+                    <li><strong>Experiência:</strong> Usuários esperam carregamento instantâneo</li>
+                </ol>
+
+                <div class="highlight-box">
+                    <strong>📊 Dado Crucial:</strong>
+                    "Um e-commerce que reduz o carregamento de 5s para 2s pode aumentar vendas em 21%. A Amazon calcula que cada 100ms de atraso custa 1% em vendas."
+                </div>
+
+                <h2>As 7 Técnicas que Realmente Funcionam</h2>
+
+                <div class="technique-card">
+                    <h4>⚡ 1. Lazy Loading Inteligente</h4>
+                    <p>Carregue apenas o que é visível na tela, economizando até 60% da banda inicial.</p>
+                    
+                    <div class="impact-meter">
+                        <span>Impacto:</span>
+                        <div class="impact-bar">
+                            <div class="impact-fill" style="width: 85%;"></div>
+                        </div>
+                        <span>Alto</span>
+                    </div>
+
+                    <div class="code-block">
+&lt;!-- Lazy Loading Nativo --&gt;
+&lt;img src="imagem.jpg" loading="lazy" alt="Descrição"&gt;
+
+&lt;!-- Para iframes --&gt;
+&lt;iframe src="video.html" loading="lazy"&gt;&lt;/iframe&gt;
+
+&lt;!-- JavaScript para elementos customizados --&gt;
+const observer = new IntersectionObserver((entries) =&gt; {
+  entries.forEach(entry =&gt; {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      observer.unobserve(img);
+    }
+  });
+});
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <h4>📦 2. Compressão Brotli vs Gzip</h4>
+                    <p>Brotli comprime 20% melhor que Gzip, reduzindo tamanho de arquivos textuais.</p>
+                    
+                    <div class="impact-meter">
+                        <span>Impacto:</span>
+                        <div class="impact-bar">
+                            <div class="impact-fill" style="width: 65%;"></div>
+                        </div>
+                        <span>Médio-Alto</span>
+                    </div>
+
+                    <div class="code-block">
+# NGINX Configuration
+gzip on;
+gzip_vary on;
+gzip_min_length 1024;
+gzip_types text/plain text/css text/xml text/javascript 
+           application/javascript application/xml+rss 
+           application/json;
+
+# Brotli (superior)
+brotli on;
+brotli_comp_level 6;
+brotli_types text/plain text/css text/xml text/javascript 
+             application/javascript application/xml+rss 
+             application/json;
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <h4>🎯 3. Critical CSS (CSS Crítico)</h4>
+                    <p>Extraia e inline o CSS necessário para renderização inicial, carregue o resto depois.</p>
+                    
+                    <div class="impact-meter">
+                        <span>Impacto:</span>
+                        <div class="impact-bar">
+                            <div class="impact-fill" style="width: 75%;"></div>
+                        </div>
+                        <span>Alto</span>
+                    </div>
+
+                    <p><strong>Ferramentas recomendadas:</strong></p>
+                    <ul>
+                        <li>Critical (npm package)</li>
+                        <li>Penthouse</li>
+                        <li>Lighthouse (auditoria)</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h4>🖼️ 4. Otimização Avançada de Imagens</h4>
+                    <p>WebP + Lazy Loading + CDN pode reduzir 80% do peso das imagens.</p>
+                    
+                    <div class="impact-meter">
+                        <span>Impacto:</span>
+                        <div class="impact-bar">
+                            <div class="impact-fill" style="width: 90%;"></div>
+                        </div>
+                        <span>Muito Alto</span>
+                    </div>
+
+                    <div class="code-block">
+&lt;picture&gt;
+  &lt;source srcset="imagem.webp" type="image/webp"&gt;
+  &lt;source srcset="imagem.jpg" type="image/jpeg"&gt;
+  &lt;img src="imagem.jpg" alt="Descrição" loading="lazy"&gt;
+&lt;/picture&gt;
+
+# Comando para conversão (CLI)
+cwebp -q 80 imagem.jpg -o imagem.webp
+
+# Redimensionamento responsivo
+srcset="imagem-320w.jpg 320w,
+        imagem-480w.jpg 480w,
+        imagem-800w.jpg 800w"
+sizes="(max-width: 600px) 480px,
+       800px"
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <h4>🌐 5. CDN + HTTP/3 (QUIC)</h4>
+                    <p>Distribuição global + protocolo moderno para carregamento paralelo.</p>
+                    
+                    <div class="impact-meter">
+                        <span>Impacto:</span>
+                        <div class="impact-bar">
+                            <div class="impact-fill" style="width: 70%;"></div>
+                        </div>
+                        <span>Alto</span>
+                    </div>
+
+                    <p><strong>CDNs recomendadas:</strong></p>
+                    <ul>
+                        <li>Cloudflare (gratuito com HTTP/3)</li>
+                        <li>Amazon CloudFront</li>
+                        <li>Google Cloud CDN</li>
+                        <li>Vercel/Netlify (para projetos frontend)</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h4>🔧 6. Bundle Splitting e Tree Shaking</h4>
+                    <p>Divida seu JavaScript em chunks e remova código não utilizado.</p>
+                    
+                    <div class="impact-meter">
+                        <span>Impacto:</span>
+                        <div class="impact-bar">
+                            <div class="impact-fill" style="width: 60%;"></div>
+                        </div>
+                        <span>Médio</span>
+                    </div>
+
+                    <div class="code-block">
+// webpack.config.js
+module.exports = {
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000,
+      maxSize: 70000,
+    }
+  }
+};
+
+// Vite/Rollup faz tree shaking automático
+// Importação seletiva para lodash
+import { debounce, throttle } from 'lodash-es';
+// Em vez de:
+// import _ from 'lodash';
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <h4>⚙️ 7. Preload, Prefetch, Preconnect</h4>
+                    <p>Antecipe recursos importantes para carregamento mais rápido.</p>
+                    
+                    <div class="impact-meter">
+                        <span>Impacto:</span>
+                        <div class="impact-bar">
+                            <div class="impact-fill" style="width: 55%;"></div>
+                        </div>
+                        <span>Médio</span>
+                    </div>
+
+                    <div class="code-block">
+&lt;!-- Pré-carrega fonte crítica --&gt;
+&lt;link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin&gt;
+
+&lt;!-- Pré-conecta a CDN --&gt;
+&lt;link rel="preconnect" href="https://cdn.seusite.com"&gt;
+
+&lt;!-- Pré-busca próxima página --&gt;
+&lt;link rel="prefetch" href="/proxima-pagina.html"&gt;
+
+&lt;!-- DNS pré-fetch --&gt;
+&lt;link rel="dns-prefetch" href="//api.seusite.com"&gt;
+                    </div>
+                </div>
+
+                <h2>Checklist de Otimização Rápida (30 Minutos)</h2>
+                
+                <div class="highlight-box">
+                    <strong>🚀 Ações Imediatas:</strong><br>
+                    1. [ ] Habilitar compressão Brotli/Gzip<br>
+                    2. [ ] Converter imagens para WebP<br>
+                    3. [ ] Implementar lazy loading<br>
+                    4. [ ] Minificar CSS/JS<br>
+                    5. [ ] Configurar cache HTTP<br>
+                    6. [ ] Remover recursos não utilizados<br>
+                    7. [ ] Usar CDN para assets estáticos<br>
+                    8. [ ] Otimizar fontes web<br>
+                    9. [ ] Reduzir redirects<br>
+                    10. [ ] Monitorar Core Web Vitals
+                </div>
+
+                <h2>Ferramentas Essenciais</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                    <div style="padding: 1rem; background: var(--gray-light); border-radius: 8px;">
+                        <strong>Lighthouse</strong>
+                        <div>Auditoria completa (Chrome DevTools)</div>
+                    </div>
+                    <div style="padding: 1rem; background: var(--gray-light); border-radius: 8px;">
+                        <strong>WebPageTest</strong>
+                        <div>Teste global com vídeo</div>
+                    </div>
+                    <div style="padding: 1rem; background: var(--gray-light); border-radius: 8px;">
+                        <strong>GTmetrix</strong>
+                        <div>Análise detalhada + recomendações</div>
+                    </div>
+                    <div style="padding: 1rem; background: var(--gray-light); border-radius: 8px;">
+                        <strong>PageSpeed Insights</strong>
+                        <div>Análise do Google</div>
+                    </div>
+                </div>
+
+                <h2>Caso Real: De 8.2s para 2.3s</h2>
+                
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="color: white; margin-top: 0;">📈 E-commerce de Moda (50k produtos)</h3>
+                    <p><strong>Situação Inicial:</strong> LCP: 8.2s, FID: 320ms, CLS: 0.45</p>
+                    <p><strong>Ações Implementadas:</strong></p>
+                    <ol style="margin: 1rem 0;">
+                        <li>Conversão de 2.347 imagens para WebP (redução de 78%)</li>
+                        <li>Implementação de lazy loading nativo</li>
+                        <li>Brotli + CDN Cloudflare</li>
+                        <li>Remoção de 3 scripts não utilizados</li>
+                        <li>Otimização de fontes (de 4 para 1)</li>
+                    </ol>
+                    <p><strong>Resultado Final (60 dias):</strong> LCP: 2.3s, FID: 45ms, CLS: 0.08</p>
+                    <p><strong>Impacto Negócio:</strong> +18% conversões, -37% taxa de rejeição</p>
+                </div>
+
+                <h2>Plano de Ação: 4 Semanas para Site Rápido</h2>
+                
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">Semana 1: Diagnóstico</h3>
+                    <ul>
+                        <li>Auditoria completa com Lighthouse</li>
+                        <li>Identificar gargalos principais</li>
+                        <li>Estabelecer métricas base</li>
+                        <li>Priorizar ações por ROI</li>
+                    </ul>
+                    
+                    <h3>Semana 2: Otimizações de Superfície</h3>
+                    <ul>
+                        <li>Compressão de imagens</li>
+                        <li>Habilitação de cache</li>
+                        <li>Minificação CSS/JS</li>
+                        <li>Configuração CDN</li>
+                    </ul>
+                    
+                    <h3>Semana 3: Otimizações Avançadas</h3>
+                    <ul>
+                        <li>Critical CSS</li>
+                        <li>Bundle optimization</li>
+                        <li>Preload estratégico</li>
+                        <li>Remoção de recursos</li>
+                    </ul>
+                    
+                    <h3>Semana 4: Monitoramento e Ajustes</h3>
+                    <ul>
+                        <li>Testes A/B de performance</li>
+                        <li>Monitoramento contínuo</li>
+                        <li>Documentação de melhorias</li>
+                        <li>Plano de manutenção</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #f39c12, #e67e22); color: white; border-radius: 10px;">
+                    <h3 style="margin-top: 0; color: white;">Quer Saber Quanto Seu Site Pode Melhorar?</h3>
+                    <p>Faça uma auditoria gratuita de performance e receba um relatório personalizado com as ações prioritárias para seu site.</p>
+                    <a href="../contato.html?assunto=performance" style="display: inline-block; background: white; color: #f39c12; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 1rem;">Solicitar Auditoria Gratuita</a>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div style="display: flex; justify-content: space-between; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 3rem 0;">
+                <div style="max-width: 45%;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">← Artigo Anterior</div>
+                    <a href="post-4.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Design Responsivo vs Mobile First</a>
+                </div>
+                <div style="max-width: 45%; text-align: right;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Próximo Artigo →</div>
+                    <a href="post-6.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">JavaScript Moderno</a>
+                </div>
+            </div>
+
+            <!-- Comentários -->
+            <div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 3rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">💬 Compartilhe Suas Dificuldades</h2>
+                
+                <form style="margin-bottom: 3rem;" id="commentForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" placeholder="Seu nome" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        <input type="email" placeholder="Seu e-mail" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea placeholder="Qual seu maior desafio com performance?..." required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 120px; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" style="background: #f39c12; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer;">Compartilhar Desafio</button>
+                </form>
+
+                <div id="commentList">
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Dev Front-end</span>
+                            <span style="color: #666; font-size: 0.9rem;">21/02/2024 16:15</span>
+                        </div>
+                        <p>Implementei o Brotli e o lazy loading esta semana. O site que estava com LCP de 5.8s agora está em 2.9s! Impressionante como técnicas "simples" fazem diferença.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Analista de SEO</span>
+                            <span style="color: #666; font-size: 0.9rem;">20/02/2024 22:30</span>
+                        </div>
+                        <p>Alguém tem dica para WordPress com muitos plugins? Meu CLS está alto por causa de ads, mas não posso removê-los.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">CTO Startup</span>
+                            <span style="color: #666; font-size: 0.9rem;">20/02/2024 19:45</span>
+                        </div>
+                        <p>Excelente artigo! A parte sobre Core Web Vitals é crucial. Desde que melhoramos nossos scores, subimos 3 posições no Google para palavras-chave competitivas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Otimização de Performance</h3>
+                    <p>Técnicas avançadas para sites ultrarrápidos e conversões maximizadas.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Serviços Performance</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Auditoria de Performance</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Otimização Core Web Vitals</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Consultoria Técnica</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Monitoramento Contínuo</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Ferramentas Grátis</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Calculadora de ROI</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Checklist Performance</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Monitor LCP Grátis</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Template de Config</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Contato Especialista</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">📧 performance@construcode.com</li>
+                        <li style="margin-bottom: 0.8rem;">📱 (11) 98765-4321</li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contato.html" style="color: #f39c12; text-decoration: none; font-weight: 500;">Falar com Especialista</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem;">
+                <p>&copy; 2024 ConstruCode Performance. Artigo escrito por Carlos Mendes, especialista em otimização com mais de 200 projetos acelerados.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Tempo de leitura: 9 minutos | <span id="views">2,415</span> visualizações | Baseado em dados reais
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const inputs = commentForm.querySelectorAll('input, textarea');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const comment = inputs[2].value;
+            
+            if (!name || !email || !comment) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            const now = new Date();
+            const newComment = document.createElement('div');
+            newComment.style.padding = '1.5rem 0';
+            newComment.style.borderBottom = '1px solid #eee';
+            
+            newComment.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-weight: 600; color: var(--primary-color);">${name}</span>
+                    <span style="color: #666; font-size: 0.9rem;">${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}</span>
+                </div>
+                <p>${comment}</p>
+            `;
+            
+            commentList.prepend(newComment);
+            commentForm.reset();
+            
+            alert('Obrigado por compartilhar sua experiência!');
+        });
+
+        // Contador de visualizações
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = localStorage.getItem('post-5-views') || 2415;
+            localStorage.setItem('post-5-views', parseInt(views) + 1);
+            
+            const viewsElement = document.getElementById('views');
+            if (viewsElement) {
+                viewsElement.textContent = (parseInt(views) + 1).toLocaleString();
+            }
+        });
+
+        // Calculadora de Perda por Performance
+        const calculatorBtn = document.createElement('button');
+        calculatorBtn.textContent = '💰 Calcular Perda por Lentidão';
+        calculatorBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        `;
+        
+        calculatorBtn.addEventListener('click', () => {
+            const vendasMensais = prompt('Faturamento mensal do site (R$):');
+            const tempoAtual = prompt('Tempo de carregamento atual (segundos):');
+            
+            if (vendasMensais && tempoAtual) {
+                const vendas = parseFloat(vendasMensais);
+                const tempo = parseFloat(tempoAtual);
+                
+                // Cada segundo a mais = 7% menos conversão
+                const perdaPorSegundo = 0.07;
+                const segundosIdeais = 2;
+                
+                if (tempo > segundosIdeais) {
+                    const segundosExtras = tempo - segundosIdeais;
+                    const perdaPercentual = segundosExtras * perdaPorSegundo;
+                    const perdaMensal = vendas * perdaPercentual;
+                    const potencialGanho = perdaMensal * 12;
+                    
+                    alert(`📊 Análise de Performance:\n\n` +
+                          `Tempo atual: ${tempo}s (ideal: 2s)\n` +
+                          `Perda por lentidão: ${(perdaPercentual * 100).toFixed(1)}%\n` +
+                          `💰 Perda mensal: R$ ${perdaMensal.toFixed(2)}\n` +
+                          `💰 Perda anual: R$ ${potencialGanho.toFixed(2)}\n\n` +
+                          `*Baseado em estudo que mostra 7% menos conversão por segundo acima de 2s`);
+                } else {
+                    alert('✅ Seu site já está no tempo ideal! Parabéns!');
+                }
+            }
+        });
+        
+        document.body.appendChild(calculatorBtn);
+    </script>
+</body>
+</html>

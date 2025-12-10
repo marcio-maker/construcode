@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenvolvimento Ágil: Metodologias para Times Eficientes - ConstruCode Blog</title>
+    <link rel="manifest" href="../manifest.json">
+    <meta name="description" content="Scrum, Kanban e outras metodologias ágeis. Como implementar processos que aumentam produtividade e qualidade do código.">
+    <meta name="keywords" content="Desenvolvimento Ágil, Scrum, Kanban, Agile, Metodologias Ágeis, Gestão de Projetos, DevOps">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #10b981;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .article-header {
+            padding: 4rem 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-category {
+            background: #10b981;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .methodology-card {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #10b981;
+        }
+
+        .methodology-card h4 {
+            color: var(--primary-color);
+            margin: 0 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .comparison-table th {
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .process-step {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+            padding: 1rem;
+            background: #f0fdf9;
+            border-radius: 8px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+
+        .stat-box {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #10b98115, #3b82f615);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #10b981;
+            min-width: 60px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #10b98115, #3b82f615);
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tool-card {
+            padding: 1.5rem;
+            background: white;
+            border: 2px solid #10b981;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .checklist {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #10b981;
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .author-card {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #10b98110, #3b82f610);
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #10b981;
+        }
+
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 2rem;
+            }
+
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-flow {
+                flex-direction: column;
+            }
+
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .author-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="../index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Artigo -->
+    <article>
+        <div class="container">
+            <!-- Cabeçalho -->
+            <div class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">1 de Janeiro, 2024</span>
+                    <span class="article-author">Por: Carlos Mendes</span>
+                    <a href="../blog.html" class="article-category">Gestão</a>
+                </div>
+                <h1 class="article-title">Desenvolvimento Ágil: Metodologias para Times Eficientes</h1>
+                <p class="article-subtitle">Scrum, Kanban e outras metodologias ágeis. Como implementar processos que aumentam a produtividade e a qualidade do código.</p>
+            </div>
+
+            <!-- Imagem do Artigo -->
+            <div class="article-image">
+                🏃 AGILE
+            </div>
+
+            <!-- Conteúdo -->
+            <div class="article-content">
+                <p><strong>No mundo do desenvolvimento de software, a velocidade de entrega e a adaptabilidade tornaram-se fatores críticos de sucesso.</strong> O desenvolvimento ágil surgiu como resposta aos métodos tradicionais em cascata, que muitas vezes resultavam em projetos atrasados, acima do orçamento e desalinhados com as necessidades reais dos clientes.</p>
+
+                <div class="stat-box">
+                    <div class="stat-number">71%</div>
+                    <div class="stat-text">das organizações usam metodologias ágeis. Times ágeis são 25% mais produtivos e têm 50% menos bugs em produção.</div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>🎯 Princípio Fundamental:</strong>
+                    "Indivíduos e interações mais que processos e ferramentas. Software em funcionamento mais que documentação abrangente. Colaboração com o cliente mais que negociação de contratos. Responder a mudanças mais que seguir um plano." - Manifesto Ágil
+                </div>
+
+                <h2>As Metodologias Ágeis Mais Populares</h2>
+                
+                <div class="methodology-grid">
+                    <div class="methodology-card">
+                        <h4>📋 Scrum</h4>
+                        <p>Framework estruturado com sprints fixos, papéis definidos e cerimônias regulares.</p>
+                        <p><strong>Para:</strong> Projetos com escopo definido, times 3-9 pessoas</p>
+                        <p><strong>Sprints:</strong> 1-4 semanas</p>
+                        <p><strong>Cerimônias:</strong> Daily, Planning, Review, Retrospective</p>
+                    </div>
+                    
+                    <div class="methodology-card">
+                        <h4>📊 Kanban</h4>
+                        <p>Sistema visual de fluxo contínuo com foco na limitação do trabalho em progresso (WIP).</p>
+                        <p><strong>Para:</strong> Suporte, manutenção, fluxos contínuos</p>
+                        <p><strong>Foco:</strong> Visualização do fluxo, limite de WIP</p>
+                        <p><strong>Métricas:</strong> Lead time, cycle time, throughput</p>
+                    </div>
+                    
+                    <div class="methodology-card">
+                        <h4>🔄 Extreme Programming (XP)</h4>
+                        <p>Foco em qualidade técnica com práticas como pair programming, TDD e integração contínua.</p>
+                        <p><strong>Para:</strong> Projetos com alta complexidade técnica</p>
+                        <p><strong>Práticas:</strong> Pair programming, TDD, CI/CD</p>
+                        <p><strong>Foco:</strong> Qualidade do código, feedback rápido</p>
+                    </div>
+                </div>
+
+                <h2>Scrum vs Kanban: Comparativo Detalhado</h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Scrum</th>
+                            <th>Kanban</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Entrega</strong></td>
+                            <td>Em sprints fixos (1-4 semanas)</td>
+                            <td>Fluxo contínuo (on-demand)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mudanças</strong></td>
+                            <td>Restritas durante o sprint</td>
+                            <td>Permitidas a qualquer momento</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Papéis</strong></td>
+                            <td>PO, SM, Dev Team (definidos)</td>
+                            <td>Não tem papéis fixos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Métricas</strong></td>
+                            <td>Velocity, burndown chart</td>
+                            <td>Lead time, cycle time, WIP</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Melhor para</strong></td>
+                            <td>Projetos novos, escopo definido</td>
+                            <td>Suporte, manutenção, bugs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quadro</strong></td>
+                            <td>Resetado a cada sprint</td>
+                            <td>Contínuo, sempre atualizado</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Implementando Scrum em 7 Passos</h2>
+                
+                <div class="process-flow">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div><strong>Definir Product Owner</strong></div>
+                        <div>Representante do cliente</div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div><strong>Montar Time</strong></div>
+                        <div>3-9 pessoas multifuncionais</div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div><strong>Treinar Scrum Master</strong></div>
+                        <div>Remover impedimentos</div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div><strong>Criar Backlog</strong></div>
+                        <div>Lista priorizada de itens</div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <div><strong>Planejar Sprint</strong></div>
+                        <div>Selecionar itens para sprint</div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">6</div>
+                        <div><strong>Executar Sprint</strong></div>
+                        <div>Daily meetings, desenvolvimento</div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">7</div>
+                        <div><strong>Revisar & Adaptar</strong></div>
+                        <div>Review + Retrospective</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>⚠️ Erros Comuns na Implementação Ágil:</strong>
+                    "1. Implementar cerimônias sem entender os princípios<br>
+                    2. Ignorar a necessidade de mudança cultural<br>
+                    3. Manter hierarquias tradicionais em estrutura ágil<br>
+                    4. Não capacitar adequadamente a equipe<br>
+                    5. Pular retrospectivas ou não agir nos insights<br>
+                    6. Micromanagement disfarçado de daily meeting"
+                </div>
+
+                <h2>Métricas Ágeis que Realmente Importam</h2>
+                
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <strong>📈 Velocity</strong>
+                        <div>Capacidade de entrega por sprint</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>⏱️ Lead Time</strong>
+                        <div>Tempo total do pedido à entrega</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>🔄 Cycle Time</strong>
+                        <div>Tempo de trabalho ativo no item</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>📊 Throughput</strong>
+                        <div>Itens completados por período</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>🚧 WIP Limit</strong>
+                        <div>Itens sendo trabalhados simultaneamente</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>📉 Burndown Chart</strong>
+                        <div>Progresso visual do sprint</div>
+                    </div>
+                </div>
+
+                <h2>Ferramentas Essenciais para Times Ágeis</h2>
+                
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>📋 Jira/Asana</strong>
+                            <p>Gerenciamento de tarefas, backlog, sprints</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>📊 Trello</strong>
+                            <p>Quadros Kanban simples e visuais</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>⚙️ Azure DevOps</strong>
+                            <p>Suite completa para DevOps e Agile</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>💻 GitHub/GitLab</strong>
+                            <p>Versionamento + CI/CD + Issues</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>💬 Slack/Teams</strong>
+                            <p>Comunicação em tempo real, integrações</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-checkbox"></div>
+                        <div>
+                            <strong>🎨 Miro/Mural</strong>
+                            <p>Colaboração visual remota, retrospectivas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Case Study: Fintech que Reduziu Time-to-Market em 60%</h2>
+                
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="color: white; margin-top: 0;">💰 FintechSegura S.A.</h3>
+                    
+                    <p><strong>Situação Inicial:</strong> Método cascata, releases trimestrais, 40% de features nunca usadas, alta rotatividade de devs.</p>
+                    
+                    <p><strong>Problemas Identificados:</strong></p>
+                    <ul>
+                        <li>Time-to-market: 90 dias para novas features</li>
+                        <li>Satisfação do cliente: 2.8/5</li>
+                        <li>Bugs em produção: 15% dos tickets</li>
+                        <li>Rotatividade de devs: 35% ao ano</li>
+                    </ul>
+
+                    <p><strong>Transformação Ágil (6 meses):</strong></p>
+                    <ol>
+                        <li>Treinamento completo em Scrum para 5 times</li>
+                        <li>Implementação de CI/CD pipeline</li>
+                        <li>Daily meetings com foco em impedimentos</li>
+                        <li>Retrospectivas semanais com ações concretas</li>
+                        <li>Quadros visuais (Jira + TV no escritório)</li>
+                        <li>Definition of Done clara para todos os times</li>
+                    </ol>
+
+                    <p><strong>Resultados (12 meses depois):</strong></p>
+                    <ul>
+                        <li>Time-to-market: 90 → 35 dias (-60%)</li>
+                        <li>Satisfação do cliente: 2.8 → 4.2/5</li>
+                        <li>Bugs em produção: 15% → 4%</li>
+                        <li>Rotatividade de devs: 35% → 12%</li>
+                        <li>Produtividade: +40% (velocity consistente)</li>
+                        <li>Employee NPS: -15 → +32</li>
+                    </ul>
+                </div>
+
+                <h2>Scaling Agile: Métodos para Grandes Organizações</h2>
+                
+                <div class="methodology-grid">
+                    <div class="methodology-card">
+                        <h4>🏢 SAFe</h4>
+                        <p>Scaled Agile Framework - Abordagem prescritiva e estruturada para scale.</p>
+                        <p><strong>Para:</strong> Grandes empresas (1000+ pessoas)</p>
+                        <p><strong>Níveis:</strong> Team, Program, Large Solution, Portfolio</p>
+                        <p><strong>Cerimônias:</strong> PI Planning, Scrum of Scrums</p>
+                    </div>
+                    
+                    <div class="methodology-card">
+                        <h4>🔗 LeSS</h4>
+                        <p>Large Scale Scrum - Mantém princípios Scrum puros em escala.</p>
+                        <p><strong>Para:</strong> 2-8 times Scrum (10-80 pessoas)</p>
+                        <p><strong>Foco:</strong> Simplicidade, princípios sobre processos</p>
+                        <p><strong>Estrutura:</strong> Product Owner único, múltiplos times</p>
+                    </div>
+                    
+                    <div class="methodology-card">
+                        <h4>⚡ Nexus</h4>
+                        <p>Framework para 3-9 times Scrum trabalhando em um único backlog.</p>
+                        <p><strong>Para:</strong> 3-9 times (15-81 pessoas)</p>
+                        <p><strong>Foco:</strong> Integração contínua, dependências</p>
+                        <p><strong>Cerimônia:</strong> Nexus Daily, Integration Team</p>
+                    </div>
+                </div>
+
+                <h2>O Futuro do Trabalho Ágil (2024+)</h2>
+                
+                <div class="stat-box">
+                    <div class="stat-number">83%</div>
+                    <div class="stat-text">dos times ágeis são híbridos ou remotos. Metodologias estão evoluindo para async-first com foco em resultados, não presença.</div>
+                </div>
+
+                <p>Com o aumento do trabalho remoto e híbrido, as metodologias ágeis estão evoluindo:</p>
+                <ul>
+                    <li><strong>Async-First:</strong> Menos reuniões síncronas, mais documentação assíncrona</li>
+                    <li><strong>IA no Desenvolvimento:</strong> Ferramentas de IA auxiliando no planejamento e estimativas</li>
+                    <li><strong>OKRs Ágeis:</strong> Objetivos e resultados-chave integrados ao ciclo ágil</li>
+                    <li><strong>DevOps & DevSecOps:</strong> Integração contínua entre desenvolvimento, operações e segurança</li>
+                    <li><strong>Remote-First Rituals:</strong> Cerimônias otimizadas para times distribuídos</li>
+                    <li><strong>Data-Driven Agile:</strong> Decisões baseadas em métricas em tempo real</li>
+                </ul>
+
+                <h2>Plano de Ação em 90 Dias para Implementar Ágil</h2>
+                
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">Mês 1: Educação e Planejamento</h3>
+                    <ul>
+                        <li>Treinamento em Agile/Scrum para toda equipe</li>
+                        <li>Escolher metodologia (Scrum/Kanban/XP)</li>
+                        <li>Definir papéis (PO, SM se Scrum)</li>
+                        <li>Criar backlog inicial priorizado</li>
+                        <li>Configurar ferramentas (Jira, Trello, etc)</li>
+                    </ul>
+                    
+                    <h3>Mês 2: Implementação Piloto</h3>
+                    <ul>
+                        <li>Começar com 1 time piloto (5-9 pessoas)</li>
+                        <li>Primeiro sprint planning</li>
+                        <li>Implementar daily meetings</li>
+                        <li>Primeira sprint review e retrospective</li>
+                        <li>Ajustar processos baseado em feedback</li>
+                    </ul>
+                    
+                    <h3>Mês 3: Expansão e Otimização</h3>
+                    <ul>
+                        <li>Expandir para outros times</li>
+                        <li>Implementar métricas e dashboards</li>
+                        <li>Otimizar ceremonies baseado em dados</li>
+                        <li>Integrar com CI/CD pipeline</li>
+                        <li>Documentar processos e best practices</li>
+                    </ul>
+                </div>
+
+                <div class="author-card">
+                    <div class="author-avatar">CM</div>
+                    <div class="author-info">
+                        <h3 style="margin-top: 0;">Sobre Carlos Mendes</h3>
+                        <p>Consultor em Transformação Ágil com 12 anos de experiência. Certificado Scrum Master e SAFe Program Consultant. Já treinou mais de 100 times em empresas como Itaú, Globo e Ambev. Autor do livro "Ágil na Prática: Do Papel à Realidade".</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #10b981, #3b82f6); color: white; border-radius: 10px;">
+                    <h3 style="margin-top: 0; color: white;">🏃 Quer Implementar Ágil no Seu Time?</h3>
+                    <p>Agende uma consultoria gratuita de 45 minutos para analisarmos seus processos e criarmos um plano de transformação ágil.</p>
+                    <a href="../contato.html?assunto=agile" style="display: inline-block; background: white; color: #10b981; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 1rem;">Agendar Consultoria Gratuita</a>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div style="display: flex; justify-content: space-between; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 3rem 0;">
+                <div style="max-width: 45%;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">← Artigo Anterior</div>
+                    <a href="post-14.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Analytics: Extrair Insights</a>
+                </div>
+                <div style="max-width: 45%; text-align: right;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Voltar para →</div>
+                    <a href="../blog.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">Todos os Artigos</a>
+                </div>
+            </div>
+
+            <!-- Comentários -->
+            <div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 3rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">💬 Compartilhe Suas Experiências</h2>
+                
+                <form style="margin-bottom: 3rem;" id="commentForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" placeholder="Seu nome" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        <input type="email" placeholder="Seu e-mail" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea placeholder="Qual metodologia ágil funciona melhor para seu time?..." required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 120px; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" style="background: #10b981; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer;">Compartilhar Experiência</button>
+                </form>
+
+                <div id="commentList">
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Scrum Master</span>
+                            <span style="color: #666; font-size: 0.9rem;">03/01/2024 15:20</span>
+                        </div>
+                        <p>Implementamos Scrum no meu time há 6 meses e a produtividade aumentou 40%. O maior ganho foi nas retrospectivas - conseguimos identificar e remover impedimentos que travavam o time há anos.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Tech Lead</span>
+                            <span style="color: #666; font-size: 0.9rem;">02/01/2024 22:45</span>
+                        </div>
+                        <p>Excelente comparação entre Scrum e Kanban. Estávamos na dúvida sobre qual adotar e isso ajudou muito. Acabamos usando Scrum para desenvolvimento e Kanban para suporte - combinação perfeita.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Product Owner</span>
+                            <span style="color: #666; font-size: 0.9rem;">01/01/2024 19:10</span>
+                        </div>
+                        <p>O case study da fintech é muito real. Passamos por transformação similar e os resultados foram incríveis: de releases trimestrais para semanais, satisfação do cliente de 2.5 para 4.3. Ágil mudou nosso negócio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Desenvolvimento Ágil</h3>
+                    <p>Metodologias que aumentam produtividade, qualidade e satisfação do time e do cliente.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Serviços Ágeis</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Consultoria Ágil</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Treinamento Scrum/Kanban</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Implementação de Ferramentas</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Coaching de Times</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Recursos Grátis</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Template de Backlog</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Checklist de Implementação</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Calculadora de Velocity</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Guia de Cerimônias</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Especialista Ágil</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">📧 agile@construcode.com</li>
+                        <li style="margin-bottom: 0.8rem;">🏃 Discord: construecode/agile</li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contato.html" style="color: #10b981; text-decoration: none; font-weight: 500;">Consultoria Ágil</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem;">
+                <p>&copy; 2024 ConstruCode Agile. Artigo escrito por Carlos Mendes, especialista em metodologias ágeis com certificações Scrum Master, SAFe e mais de 12 anos de experiência em transformação digital.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Tempo de leitura: 12 minutos | <span id="views">3,420</span> visualizações | Baseado em 100+ implementações reais
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const inputs = commentForm.querySelectorAll('input, textarea');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const comment = inputs[2].value;
+            
+            if (!name || !email || !comment) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            const now = new Date();
+            const newComment = document.createElement('div');
+            newComment.style.padding = '1.5rem 0';
+            newComment.style.borderBottom = '1px solid #eee';
+            
+            newComment.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-weight: 600; color: var(--primary-color);">${name}</span>
+                    <span style="color: #666; font-size: 0.9rem;">${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}</span>
+                </div>
+                <p>${comment}</p>
+            `;
+            
+            commentList.prepend(newComment);
+            commentForm.reset();
+            
+            alert('Obrigado por compartilhar sua experiência!');
+        });
+
+        // Contador de visualizações
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = localStorage.getItem('post-15-views') || 3420;
+            localStorage.setItem('post-15-views', parseInt(views) + 1);
+            
+            const viewsElement = document.getElementById('views');
+            if (viewsElement) {
+                viewsElement.textContent = (parseInt(views) + 1).toLocaleString();
+            }
+        });
+
+        // Calculadora de Velocity
+        const velocityCalculatorBtn = document.createElement('button');
+        velocityCalculatorBtn.textContent = '📊 Calcular Velocity';
+        velocityCalculatorBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        `;
+        
+        velocityCalculatorBtn.addEventListener('click', () => {
+            const teamSize = parseInt(prompt('Tamanho do time (pessoas):', '5')) || 5;
+            const sprintWeeks = parseInt(prompt('Duração do sprint (semanas):', '2')) || 2;
+            const storyPoints1 = parseFloat(prompt('Story Points Sprint 1:', '25')) || 25;
+            const storyPoints2 = parseFloat(prompt('Story Points Sprint 2:', '28')) || 28;
+            const storyPoints3 = parseFloat(prompt('Story Points Sprint 3:', '23')) || 23;
+            
+            if (teamSize && sprintWeeks) {
+                // Cálculos
+                const velocity = (storyPoints1 + storyPoints2 + storyPoints3) / 3;
+                const velocityPerPerson = velocity / teamSize;
+                const velocityPerWeek = velocity / sprintWeeks;
+                const velocityPerPersonWeek = velocityPerPerson / sprintWeeks;
+                
+                // Capacidade
+                const availableHoursWeek = teamSize * 30; // 30 horas produtivas por semana
+                const pointsPerHour = velocity / (availableHoursWeek * sprintWeeks * 3); // 3 sprints
+                
+                // Previsões
+                const backlogSize = parseFloat(prompt('Tamanho total do backlog (points):', '150')) || 150;
+                const sprintsToComplete = Math.ceil(backlogSize / velocity);
+                const weeksToComplete = sprintsToComplete * sprintWeeks;
+                
+                // Análise
+                let velocityRating = '';
+                if (velocityPerPersonWeek < 2) velocityRating = '❌ Baixa - Time pode estar superestimando';
+                else if (velocityPerPersonWeek >= 2 && velocityPerPersonWeek <= 4) velocityRating = '✅ Ideal - Estimativas realistas';
+                else velocityRating = '⚠️ Alta - Pode estar subestimando complexidade';
+                
+                alert(`📊 Agile Velocity Calculator\n\n` +
+                      `👥 Time: ${teamSize} pessoas | Sprint: ${sprintWeeks} semanas\n\n` +
+                      `📈 Velocity (média 3 sprints): ${velocity.toFixed(1)} points\n` +
+                      `👤 Por pessoa: ${velocityPerPerson.toFixed(1)} points\n` +
+                      `📅 Por semana: ${velocityPerWeek.toFixed(1)} points\n` +
+                      `👤📅 Por pessoa/semana: ${velocityPerPersonWeek.toFixed(1)} points\n\n` +
+                      `🎯 ${velocityRating}\n\n` +
+                      `📋 Capacidade:\n` +
+                      `• Horas produtivas/semana: ${availableHoursWeek}h\n` +
+                      `• Points por hora: ${pointsPerHour.toFixed(2)}\n\n` +
+                      `🔮 Previsões:\n` +
+                      `• Backlog: ${backlogSize} points\n` +
+                      `• Sprints para completar: ${sprintsToComplete}\n` +
+                      `• Tempo estimado: ${weeksToComplete} semanas\n\n` +
+                      `💡 Recomendações:\n` +
+                      `1. Manter velocidade entre ${(velocityPerPersonWeek * 0.8).toFixed(1)}-${(velocityPerPersonWeek * 1.2).toFixed(1)} points/pessoa/semana\n` +
+                      `2. Revisar estimativas se variação >20% entre sprints\n` +
+                      `3. Considerar férias/feriados no planejamento\n` +
+                      `4. Ajustar capacidade baseado em aprendizado`);
+            }
+        });
+        
+        document.body.appendChild(velocityCalculatorBtn);
+
+        // Checklist interativo
+        document.querySelectorAll('.checklist-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                this.style.background = this.style.background === 'rgb(16, 185, 129)' ? 'white' : '#10b981';
+                this.style.background = this.style.background === 'white' ? '#10b981' : 'white';
+                
+                const item = this.closest('.checklist-item');
+                if (this.style.background === '#10b981') {
+                    item.style.opacity = '0.6';
+                    item.style.textDecoration = 'line-through';
+                } else {
+                    item.style.opacity = '1';
+                    item.style.textDecoration = 'none';
+                }
+            });
+        });
+
+        // Animar steps
+        const steps = document.querySelectorAll('.process-step');
+        steps.forEach((step, index) => {
+            step.style.animationDelay = `${index * 0.1}s`;
+            step.style.opacity = '0';
+            step.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                step.style.transition = 'all 0.5s ease';
+                step.style.opacity = '1';
+                step.style.transform = 'translateY(0)';
+            }, 100 + (index * 100));
+        });
+    </script>
+</body>
+</html>

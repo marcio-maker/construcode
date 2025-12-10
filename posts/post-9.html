@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acessibilidade Web: Por que é Fundamental e Como Implementar - ConstruCode Blog</title>
+    <link rel="manifest" href="../manifest.json">
+    <meta name="description" content="Garantir que seu site seja acessível não é apenas uma questão legal, mas também ética e comercial. Aprenda as melhores práticas.">
+    <meta name="keywords" content="Acessibilidade Web, WCAG, Design Inclusivo, Desenvolvimento Acessível, PCD, Lei Brasileira de Inclusão">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        .article-header {
+            padding: 4rem 0 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-category {
+            background: #e67e22;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2.5rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .wcag-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .wcag-card {
+            padding: 1.5rem;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .wcag-card.A {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .wcag-card.AA {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+        }
+
+        .wcag-card.AAA {
+            background: linear-gradient(135deg, #27ae60, #219653);
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--gray-light);
+            border-radius: 8px;
+        }
+
+        .checklist-icon {
+            background: #e67e22;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .code-example {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .contrast-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .contrast-example {
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .contrast-good {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border: 2px solid #27ae60;
+        }
+
+        .contrast-bad {
+            background: #2c3e50;
+            color: #7f8c8d;
+            border: 2px solid #e74c3c;
+        }
+
+        .stat-box {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #e67e2215, #d3540015);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e67e22;
+            min-width: 60px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e67e2215, #d3540015);
+            border-left: 4px solid #e67e22;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tool-card {
+            padding: 1.5rem;
+            background: white;
+            border: 2px solid #e67e22;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 2rem;
+            }
+
+            .article-image {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .wcag-levels {
+                grid-template-columns: 1fr;
+            }
+
+            .checklist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contrast-box {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="../index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../servicos.html" class="nav-link">Serviços</a>
+                    <a href="../portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="../blog.html" class="nav-link">Blog</a>
+                    <a href="../sobre.html" class="nav-link">Sobre</a>
+                    <a href="../contato.html" class="nav-link">Contato</a>
+                    <a href="../login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Artigo -->
+    <article>
+        <div class="container">
+            <!-- Cabeçalho -->
+            <div class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">30 de Janeiro, 2024</span>
+                    <span class="article-author">Por: Ana Rodrigues</span>
+                    <a href="../blog.html" class="article-category">Design UI/UX</a>
+                </div>
+                <h1 class="article-title">Acessibilidade Web: Por que é Fundamental e Como Implementar</h1>
+                <p class="article-subtitle">Garantir que seu site seja acessível não é apenas uma questão legal, mas também ética e comercial. Aprenda as melhores práticas.</p>
+            </div>
+
+            <!-- Imagem do Artigo -->
+            <div class="article-image">
+                ♿ WEB ACCESSIBLE
+            </div>
+
+            <!-- Conteúdo -->
+            <div class="article-content">
+                <p><strong>Mais de 1 bilhão de pessoas no mundo têm algum tipo de deficiência.</strong> No Brasil, são 45 milhões de pessoas com deficiência (PCDs). Garantir que seu site seja acessível não é apenas uma obrigação legal - é uma oportunidade de mercado gigantesca que muitas empresas ignoram.</p>
+
+                <div class="stat-box">
+                    <div class="stat-number">71%</div>
+                    <div class="stat-text">dos sites brasileiros não cumprem os requisitos mínimos de acessibilidade, perdendo oportunidades de negócio.</div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>⚖️ Aspecto Legal Importante:</strong>
+                    "A Lei Brasileira de Inclusão (Lei 13.146/2015) estabelece que sites devem ser acessíveis. Empresas podem ser multadas em até 3% do faturamento e processos podem chegar a R$ 100 mil por dia de descumprimento."
+                </div>
+
+                <h2>1. Os 4 Princípios da Acessibilidade (POUR)</h2>
+                
+                <div class="checklist-grid">
+                    <div class="checklist-item">
+                        <div class="checklist-icon">P</div>
+                        <div>
+                            <strong>Perceptível</strong>
+                            <p>As informações devem ser apresentadas de formas que os usuários possam perceber.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-icon">O</div>
+                        <div>
+                            <strong>Operável</strong>
+                            <p>A interface não pode exigir interações que o usuário não possa realizar.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-icon">U</div>
+                        <div>
+                            <strong>Compreensível</strong>
+                            <p>As informações e operações devem ser compreensíveis.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checklist-item">
+                        <div class="checklist-icon">R</div>
+                        <div>
+                            <strong>Robusto</strong>
+                            <p>O conteúdo deve ser robusto o suficiente para ser interpretado por diversas tecnologias assistivas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>2. Níveis WCAG 2.1: A, AA e AAA</h2>
+                
+                <div class="wcag-levels">
+                    <div class="wcag-card A">
+                        <h3 style="color: white;">Nível A</h3>
+                        <p><strong>Mínimo</strong> - Requisitos básicos de acessibilidade. Sem isso, alguns usuários não conseguirão usar o site.</p>
+                        <ul>
+                            <li>Texto alternativo para imagens</li>
+                            <li>Links identificáveis</li>
+                            <li>Estrutura de cabeçalhos</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="wcag-card AA">
+                        <h3 style="color: white;">Nível AA</h3>
+                        <p><strong>Recomendado</strong> - Para a maioria dos sites. Requisito legal em muitos países.</p>
+                        <ul>
+                            <li>Contraste mínimo 4.5:1</li>
+                            <li>Navegação por teclado</li>
+                            <li>Formulários acessíveis</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="wcag-card AAA">
+                        <h3 style="color: white;">Nível AAA</h3>
+                        <p><strong>Ótimo</strong> - Nível mais alto. Recomendado para sites governamentais e de educação.</p>
+                        <ul>
+                            <li>Contraste 7:1</li>
+                            <li>Linguagem simplificada</li>
+                            <li>Ajuda contextual</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>3. Checklist Prático de Implementação</h2>
+                
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">✅ HTML Semântico e Estrutural</h3>
+                    
+                    <div class="code-example">
+&lt;!-- Ruim --&gt;
+&lt;div onclick="goToPage()"&gt;Clique aqui&lt;/div&gt;
+
+&lt;!-- Bom --&gt;
+&lt;a href="pagina.html" aria-label="Ir para página principal"&gt;
+    &lt;button&gt;Clique aqui&lt;/button&gt;
+&lt;/a&gt;
+
+&lt;!-- Ruim --&gt;
+&lt;div class="title"&gt;Título&lt;/div&gt;
+
+&lt;!-- Bom --&gt;
+&lt;h1&gt;Título Principal&lt;/h1&gt;
+&lt;h2&gt;Subtítulo&lt;/h2&gt;
+&lt;h3&gt;Seção&lt;/h3&gt;
+                    </div>
+                </div>
+
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">🎨 Contraste de Cores</h3>
+                    
+                    <div class="contrast-box">
+                        <div class="contrast-example contrast-good">
+                            Texto Preto (#000)<br>
+                            Fundo Branco (#FFF)<br>
+                            Contraste: 21:1 ✅
+                        </div>
+                        
+                        <div class="contrast-example contrast-bad">
+                            Texto Cinza (#999)<br>
+                            Fundo Branco (#FFF)<br>
+                            Contraste: 2.3:1 ❌
+                        </div>
+                        
+                        <div class="contrast-example contrast-good">
+                            Texto Branco (#FFF)<br>
+                            Fundo Azul (#0056B3)<br>
+                            Contraste: 7:1 ✅
+                        </div>
+                    </div>
+                    
+                    <p><strong>Ferramenta grátis:</strong> Use o <a href="https://webaim.org/resources/contrastchecker/" target="_blank">WebAIM Contrast Checker</a> para testar suas cores.</p>
+                </div>
+
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">⌨️ Navegação por Teclado</h3>
+                    
+                    <div class="code-example">
+// CSS para focus visível
+:focus {
+    outline: 3px solid #e67e22;
+    outline-offset: 2px;
+}
+
+// HTML para navegação
+&lt;nav aria-label="Navegação principal"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#main"&gt;Ir para conteúdo&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#nav"&gt;Ir para menu&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#footer"&gt;Ir para rodapé&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+
+// Skip link (oculto visualmente, visível para leitores de tela)
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #e67e22;
+    color: white;
+    padding: 8px;
+    z-index: 100;
+}
+.skip-link:focus {
+    top: 0;
+}
+                    </div>
+                </div>
+
+                <h2>4. ARIA (Accessible Rich Internet Applications)</h2>
+                
+                <div class="code-example">
+&lt;!-- Botão com ARIA --&gt;
+&lt;button 
+    aria-expanded="false"
+    aria-controls="menu-content"
+    aria-label="Abrir menu de navegação"
+    onclick="toggleMenu()"&gt;
+    ☰ Menu
+&lt;/button&gt;
+
+&lt;div id="menu-content" aria-hidden="true"&gt;
+    &lt;!-- Conteúdo do menu --&gt;
+&lt;/div&gt;
+
+&lt;!-- Alertas dinâmicos --&gt;
+&lt;div 
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"&gt;
+    Item adicionado ao carrinho!
+&lt;/div&gt;
+
+&lt;!-- Formulário acessível --&gt;
+&lt;label for="email"&gt;E-mail&lt;/label&gt;
+&lt;input 
+    type="email"
+    id="email"
+    name="email"
+    aria-required="true"
+    aria-describedby="email-help"&gt;
+&lt;span id="email-help" class="visually-hidden"&gt;
+    Digite seu endereço de e-mail
+&lt;/span&gt;
+                </div>
+
+                <div class="highlight-box">
+                    <strong>💡 Regra de Ouro do ARIA:</strong>
+                    "Não use ARIA quando HTML nativo funciona. Use ARIA apenas quando necessário para complementar a semântica nativa. ARIA mal implementado pode piorar a acessibilidade."
+                </div>
+
+                <h2>5. Tecnologias Assistivas: Como Testar</h2>
+                
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <strong>NVDA</strong>
+                        <div>Leitor de tela gratuito para Windows</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>VoiceOver</strong>
+                        <div>Leitor de tela nativo do macOS/iOS</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>TalkBack</strong>
+                        <div>Leitor de tela nativo do Android</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <strong>JAWS</strong>
+                        <div>Leitor de tela profissional (pago)</div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="color: white; margin-top: 0;">🎯 Fluxo de Testes Recomendado</h3>
+                    
+                    <ol>
+                        <li><strong>Teste automatizado:</strong> Use Lighthouse, axe, WAVE</li>
+                        <li><strong>Teste de teclado:</strong> Navegue usando apenas Tab, Shift+Tab, Enter, Space</li>
+                        <li><strong>Teste de zoom:</strong> Aumente zoom para 200%</li>
+                        <li><strong>Teste de alto contraste:</strong> Ative modo alto contraste do sistema</li>
+                        <li><strong>Teste com leitor de tela:</strong> Use NVDA ou VoiceOver</li>
+                        <li><strong>Teste com usuários reais:</strong> Inclua PCDs no processo</li>
+                    </ol>
+                </div>
+
+                <h2>6. Caso Real: E-commerce Acessível</h2>
+                
+                <div style="background: #e8f4f8; padding: 2rem; border-radius: 10px; margin: 2rem 0; border-left: 4px solid #3498db;">
+                    <h3 style="margin-top: 0;">🛒 LojaVirtualAcessível.com.br</h3>
+                    
+                    <p><strong>Situação Inicial:</strong> Site com 0% de acessibilidade. Taxa de rejeição de 85% entre usuários com deficiência visual.</p>
+                    
+                    <p><strong>Ações Implementadas:</strong></p>
+                    <ul>
+                        <li>Adição de texto alternativo em 5.000+ imagens</li>
+                        <li>Implementação de navegação por teclado</li>
+                        <li>Contraste ajustado em toda a interface</li>
+                        <li>Formulários com labels e instruções claras</li>
+                        <li>Player de vídeo com legendas e descrição</li>
+                    </ul>
+                    
+                    <p><strong>Resultados (6 meses):</strong></p>
+                    <ul>
+                        <li>Aumento de 30% no tráfego de usuários PCDs</li>
+                        <li>Redução de 40% na taxa de rejeição</li>
+                        <li>Aumento de 15% nas vendas totais</li>
+                        <li>Retorno positivo nas redes sociais</li>
+                        <li>Reconhecimento com selo de acessibilidade</li>
+                    </ul>
+                </div>
+
+                <h2>7. Framework de Implementação em 4 Fases</h2>
+                
+                <div style="background: var(--gray-light); padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                    <h3 style="margin-top: 0;">Fase 1: Avaliação (Semanas 1-2)</h3>
+                    <ul>
+                        <li>Auditoria completa com ferramentas automáticas</li>
+                        <li>Identificação de violações críticas (nível A)</li>
+                        <li>Análise de tecnologias assistivas mais usadas</li>
+                        <li>Estabelecimento de baseline de acessibilidade</li>
+                    </ul>
+                    
+                    <h3>Fase 2: Correções Críticas (Semanas 3-6)</h3>
+                    <ul>
+                        <li>Correção de problemas de navegação por teclado</li>
+                        <li>Implementação de texto alternativo</li>
+                        <li>Correção de contraste mínimo</li>
+                        <li>Estruturação semântica do HTML</li>
+                    </ul>
+                    
+                    <h3>Fase 3: Otimização (Semanas 7-12)</h3>
+                    <ul>
+                        <li>Implementação de ARIA quando necessário</li>
+                        <li>Otimização de formulários</li>
+                        <li>Testes com leitores de tela</li>
+                        <li>Treinamento da equipe</li>
+                    </ul>
+                    
+                    <h3>Fase 4: Manutenção (Contínuo)</h3>
+                    <ul>
+                        <li>Processos de desenvolvimento inclusivos</li>
+                        <li>Testes automatizados em CI/CD</li>
+                        <li>Feedback contínuo de usuários PCDs</li>
+                        <li>Atualização conforme novas WCAG</li>
+                    </ul>
+                </div>
+
+                <h2>8. ROI da Acessibilidade: Números que Impressionam</h2>
+                
+                <div class="stat-box">
+                    <div class="stat-number">+20%</div>
+                    <div class="stat-text">aumento no alcance do público-alvo com sites acessíveis</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-number">-35%</div>
+                    <div class="stat-text">redução nos custos de suporte ao cliente</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-number">+15%</div>
+                    <div class="stat-text">melhora no SEO (Google prioriza sites acessíveis)</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-number">90%</div>
+                    <div class="stat-text">dos recursos de acessibilidade beneficiam todos os usuários</div>
+                </div>
+
+                <h2>9. Ferramentas Essenciais (Gratuitas)</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                    <div style="padding: 1rem; background: white; border: 2px solid #e67e22; border-radius: 8px; text-align: center;">
+                        <strong>Lighthouse</strong>
+                        <div>Acessibilidade + Performance (Chrome)</div>
+                    </div>
+                    
+                    <div style="padding: 1rem; background: white; border: 2px solid #e67e22; border-radius: 8px; text-align: center;">
+                        <strong>WAVE</strong>
+                        <div>Análise visual de acessibilidade</div>
+                    </div>
+                    
+                    <div style="padding: 1rem; background: white; border: 2px solid #e67e22; border-radius: 8px; text-align: center;">
+                        <strong>axe DevTools</strong>
+                        <div>Extensão para Chrome/Firefox</div>
+                    </div>
+                    
+                    <div style="padding: 1rem; background: white; border: 2px solid #e67e22; border-radius: 8px; text-align: center;">
+                        <strong>Color Contrast Analyzer</strong>
+                        <div>Plugin para Figma/Sketch</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(135deg, #e67e22, #d35400); color: white; border-radius: 10px;">
+                    <h3 style="margin-top: 0; color: white;">♿ Quer Avaliar a Acessibilidade do Seu Site?</h3>
+                    <p>Faça uma auditoria gratuita de acessibilidade e receba um relatório detalhado com as correções prioritárias.</p>
+                    <a href="../contato.html?assunto=acessibilidade" style="display: inline-block; background: white; color: #e67e22; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 1rem;">Solicitar Auditoria Gratuita</a>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div style="display: flex; justify-content: space-between; padding: 2rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 3rem 0;">
+                <div style="max-width: 45%;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">← Artigo Anterior</div>
+                    <a href="post-8.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">IA no Marketing Digital</a>
+                </div>
+                <div style="max-width: 45%; text-align: right;">
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Próximo Artigo →</div>
+                    <a href="post-10.html" style="color: var(--secondary-color); font-weight: 600; text-decoration: none;">E-commerce: Estratégias</a>
+                </div>
+            </div>
+
+            <!-- Comentários -->
+            <div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 3rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">💬 Compartilhe Suas Experiências</h2>
+                
+                <form style="margin-bottom: 3rem;" id="commentForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <input type="text" placeholder="Seu nome" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        <input type="email" placeholder="Seu e-mail" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <textarea placeholder="Quais desafios você enfrenta com acessibilidade?..." required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 120px; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" style="background: #e67e22; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer;">Compartilhar Experiência</button>
+                </form>
+
+                <div id="commentList">
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Dev Front-end</span>
+                            <span style="color: #666; font-size: 0.9rem;">31/01/2024 14:30</span>
+                        </div>
+                        <p>Implementamos acessibilidade no nosso e-commerce e os resultados foram impressionantes. Além de cumprir a lei, aumentamos vendas em 18%. A navegação por teclado foi o que mais fez diferença.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Usuário PCD</span>
+                            <span style="color: #666; font-size: 0.9rem;">30/01/2024 21:15</span>
+                        </div>
+                        <p>Sou deficiente visual e uso leitor de tela. É frustrante quando sites não têm texto alternativo nas imagens. Parabéns pelo artigo, espero que mais desenvolvedores leiam e implementem essas dicas.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-weight: 600; color: var(--primary-color);">Product Manager</span>
+                            <span style="color: #666; font-size: 0.9rem;">30/01/2024 18:45</span>
+                        </div>
+                        <p>Excelente conteúdo! Incluímos acessibilidade desde o início no nosso novo produto e economizamos 60% do tempo que gastaríamos corrigindo depois. A fase de avaliação inicial é crucial.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Acessibilidade Web</h3>
+                    <p>Torne seu site inclusivo para todos os usuários, independentemente de suas habilidades.</p>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Serviços</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Auditoria de Acessibilidade</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Implementação WCAG</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Treinamento para Equipes</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../servicos.html" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Certificação de Acessibilidade</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Recursos Grátis</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Checklist WCAG 2.1</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Guia de ARIA</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Template de Auditoria</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: var(--light-color); text-decoration: none; opacity: 0.8;">Calculadora de Contraste</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem; font-family: 'Poppins', sans-serif;">Especialista</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">📧 acessibilidade@construcode.com</li>
+                        <li style="margin-bottom: 0.8rem;">📱 (11) 98765-4321</li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contato.html" style="color: #e67e22; text-decoration: none; font-weight: 500;">Consultoria Especializada</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.7; font-size: 0.9rem;">
+                <p>&copy; 2024 ConstruCode Acessibilidade. Artigo escrito por Ana Rodrigues, especialista em acessibilidade web com certificação CPWA e mais de 8 anos de experiência.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Tempo de leitura: 9 minutos | <span id="views">2,850</span> visualizações | Baseado em WCAG 2.1
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const inputs = commentForm.querySelectorAll('input, textarea');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const comment = inputs[2].value;
+            
+            if (!name || !email || !comment) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            const now = new Date();
+            const newComment = document.createElement('div');
+            newComment.style.padding = '1.5rem 0';
+            newComment.style.borderBottom = '1px solid #eee';
+            
+            newComment.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-weight: 600; color: var(--primary-color);">${name}</span>
+                    <span style="color: #666; font-size: 0.9rem;">${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}</span>
+                </div>
+                <p>${comment}</p>
+            `;
+            
+            commentList.prepend(newComment);
+            commentForm.reset();
+            
+            alert('Obrigado por compartilhar sua experiência!');
+        });
+
+        // Contador de visualizações
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = localStorage.getItem('post-9-views') || 2850;
+            localStorage.setItem('post-9-views', parseInt(views) + 1);
+            
+            const viewsElement = document.getElementById('views');
+            if (viewsElement) {
+                viewsElement.textContent = (parseInt(views) + 1).toLocaleString();
+            }
+        });
+
+        // Simulador de Contraste
+        const contrastBtn = document.createElement('button');
+        contrastBtn.textContent = '🎨 Testar Contraste';
+        contrastBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        `;
+        
+        contrastBtn.addEventListener('click', () => {
+            const textColor = prompt('Cor do texto (hex, ex: #000000):', '#000000');
+            const bgColor = prompt('Cor do fundo (hex, ex: #ffffff):', '#ffffff');
+            
+            if (textColor && bgColor) {
+                // Função simplificada para calcular contraste
+                function hexToRgb(hex) {
+                    const r = parseInt(hex.slice(1, 3), 16);
+                    const g = parseInt(hex.slice(3, 5), 16);
+                    const b = parseInt(hex.slice(5, 7), 16);
+                    return [r, g, b];
+                }
+                
+                function getLuminance(rgb) {
+                    const [r, g, b] = rgb.map(c => {
+                        c /= 255;
+                        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+                    });
+                    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+                }
+                
+                function getContrastRatio(color1, color2) {
+                    const l1 = getLuminance(color1);
+                    const l2 = getLuminance(color2);
+                    const lighter = Math.max(l1, l2);
+                    const darker = Math.min(l1, l2);
+                    return (lighter + 0.05) / (darker + 0.05);
+                }
+                
+                const rgb1 = hexToRgb(textColor);
+                const rgb2 = hexToRgb(bgColor);
+                const ratio = getContrastRatio(rgb1, rgb2);
+                
+                let result = '';
+                let compliance = '';
+                
+                if (ratio >= 7) {
+                    compliance = '✅ AAA (Excelente)';
+                } else if (ratio >= 4.5) {
+                    compliance = '✅ AA (Bom)';
+                } else if (ratio >= 3) {
+                    compliance = '⚠️ AA para texto grande';
+                } else {
+                    compliance = '❌ Não atende WCAG';
+                }
+                
+                // Criar visualização
+                const preview = document.createElement('div');
+                preview.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 300px;
+                    padding: 30px;
+                    background: ${bgColor};
+                    color: ${textColor};
+                    border-radius: 10px;
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: bold;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                    z-index: 10000;
+                `;
+                preview.innerHTML = `
+                    <div style="margin-bottom: 20px;">Texto de Exemplo</div>
+                    <div style="font-size: 14px; font-weight: normal;">
+                        Contraste: ${ratio.toFixed(2)}:1<br>
+                        ${compliance}<br><br>
+                        Texto: ${textColor}<br>
+                        Fundo: ${bgColor}
+                    </div>
+                `;
+                
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.7);
+                    z-index: 9999;
+                `;
+                
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = 'Fechar';
+                closeBtn.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #e67e22;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    z-index: 10001;
+                    font-weight: bold;
+                `;
+                
+                closeBtn.addEventListener('click', () => {
+                    document.body.removeChild(preview);
+                    document.body.removeChild(overlay);
+                    document.body.removeChild(closeBtn);
+                });
+                
+                overlay.addEventListener('click', () => {
+                    document.body.removeChild(preview);
+                    document.body.removeChild(overlay);
+                    document.body.removeChild(closeBtn);
+                });
+                
+                document.body.appendChild(overlay);
+                document.body.appendChild(preview);
+                document.body.appendChild(closeBtn);
+            }
+        });
+        
+        document.body.appendChild(contrastBtn);
+    </script>
+</body>
+</html>
