@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - ConstruCode</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Conheça nossos cases de sucesso em desenvolvimento web, PWA, SEO e otimização de conversão. Projetos reais com resultados mensuráveis.">
+    <meta name="keywords" content="portfólio, cases, projetos, desenvolvimento web, PWA, SEO, CRO, cases de sucesso">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link.active {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Portfólio */
+        .portfolio-hero {
+            text-align: center;
+            padding: 80px 0 40px;
+        }
+
+        .portfolio-hero h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .portfolio-hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Filtros */
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* Grid de Projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            position: relative;
+        }
+
+        .project-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .project-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .project-title a:hover {
+            color: var(--secondary-color);
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .project-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn-case {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .btn-case:hover {
+            background: var(--primary-color);
+        }
+
+        /* CTA Portfólio */
+        .portfolio-cta {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), #34495e);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            margin: 4rem 0;
+        }
+
+        .portfolio-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .portfolio-cta .btn-case {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .portfolio-cta .btn-case:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .portfolio-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-filters {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="servicos.html" class="nav-link">Serviços</a>
+                    <a href="portfolio.html" class="nav-link active">Portfólio</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="sobre.html" class="nav-link">Sobre</a>
+                    <a href="contato.html" class="nav-link">Contato</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Portfólio -->
+    <section class="portfolio-hero">
+        <div class="container">
+            <h1>Nossos Cases de Sucesso</h1>
+            <p>Projetos reais que transformaram negócios através da tecnologia. Cada case tem resultados mensuráveis e estratégias comprovadas.</p>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <div class="container">
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">Todos os Projetos</button>
+            <button class="filter-btn" data-filter="pwa">PWA</button>
+            <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+            <button class="filter-btn" data-filter="seo">SEO</button>
+            <button class="filter-btn" data-filter="cro">Otimização (CRO)</button>
+            <button class="filter-btn" data-filter="design">Design</button>
+        </div>
+
+        <!-- Grid de Projetos -->
+        <div class="projects-grid">
+            
+            <!-- Project 1 -->
+            <article class="project-card" data-category="pwa ecommerce">
+                <div class="project-image">
+                    <span class="project-category">PWA + E-commerce</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">
+                        <a href="projects/project-1.html">ModaExpress - Loja de Moda PWA</a>
+                    </h3>
+                    <p class="project-description">
+                        Transformação completa de e-commerce tradicional para Progressive Web App, resultando em aumento de 250% nas vendas mobile.
+                    </p>
+                    <div class="project-stats">
+                        <span class="project-stat">📈 +250% vendas</span>
+                        <span class="project-stat">⚡ 2.1s LCP</span>
+                        <span class="project-stat">📱 85% mobile</span>
+                    </div>
+                    <a href="projects/project-1.html" class="btn-case">Ver Case Completo →</a>
+                </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="project-card" data-category="seo">
+                <div class="project-image" style="background: linear-gradient(45deg, #28a745, #20c997);">
+                    <span class="project-category">SEO</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">
+                        <a href="projects/project-2.html">Clínica Saúde Total - SEO Local</a>
+                    </h3>
+                    <p class="project-description">
+                        Estratégia de SEO local que posicionou clínica médica no topo do Google Maps, aumentando agendamentos em 180%.
+                    </p>
+                    <div class="project-stats">
+                        <span class="project-stat">📍 #1 Google Maps</span>
+                        <span class="project-stat">📞 +180% agendamentos</span>
+                        <span class="project-stat">👁️ 15k/mês visualizações</span>
+                    </div>
+                    <a href="projects/project-2.html" class="btn-case">Ver Case Completo →</a>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="project-card" data-category="cro">
+                <div class="project-image" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">
+                    <span class="project-category">CRO</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">
+                        <a href="projects/project-3.html">FinTech Invest - Otimização de Conversão</a>
+                    </h3>
+                    <p class="project-description">
+                        Redesign completo do funnel de conversão para plataforma de investimentos, aumentando a taxa de conversão em 315%.
+                    </p>
+                    <div class="project-stats">
+                        <span class="project-stat">💰 +315% conversão</span>
+                        <span class="project-stat">📊 47 testes A/B</span>
+                        <span class="project-stat">🎯 12% taxa de retenção</span>
+                    </div>
+                    <a href="projects/project-3.html" class="btn-case">Ver Case Completo →</a>
+                </div>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="project-card" data-category="pwa">
+                <div class="project-image" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
+                    <span class="project-category">PWA</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">
+                        <a href="projects/project-4.html">AppDelivery - PWA para Delivery</a>
+                    </h3>
+                    <p class="project-description">
+                        Desenvolvimento de PWA para rede de restaurantes, reduzindo custos com apps nativos e aumentando pedidos em 40%.
+                    </p>
+                    <div class="project-stats">
+                        <span class="project-stat">🚀 -70% custo dev</span>
+                        <span class="project-stat">📦 +40% pedidos</span>
+                        <span class="project-stat">⭐ 4.8 avaliação</span>
+                    </div>
+                    <a href="projects/project-4.html" class="btn-case">Ver Case Completo →</a>
+                </div>
+            </article>
+
+            <!-- Project 5 -->
+            <article class="project-card" data-category="ecommerce">
+                <div class="project-image" style="background: linear-gradient(45deg, #f39c12, #e67e22);">
+                    <span class="project-category">E-commerce</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">
+                        <a href="projects/project-5.html">PetShop Online - Migração para Vtex</a>
+                    </h3>
+                    <p class="project-description">
+                        Migração completa de plataforma e-commerce com otimização de performance, reduzindo carregamento de 6s para 1.8s.
+                    </p>
+                    <div class="project-stats">
+                        <span class="project-stat">⚡ 1.8s carregamento</span>
+                        <span class="project-stat">🛒 -65% abandono</span>
+                        <span class="project-stat">📈 +120% vendas</span>
+                    </div>
+                    <a href="projects/project-5.html" class="btn-case">Ver Case Completo →</a>
+                </div>
+            </article>
+
+            <!-- Project 6 -->
+            <article class="project-card" data-category="design">
+                <div class="project-image" style="background: linear-gradient(45deg, #1abc9c, #16a085);">
+                    <span class="project-category">Design</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">
+                        <a href="projects/project-6.html">Startup Tech - Redesign de Marca</a>
+                    </h3>
+                    <p class="project-description">
+                        Reposicionamento completo de marca e design system para startup de tecnologia, aumentando reconhecimento em 300%.
+                    </p>
+                    <div class="project-stats">
+                        <span class="project-stat">🎨 Design System</span>
+                        <span class="project-stat">📱 Mobile First</span>
+                        <span class="project-stat">🚀 +300% reconhecimento</span>
+                    </div>
+                    <a href="projects/project-6.html" class="btn-case">Ver Case Completo →</a>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- CTA -->
+        <div class="portfolio-cta">
+            <h2>Quer Ver seu Projeto Aqui?</h2>
+            <p>Trabalhamos com empresas de todos os tamanhos para criar soluções digitais que geram resultados reais.</p>
+            <a href="contato.html" class="btn-case">Falar com Especialista →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>ConstruCode</h3>
+                    <p>Especialistas em desenvolvimento web e marketing digital com resultados comprovados.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Serviços</h3>
+                    <ul class="footer-links">
+                        <li><a href="servicos.html#pwa">Desenvolvimento PWA</a></li>
+                        <li><a href="servicos.html#seo">Otimização SEO</a></li>
+                        <li><a href="servicos.html#cro">CRO & Conversão</a></li>
+                        <li><a href="servicos.html#design">UI/UX Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Cases</h3>
+                    <ul class="footer-links">
+                        <li><a href="projects/project-1.html">ModaExpress (PWA)</a></li>
+                        <li><a href="projects/project-2.html">Clínica Saúde Total (SEO)</a></li>
+                        <li><a href="projects/project-3.html">FinTech Invest (CRO)</a></li>
+                        <li><a href="projects/project-4.html">AppDelivery (Delivery)</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li>📧 contato@construcode.com</li>
+                        <li>📱 (11) 98765-4321</li>
+                        <li>📍 São Paulo, SP</li>
+                        <li><a href="contato.html">Agendar Consultoria</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ConstruCode. Todos os direitos reservados.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    <a href="legal.html#privacidade" style="color: white; opacity: 0.8;">Política de Privacidade</a> |
+                    <a href="legal.html#termos" style="color: white; opacity: 0.8;">Termos de Uso</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Filtro de projetos
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active de todos
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Adiciona active no clicado
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+
+                    projectCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category.includes(filter)) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // Animação de entrada dos cards
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            projectCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

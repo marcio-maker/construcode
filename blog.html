@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - ConstruCode</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description"
+        content="Blog sobre desenvolvimento web, marketing digital, SEO e tecnologia. Aprenda com nossos artigos especializados.">
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link.active {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Blog */
+        .hero-blog {
+            background: linear-gradient(135deg, #71d6d9 0%, #7593b6 100%);
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+
+        .hero-blog h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-blog p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 2rem auto 0;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow);
+        }
+
+        /* Layout do Blog */
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 3rem;
+            padding: 3rem 0;
+        }
+
+        /* Artigos */
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 2.5rem;
+            transition: var(--transition);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-image {
+            height: 300px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            position: relative;
+        }
+
+        .article-category {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .article-content {
+            padding: 2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            display: block;
+        }
+
+        .article-title:hover {
+            color: var(--secondary-color);
+        }
+
+        .article-excerpt {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .read-time {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .read-more {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            color: var(--primary-color);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-widget {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        /* Categorias */
+        .categories-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .categories-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .categories-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .categories-list a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .category-count {
+            background: var(--gray-light);
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Posts Populares */
+        .popular-post {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .popular-post:last-child {
+            border-bottom: none;
+        }
+
+        .popular-post img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .popular-post-content h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .popular-post-content h4 a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .popular-post-content h4 a:hover {
+            color: var(--secondary-color);
+        }
+
+        .popular-post-meta {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* Newsletter */
+        .newsletter-form {
+            margin-top: 1.5rem;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            width: 100%;
+            padding: 12px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: var(--primary-color);
+        }
+
+        /* Paginação */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 3rem 0;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 10px 18px;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .pagination a:hover,
+        .pagination a.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* AdSense no Blog */
+        .blog-ad {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            margin: 3rem 0;
+            border-radius: 8px;
+        }
+
+        .in-article-ad {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .blog-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero-blog h1 {
+                font-size: 2.2rem;
+            }
+
+            .article-image {
+                height: 200px;
+            }
+
+            .article-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Placeholders */
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        /* Estados de loading */
+        .loading {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="servicos.html" class="nav-link">Serviços</a>
+                    <a href="portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="blog.html" class="nav-link active">Blog</a>
+                    <a href="sobre.html" class="nav-link">Sobre</a>
+                    <a href="contato.html" class="nav-link">Contato</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Blog -->
+    <section class="hero-blog">
+        <div class="container">
+            <h1>Blog ConstruCode</h1>
+            <p>Conteúdo especializado sobre desenvolvimento web, marketing digital, SEO e tecnologia para impulsionar
+                seu negócio.</p>
+            <div class="search-box">
+                <input type="text" placeholder="Buscar artigos..." id="searchInput">
+            </div>
+        </div>
+    </section>
+
+    <!-- AdSense Top -->
+    <div class="container">
+        <div class="blog-ad">
+            Espaço para AdSense (728x90)
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <section>
+        <div class="container">
+            <div class="blog-layout">
+
+                <!-- Artigos -->
+                <main class="blog-main" id="articlesContainer">
+                    <!-- Os artigos serão carregados dinamicamente aqui -->
+                </main>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+
+                    <!-- Widget Categorias -->
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-title">Categorias</h3>
+                        <ul class="categories-list">
+                            <li>
+                                <a href="#">
+                                    <span>Desenvolvimento Web</span>
+                                    <span class="category-count">15</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>SEO</span>
+                                    <span class="category-count">12</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Marketing Digital</span>
+                                    <span class="category-count">18</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Design UI/UX</span>
+                                    <span class="category-count">8</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>PWA</span>
+                                    <span class="category-count">6</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Performance</span>
+                                    <span class="category-count">7</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>Negócios</span>
+                                    <span class="category-count">9</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Widget Posts Populares -->
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-title">Posts Populares</h3>
+                        <div class="popular-post">
+                            <div class="placeholder-img" style="width: 80px; height: 80px; font-size: 2rem;">🚀</div>
+                            <div class="popular-post-content">
+                                <h4><a href="#">Como Criar um PWA em 2024</a></h4>
+                                <div class="popular-post-meta">15/03 • 1.2k views</div>
+                            </div>
+                        </div>
+                        <div class="popular-post">
+                            <div class="placeholder-img" style="width: 80px; height: 80px; font-size: 2rem;">🔍</div>
+                            <div class="popular-post-content">
+                                <h4><a href="#">SEO para Iniciantes: Guia Completo</a></h4>
+                                <div class="popular-post-meta">10/03 • 980 views</div>
+                            </div>
+                        </div>
+                        <div class="popular-post">
+                            <div class="placeholder-img" style="width: 80px; height: 80px; font-size: 2rem;">💡</div>
+                            <div class="popular-post-content">
+                                <h4><a href="#">Estratégias de Conversão que Funcionam</a></h4>
+                                <div class="popular-post-meta">05/03 • 750 views</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget Newsletter -->
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-title">Newsletter</h3>
+                        <p>Receba nossos melhores artigos e dicas exclusivas no seu e-mail.</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Seu melhor e-mail" required>
+                            <button type="submit">Inscrever-se</button>
+                        </form>
+                    </div>
+
+                    <!-- AdSense Sidebar -->
+                    <div class="sidebar-widget">
+                        <div
+                            style="background: #f8f9fa; height: 600px; display: flex; align-items: center; justify-content: center; color: #6c757d; border: 2px dashed #dee2e6; border-radius: 8px;">
+                            Espaço para AdSense (300x600)
+                        </div>
+                    </div>
+
+                </aside>
+
+            </div>
+
+            <!-- Paginação -->
+            <div class="pagination" id="paginationContainer">
+                <!-- A paginação será gerada dinamicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Blog ConstruCode</h3>
+                    <p>Conteúdo especializado para transformar sua presença digital.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Categorias</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Desenvolvimento Web</a></li>
+                        <li><a href="#">SEO</a></li>
+                        <li><a href="#">Marketing Digital</a></li>
+                        <li><a href="#">Design UI/UX</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">E-books Gratuitos</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Ferramentas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li>📧 blog@construcode.com</li>
+                        <li>📱 (11) 98765-4321</li>
+                        <li>📍 São Paulo, SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ConstruCode Blog. Todos os direitos reservados.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    <a href="legal.html#privacidade" style="color: white; opacity: 0.8;">Política de Privacidade</a> |
+                    <a href="legal.html#termos" style="color: white; opacity: 0.8;">Termos de Uso</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dados dos artigos (15 artigos no total)
+        const articles = [
+            {
+                id: 1,
+                title: "Por que PWA é o Futuro dos Sites e Como Implementar",
+                excerpt: "Descubra como Progressive Web Apps estão revolucionando a experiência mobile, aumentando conversões em até 40% e proporcionando uma experiência similar a apps nativos.",
+                category: "PWA",
+                date: "15 de Março, 2024",
+                author: "João Silva",
+                readTime: "8 min",
+                icon: "🚀"
+            },
+            {
+                id: 2,
+                title: "SEO em 2024: Novas Estratégias que Realmente Funcionam",
+                excerpt: "Com as constantes atualizações dos algoritmos do Google, é essencial se manter atualizado. Neste artigo, revelamos as estratégias de SEO que estão funcionando em 2024.",
+                category: "SEO",
+                date: "10 de Março, 2024",
+                author: "Maria Santos",
+                readTime: "10 min",
+                icon: "🔍"
+            },
+            {
+                id: 3,
+                title: "Conversão: Do Clic ao Cliente - Estratégias Comprovadas",
+                excerpt: "Ter tráfego no site é importante, mas converter visitantes em clientes é essencial. Técnicas avançadas de CRO que podem aumentar suas vendas em até 300%.",
+                category: "Conversão",
+                date: "5 de Março, 2024",
+                author: "Pedro Costa",
+                readTime: "12 min",
+                icon: "💡"
+            },
+            {
+                id: 4,
+                title: "Design Responsivo vs Mobile First: Qual Estratégia Escolher?",
+                excerpt: "Entenda as diferenças entre design responsivo e mobile first, e descubra qual estratégia é mais adequada para o seu projeto. Análise de cases reais e melhores práticas.",
+                category: "Mobile",
+                date: "28 de Fevereiro, 2024",
+                author: "Ana Rodrigues",
+                readTime: "7 min",
+                icon: "📱"
+            },
+            {
+                id: 5,
+                title: "Otimização de Performance: Como Reduzir o Carregamento em 70%",
+                excerpt: "A velocidade do site impacta diretamente nas conversões e no SEO. Aprenda técnicas avançadas que podem reduzir drasticamente o tempo de carregamento.",
+                category: "Performance",
+                date: "20 de Fevereiro, 2024",
+                author: "Carlos Mendes",
+                readTime: "9 min",
+                icon: "⚡"
+            },
+            {
+                id: 6,
+                title: "JavaScript Moderno: Novos Recursos que Você Precisa Conhecer",
+                excerpt: "ECMAScript 2024 trouxe recursos incríveis para o JavaScript. Descubra as novas funcionalidades e como implementá-las em seus projetos.",
+                category: "Desenvolvimento Web",
+                date: "15 de Fevereiro, 2024",
+                author: "João Silva",
+                readTime: "11 min",
+                icon: "💻"
+            },
+            {
+                id: 7,
+                title: "WordPress vs CMS Personalizado: Qual é Melhor para Seu Negócio?",
+                excerpt: "Análise completa das vantagens e desvantagens de cada abordagem. Descubra qual solução é mais adequada para seu tipo de projeto.",
+                category: "Desenvolvimento Web",
+                date: "10 de Fevereiro, 2024",
+                author: "Maria Santos",
+                readTime: "8 min",
+                icon: "🛠️"
+            },
+            {
+                id: 8,
+                title: "Inteligência Artificial no Marketing Digital: Como Aplicar",
+                excerpt: "Como usar ferramentas de IA para otimizar suas campanhas de marketing, criar conteúdo e analisar dados de forma mais eficiente.",
+                category: "Marketing Digital",
+                date: "5 de Fevereiro, 2024",
+                author: "Pedro Costa",
+                readTime: "10 min",
+                icon: "🤖"
+            },
+            {
+                id: 9,
+                title: "Acessibilidade Web: Por que é Fundamental e Como Implementar",
+                excerpt: "Garantir que seu site seja acessível não é apenas uma questão legal, mas também ética e comercial. Aprenda as melhores práticas.",
+                category: "Design UI/UX",
+                date: "30 de Janeiro, 2024",
+                author: "Ana Rodrigues",
+                readTime: "9 min",
+                icon: "♿"
+            },
+            {
+                id: 10,
+                title: "E-commerce: Estratégias para Aumentar as Vendas Online",
+                excerpt: "Técnicas comprovadas para melhorar a experiência de compra e aumentar a conversão em lojas virtuais. Case studies de sucesso.",
+                category: "Negócios",
+                date: "25 de Janeiro, 2024",
+                author: "Carlos Mendes",
+                readTime: "12 min",
+                icon: "🛒"
+            },
+            {
+                id: 11,
+                title: "React vs Vue vs Angular: Qual Framework Escolher em 2024?",
+                excerpt: "Análise detalhada dos três principais frameworks JavaScript. Descubra qual é o mais adequado para seus projetos.",
+                category: "Desenvolvimento Web",
+                date: "20 de Janeiro, 2024",
+                author: "João Silva",
+                readTime: "13 min",
+                icon: "⚛️"
+            },
+            {
+                id: 12,
+                title: "Marketing de Conteúdo: Como Criar Estratégias que Convertem",
+                excerpt: "Planejamento, criação e distribuição de conteúdo que realmente engaja seu público e gera resultados para seu negócio.",
+                category: "Marketing Digital",
+                date: "15 de Janeiro, 2024",
+                author: "Maria Santos",
+                readTime: "8 min",
+                icon: "📝"
+            },
+            {
+                id: 13,
+                title: "Segurança Web: Protegendo Seu Site de Ataques",
+                excerpt: "Principais vulnerabilidades e como proteger seu site. Medidas essenciais de segurança que todo desenvolvedor deve conhecer.",
+                category: "Desenvolvimento Web",
+                date: "10 de Janeiro, 2024",
+                author: "Pedro Costa",
+                readTime: "10 min",
+                icon: "🔒"
+            },
+            {
+                id: 14,
+                title: "Analytics: Como Extrair Insights Valiosos dos Dados",
+                excerpt: "Vá além do básico do Google Analytics. Aprenda a analisar dados de forma estratégica para tomar melhores decisões de negócio.",
+                category: "Marketing Digital",
+                date: "5 de Janeiro, 2024",
+                author: "Ana Rodrigues",
+                readTime: "9 min",
+                icon: "📊"
+            },
+            {
+                id: 15,
+                title: "Desenvolvimento Ágil: Metodologias para Times Eficientes",
+                excerpt: "Scrum, Kanban e outras metodologias ágeis. Como implementar processos que aumentam a produtividade e a qualidade do código.",
+                category: "Negócios",
+                date: "1 de Janeiro, 2024",
+                author: "Carlos Mendes",
+                readTime: "11 min",
+                icon: "🏃"
+            }
+        ];
+
+        // Configuração de paginação
+        const ARTICLES_PER_PAGE = 5;
+        let currentPage = 1;
+
+        // Elementos DOM
+        const articlesContainer = document.getElementById('articlesContainer');
+        const paginationContainer = document.getElementById('paginationContainer');
+        const searchInput = document.getElementById('searchInput');
+
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Função para renderizar artigos
+        function renderArticles(page = 1, searchTerm = '') {
+            currentPage = page;
+            articlesContainer.innerHTML = '';
+            paginationContainer.innerHTML = '';
+
+            // Filtrar artigos se houver termo de busca
+            let filteredArticles = articles;
+            if (searchTerm) {
+                filteredArticles = articles.filter(article =>
+                    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    article.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    article.author.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+
+            // Calcular total de páginas
+            const totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
+
+            // Calcular índice inicial e final
+            const startIndex = (page - 1) * ARTICLES_PER_PAGE;
+            const endIndex = Math.min(startIndex + ARTICLES_PER_PAGE, filteredArticles.length);
+
+            // Renderizar artigos da página atual
+            for (let i = startIndex; i < endIndex; i++) {
+                const article = filteredArticles[i];
+                const articleElement = createArticleElement(article);
+                articlesContainer.appendChild(articleElement);
+
+                // Adicionar AdSense após o segundo artigo
+                if (i === startIndex + 1) {
+                    const adElement = document.createElement('div');
+                    adElement.className = 'in-article-ad';
+                    adElement.innerHTML = 'Espaço para AdSense In-Article (728x90)';
+                    articlesContainer.appendChild(adElement);
+                }
+            }
+
+            // Renderizar paginação
+            if (totalPages > 1) {
+                renderPagination(totalPages, page, searchTerm);
+            }
+
+            // Animação de entrada dos artigos
+            animateArticles();
+        }
+
+        // Função para criar elemento de artigo
+        function createArticleElement(article) {
+            const articleDiv = document.createElement('article');
+            articleDiv.className = 'article-card';
+            articleDiv.innerHTML = `
+                <div class="article-image">
+                    <div class="placeholder-img">${article.icon}</div>
+                    <a href="posts/post-${article.id}.html" class="article-category">${article.category}</a>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-date">${article.date}</span>
+                        <span class="article-author">Por: ${article.author}</span>
+                    </div>
+                    <a href="posts/post-${article.id}.html" class="article-title">
+                        ${article.title}
+                    </a>
+                    <p class="article-excerpt">
+                        ${article.excerpt}
+                    </p>
+                    <div class="article-footer">
+                        <span class="read-time">${article.readTime} de leitura</span>
+                        <a href="posts/post-${article.id}.html" class="read-more">Continuar lendo →</a>
+                    </div>
+                </div>
+            `;
+            return articleDiv;
+        }
+
+        // Função para renderizar paginação
+        function renderPagination(totalPages, currentPage, searchTerm = '') {
+            const paginationDiv = document.createElement('div');
+            paginationDiv.className = 'pagination';
+
+            // Botão anterior
+            if (currentPage > 1) {
+                const prevLink = document.createElement('a');
+                prevLink.href = '#';
+                prevLink.innerHTML = '← Anterior';
+                prevLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderArticles(currentPage - 1, searchTerm);
+                    window.scrollTo({ top: articlesContainer.offsetTop - 100, behavior: 'smooth' });
+                });
+                paginationDiv.appendChild(prevLink);
+            }
+
+            // Números das páginas
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageLink = document.createElement('a');
+                pageLink.href = '#';
+                pageLink.textContent = i;
+                if (i === currentPage) {
+                    pageLink.classList.add('active');
+                }
+                pageLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderArticles(i, searchTerm);
+                    window.scrollTo({ top: articlesContainer.offsetTop - 100, behavior: 'smooth' });
+                });
+                paginationDiv.appendChild(pageLink);
+            }
+
+            // Botão próximo
+            if (currentPage < totalPages) {
+                const nextLink = document.createElement('a');
+                nextLink.href = '#';
+                nextLink.innerHTML = 'Próxima →';
+                nextLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderArticles(currentPage + 1, searchTerm);
+                    window.scrollTo({ top: articlesContainer.offsetTop - 100, behavior: 'smooth' });
+                });
+                paginationDiv.appendChild(nextLink);
+            }
+
+            paginationContainer.appendChild(paginationDiv);
+        }
+
+        // Função para animar entrada dos artigos
+        function animateArticles() {
+            const articles = document.querySelectorAll('.article-card');
+            articles.forEach((article, index) => {
+                article.style.opacity = '0';
+                article.style.transform = 'translateY(20px)';
+                article.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+
+                setTimeout(() => {
+                    article.style.opacity = '1';
+                    article.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        // Busca no Blog
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                const term = searchInput.value;
+                renderArticles(1, term);
+            }
+        });
+
+        // Limpar busca
+        searchInput.addEventListener('input', (e) => {
+            if (e.target.value === '') {
+                renderArticles(1);
+            }
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            renderArticles(1);
+        });
+
+    </script>
+</body>
+
+</html>

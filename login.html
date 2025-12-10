@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Cliente - ConstruCode</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Área restrita para clientes da ConstruCode. Acesse seu painel, acompanhe projetos e veja relatórios.">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link.active {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Sistema de Login/Cadastro */
+        .auth-system {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .auth-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            min-height: 600px;
+        }
+
+        /* Lado Esquerdo - Login */
+        .auth-left {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+        }
+
+        .auth-left h2 {
+            color: var(--primary-color);
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .auth-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .auth-form {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .remember-forgot label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .btn-login {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-login:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .social-login {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .social-login p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Lado Direito - Cadastro/Info */
+        .auth-right {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-right:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+
+        .auth-right h2 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .auth-right p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .features-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .features-list li:before {
+            content: '✓';
+            background: rgba(255,255,255,0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .btn-register {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .btn-register:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Painel do Cliente (após login) */
+        .client-panel {
+            display: none;
+            padding: 3rem 0;
+            min-height: 600px;
+        }
+
+        .panel-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c3e50 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .user-details h2 {
+            margin: 0 0 0.5rem 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .panel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .panel-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .panel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .panel-card h3 {
+            color: var(--primary-color);
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .invoice-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .invoice-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .invoice-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .invoice-amount {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .invoice-paid {
+            color: #28a745;
+        }
+
+        .invoice-pending {
+            color: #dc3545;
+        }
+
+        .btn-action {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .btn-action:hover {
+            background: var(--primary-color);
+        }
+
+        .logout-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .auth-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+            
+            .auth-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .auth-left, .auth-right {
+                padding: 2rem;
+            }
+
+            .panel-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-info {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Mensagens */
+        .auth-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .auth-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .auth-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        /* Alternar entre Login e Cadastro */
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 2rem;
+        }
+
+        .auth-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .auth-tab.active {
+            color: var(--secondary-color);
+        }
+
+        .auth-tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="servicos.html" class="nav-link">Serviços</a>
+                    <a href="portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="sobre.html" class="nav-link">Sobre</a>
+                    <a href="contato.html" class="nav-link">Contato</a>
+                    <a href="login.html" class="nav-link active">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sistema de Login/Cadastro -->
+    <section class="auth-system" id="authSystem">
+        <div class="auth-container">
+            <!-- Lado Esquerdo - Login -->
+            <div class="auth-left">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <button class="auth-tab" data-tab="register">Cadastro</button>
+                </div>
+
+                <!-- Mensagens -->
+                <div id="authMessage" class="auth-message"></div>
+
+                <!-- Formulário de Login -->
+                <form id="loginForm" class="auth-form active">
+                    <h2>Bem-vindo de Volta</h2>
+                    <p class="auth-subtitle">Acesse sua conta para gerenciar seus projetos</p>
+                    
+                    <div class="form-group">
+                        <label for="loginEmail">E-mail</label>
+                        <input type="email" id="loginEmail" class="form-control" required placeholder="seu@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Senha</label>
+                        <input type="password" id="loginPassword" class="form-control" required placeholder="Sua senha">
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <label>
+                            <input type="checkbox" id="rememberMe">
+                            <span>Lembrar-me</span>
+                        </label>
+                        <a href="#" class="forgot-password" id="forgotPassword">Esqueci a senha</a>
+                    </div>
+                    
+                    <button type="submit" class="btn-login">Entrar na Conta</button>
+                    
+                    <div class="social-login">
+                        <p>Ou entre com</p>
+                        <div class="social-buttons">
+                            <button type="button" class="social-btn" data-provider="google">G</button>
+                            <button type="button" class="social-btn" data-provider="facebook">f</button>
+                            <button type="button" class="social-btn" data-provider="linkedin">in</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Formulário de Cadastro -->
+                <form id="registerForm" class="auth-form">
+                    <h2>Criar Nova Conta</h2>
+                    <p class="auth-subtitle">Cadastre-se para acompanhar seus projetos</p>
+                    
+                    <div class="form-group">
+                        <label for="registerName">Nome Completo</label>
+                        <input type="text" id="registerName" class="form-control" required placeholder="Seu nome completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerEmail">E-mail</label>
+                        <input type="email" id="registerEmail" class="form-control" required placeholder="seu@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerCompany">Empresa</label>
+                        <input type="text" id="registerCompany" class="form-control" placeholder="Nome da sua empresa (opcional)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPhone">Telefone</label>
+                        <input type="tel" id="registerPhone" class="form-control" placeholder="(11) 99999-9999">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword">Senha</label>
+                        <input type="password" id="registerPassword" class="form-control" required placeholder="Mínimo 8 caracteres">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirmar Senha</label>
+                        <input type="password" id="registerConfirmPassword" class="form-control" required placeholder="Digite a senha novamente">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem;">
+                            <input type="checkbox" id="acceptTerms" required style="margin-top: 3px;">
+                            <span>Concordo com os <a href="legal.html#termos" style="color: var(--secondary-color);">Termos de Uso</a> e <a href="legal.html#privacidade" style="color: var(--secondary-color);">Política de Privacidade</a></span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-login">Criar Conta</button>
+                </form>
+
+                <!-- Formulário de Recuperação de Senha -->
+                <form id="forgotForm" class="auth-form" style="display: none;">
+                    <h2>Recuperar Senha</h2>
+                    <p class="auth-subtitle">Digite seu e-mail para receber instruções</p>
+                    
+                    <div class="form-group">
+                        <label for="forgotEmail">E-mail</label>
+                        <input type="email" id="forgotEmail" class="form-control" required placeholder="seu@email.com">
+                    </div>
+                    
+                    <button type="submit" class="btn-login">Enviar Instruções</button>
+                    
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <a href="#" class="forgot-password" id="backToLogin">Voltar para o login</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Lado Direito - Info -->
+            <div class="auth-right">
+                <h2>Área Exclusiva para Clientes</h2>
+                <p>Acesse todos os recursos disponíveis para acompanhar seus projetos e resultados.</p>
+                
+                <ul class="features-list">
+                    <li>Acompanhamento de projetos em tempo real</li>
+                    <li>Download de arquivos e documentação</li>
+                    <li>Comunicação direta com nossa equipe</li>
+                    <li>Relatórios de desempenho detalhados</li>
+                    <li>Gestão de faturas e pagamentos</li>
+                    <li>Suporte técnico prioritário</li>
+                </ul>
+                
+                <button class="btn-register" id="showRegister">Criar uma conta</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Painel do Cliente (após login) -->
+    <section class="client-panel" id="clientPanel">
+        <div class="container">
+            <div class="panel-header">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">JS</div>
+                    <div class="user-details">
+                        <h2 id="userName">João Silva</h2>
+                        <p id="userEmail">joao@empresa.com</p>
+                        <p id="userCompany">Moda Elegante Store</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn">Sair da Conta</button>
+            </div>
+
+            <div class="panel-grid">
+                <!-- Meus Projetos -->
+                <div class="panel-card">
+                    <h3>📋 Meus Projetos</h3>
+                    <ul class="project-list">
+                        <li class="project-item">
+                            <div>
+                                <strong>Site Institucional</strong>
+                                <div style="font-size: 0.9rem; color: #666;">Iniciado: 01/03/2024</div>
+                            </div>
+                            <span class="project-status status-active">Em Andamento</span>
+                        </li>
+                        <li class="project-item">
+                            <div>
+                                <strong>Loja Virtual</strong>
+                                <div style="font-size: 0.9rem; color: #666;">Iniciado: 15/02/2024</div>
+                            </div>
+                            <span class="project-status status-completed">Concluído</span>
+                        </li>
+                        <li class="project-item">
+                            <div>
+                                <strong>Campanha Marketing</strong>
+                                <div style="font-size: 0.9rem; color: #666;">Iniciado: 10/03/2024</div>
+                            </div>
+                            <span class="project-status status-pending">Aguardando</span>
+                        </li>
+                    </ul>
+                    <button class="btn-action" style="margin-top: 1rem; width: 100%;">Ver Todos os Projetos</button>
+                </div>
+
+                <!-- Faturas -->
+                <div class="panel-card">
+                    <h3>💰 Faturas</h3>
+                    <ul class="invoice-list">
+                        <li class="invoice-item">
+                            <div>
+                                <strong>Fatura #00123</strong>
+                                <div class="invoice-date">Vencimento: 15/03/2024</div>
+                            </div>
+                            <div>
+                                <div class="invoice-amount">R$ 2.499,00</div>
+                                <div class="invoice-paid">Pago</div>
+                            </div>
+                        </li>
+                        <li class="invoice-item">
+                            <div>
+                                <strong>Fatura #00124</strong>
+                                <div class="invoice-date">Vencimento: 01/04/2024</div>
+                            </div>
+                            <div>
+                                <div class="invoice-amount">R$ 1.299,00</div>
+                                <div class="invoice-pending">Pendente</div>
+                            </div>
+                        </li>
+                        <li class="invoice-item">
+                            <div>
+                                <strong>Fatura #00125</strong>
+                                <div class="invoice-date">Vencimento: 15/04/2024</div>
+                            </div>
+                            <div>
+                                <div class="invoice-amount">R$ 799,00</div>
+                                <div class="invoice-pending">Pendente</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <button class="btn-action" style="margin-top: 1rem; width: 100%;">Ver Todas as Faturas</button>
+                </div>
+
+                <!-- Arquivos -->
+                <div class="panel-card">
+                    <h3>📁 Arquivos</h3>
+                    <p>Acesse todos os arquivos do seu projeto:</p>
+                    <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
+                        <button class="btn-action">📄 Wireframes.pdf</button>
+                        <button class="btn-action">🎨 Design Final.psd</button>
+                        <button class="btn-action">📋 Contrato.pdf</button>
+                        <button class="btn-action">📊 Relatório SEO.pdf</button>
+                    </div>
+                </div>
+
+                <!-- Suporte -->
+                <div class="panel-card">
+                    <h3>💬 Suporte</h3>
+                    <p>Entre em contato com nossa equipe:</p>
+                    <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
+                        <button class="btn-action">📞 Ligar para Suporte</button>
+                        <button class="btn-action">✉️ Abrir Ticket</button>
+                        <button class="btn-action">💬 Chat Online</button>
+                        <button class="btn-action">📅 Agendar Reunião</button>
+                    </div>
+                </div>
+
+                <!-- Relatórios -->
+                <div class="panel-card" style="grid-column: span 2;">
+                    <h3>📈 Relatórios de Desempenho</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 1rem;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--secondary-color); font-weight: bold;">+40%</div>
+                            <div style="color: #666;">Tráfego Orgânico</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--secondary-color); font-weight: bold;">+25%</div>
+                            <div style="color: #666;">Conversões</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--secondary-color); font-weight: bold;">99.9%</div>
+                            <div style="color: #666;">Uptime</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--secondary-color); font-weight: bold;">1.2s</div>
+                            <div style="color: #666;">Velocidade Média</div>
+                        </div>
+                    </div>
+                    <button class="btn-action" style="margin-top: 1.5rem; width: 100%;">Ver Relatório Completo</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Área do Cliente</h3>
+                    <p>Acesso seguro e exclusivo para clientes da ConstruCode.</p>
+                    <p><strong>Suporte 24/7:</strong> suporte@construcode.com</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="servicos.html">Serviços</a></li>
+                        <li><a href="portfolio.html">Portfólio</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contato.html">Suporte</a></li>
+                        <li><a href="legal.html">Legal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">Tutoriais</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Status do Serviço</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Segurança</h3>
+                    <ul class="footer-links">
+                        <li><a href="legal.html#privacidade">Privacidade</a></li>
+                        <li><a href="legal.html#termos">Termos</a></li>
+                        <li><a href="legal.html#lgpd">LGPD</a></li>
+                        <li><a href="legal.html#dpo">DPO</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ConstruCode. Área restrita para clientes. Acesso monitorado.</p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    Último acesso: <span id="lastAccess">15/03/2024 14:30</span> | 
+                    <span id="sessionTime">Sessão: 00:15:23</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Sistema de Login
+        const authSystem = document.getElementById('authSystem');
+        const clientPanel = document.getElementById('clientPanel');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const forgotForm = document.getElementById('forgotForm');
+        const authMessage = document.getElementById('authMessage');
+        const authTabs = document.querySelectorAll('.auth-tab');
+        const showRegisterBtn = document.getElementById('showRegister');
+        const forgotPasswordBtn = document.getElementById('forgotPassword');
+        const backToLoginBtn = document.getElementById('backToLogin');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Verificar se usuário está logado
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            
+            if (isLoggedIn === 'true' && userData.name) {
+                showClientPanel(userData);
+                return true;
+            }
+            return false;
+        }
+
+        // Mostrar painel do cliente
+        function showClientPanel(userData) {
+            authSystem.style.display = 'none';
+            clientPanel.style.display = 'block';
+            
+            // Atualizar informações do usuário
+            document.getElementById('userName').textContent = userData.name || 'Usuário';
+            document.getElementById('userEmail').textContent = userData.email || '';
+            document.getElementById('userCompany').textContent = userData.company || 'Cliente ConstruCode';
+            
+            // Inicial das letras para avatar
+            const initials = userData.name
+                .split(' ')
+                .map(n => n[0])
+                .join('')
+                .toUpperCase()
+                .substring(0, 2);
+            document.getElementById('userAvatar').textContent = initials;
+            
+            // Atualizar última sessão
+            const now = new Date();
+            document.getElementById('lastAccess').textContent = 
+                `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            // Iniciar contador de sessão
+            startSessionTimer();
+        }
+
+        // Contador de tempo de sessão
+        function startSessionTimer() {
+            let seconds = 0;
+            setInterval(() => {
+                seconds++;
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const secs = seconds % 60;
+                
+                document.getElementById('sessionTime').textContent = 
+                    `Sessão: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // Alternar entre abas
+        authTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.getAttribute('data-tab');
+                
+                // Atualizar aba ativa
+                authTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Mostrar formulário correto
+                document.querySelectorAll('.auth-form').forEach(form => {
+                    form.classList.remove('active');
+                });
+                
+                if (tabName === 'login') {
+                    loginForm.classList.add('active');
+                    forgotForm.style.display = 'none';
+                } else {
+                    registerForm.classList.add('active');
+                    forgotForm.style.display = 'none';
+                }
+            });
+        });
+
+        // Botão "Criar uma conta"
+        showRegisterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            authTabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('.auth-tab[data-tab="register"]').classList.add('active');
+            
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            registerForm.classList.add('active');
+            forgotForm.style.display = 'none';
+        });
+
+        // Botão "Esqueci a senha"
+        forgotPasswordBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.classList.remove('active');
+            forgotForm.style.display = 'block';
+        });
+
+        // Botão "Voltar para o login"
+        backToLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            forgotForm.style.display = 'none';
+            loginForm.classList.add('active');
+        });
+
+        // Login
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
+            // Validação simples (em produção, isso seria no backend)
+            if (!email || !password) {
+                showMessage('Por favor, preencha todos os campos.', 'error');
+                return;
+            }
+            
+            // Simular login bem-sucedido
+            const userData = {
+                name: email.split('@')[0],
+                email: email,
+                company: 'Cliente ConstruCode'
+            };
+            
+            // Salvar no localStorage
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userData', JSON.stringify(userData));
+            if (rememberMe) {
+                localStorage.setItem('rememberMe', 'true');
+            }
+            
+            showMessage('Login realizado com sucesso! Redirecionando...', 'success');
+            
+            // Mostrar painel do cliente após breve delay
+            setTimeout(() => {
+                showClientPanel(userData);
+            }, 1000);
+        });
+
+        // Cadastro
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const company = document.getElementById('registerCompany').value;
+            const phone = document.getElementById('registerPhone').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            const acceptTerms = document.getElementById('acceptTerms').checked;
+            
+            // Validações
+            if (!name || !email || !password || !confirmPassword) {
+                showMessage('Por favor, preencha todos os campos obrigatórios.', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showMessage('As senhas não coincidem.', 'error');
+                return;
+            }
+            
+            if (password.length < 8) {
+                showMessage('A senha deve ter pelo menos 8 caracteres.', 'error');
+                return;
+            }
+            
+            if (!acceptTerms) {
+                showMessage('Você deve aceitar os Termos de Uso e Política de Privacidade.', 'error');
+                return;
+            }
+            
+            // Simular cadastro bem-sucedido
+            const userData = {
+                name: name,
+                email: email,
+                company: company || 'Cliente ConstruCode',
+                phone: phone
+            };
+            
+            // Salvar no localStorage
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userData', JSON.stringify(userData));
+            
+            showMessage('Cadastro realizado com sucesso! Redirecionando...', 'success');
+            
+            // Mostrar painel do cliente após breve delay
+            setTimeout(() => {
+                showClientPanel(userData);
+            }, 1000);
+        });
+
+        // Recuperação de senha
+        forgotForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('forgotEmail').value;
+            
+            if (!email) {
+                showMessage('Por favor, informe seu e-mail.', 'error');
+                return;
+            }
+            
+            // Simular envio de e-mail
+            showMessage(`Instruções de recuperação enviadas para ${email}. Verifique sua caixa de entrada.`, 'success');
+            
+            // Voltar para login após 3 segundos
+            setTimeout(() => {
+                forgotForm.style.display = 'none';
+                loginForm.classList.add('active');
+            }, 3000);
+        });
+
+        // Login social
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const provider = btn.getAttribute('data-provider');
+                showMessage(`Login com ${provider} em desenvolvimento. Use o login tradicional.`, 'info');
+            });
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userData');
+            
+            clientPanel.style.display = 'none';
+            authSystem.style.display = 'flex';
+            
+            // Resetar formulários
+            loginForm.reset();
+            registerForm.reset();
+            forgotForm.reset();
+            
+            // Mostrar mensagem
+            showMessage('Você saiu da sua conta.', 'success');
+            
+            // Voltar para login
+            authTabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('.auth-tab[data-tab="login"]').classList.add('active');
+            
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            loginForm.classList.add('active');
+        });
+
+        // Mostrar mensagens
+        function showMessage(text, type) {
+            authMessage.textContent = text;
+            authMessage.className = `auth-message ${type}`;
+            
+            // Limpar mensagem após 5 segundos
+            setTimeout(() => {
+                authMessage.className = 'auth-message';
+                authMessage.textContent = '';
+            }, 5000);
+        }
+
+        // Máscara de telefone
+        const phoneInput = document.getElementById('registerPhone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 11) value = value.substring(0, 11);
+                
+                if (value.length > 10) {
+                    value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+                } else if (value.length > 6) {
+                    value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+                } else if (value.length > 2) {
+                    value = value.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
+                } else if (value.length > 0) {
+                    value = value.replace(/^(\d*)/, '($1');
+                }
+                
+                e.target.value = value;
+            });
+        }
+
+        // Verificar status de login ao carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = checkLoginStatus();
+            
+            if (!isLoggedIn) {
+                // Mostrar sistema de login
+                authSystem.style.display = 'flex';
+                clientPanel.style.display = 'none';
+            }
+            
+            // Preencher campos lembrados
+            if (localStorage.getItem('rememberMe') === 'true') {
+                const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+                if (userData.email) {
+                    document.getElementById('loginEmail').value = userData.email;
+                    document.getElementById('rememberMe').checked = true;
+                }
+            }
+        });
+
+        // Segurança: timeout de sessão (30 minutos)
+        let timeout;
+        function resetTimeout() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                if (localStorage.getItem('isLoggedIn') === 'true') {
+                    localStorage.removeItem('isLoggedIn');
+                    alert('Sessão expirada por inatividade. Faça login novamente.');
+                    window.location.reload();
+                }
+            }, 30 * 60 * 1000); // 30 minutos
+        }
+
+        // Resetar timeout em interações do usuário
+        ['click', 'mousemove', 'keypress'].forEach(event => {
+            document.addEventListener(event, resetTimeout);
+        });
+
+        // Iniciar timeout
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            resetTimeout();
+        }
+    </script>
+</body>
+</html>

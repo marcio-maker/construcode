@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado pelo Contato - ConstruCode</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--light-color);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thank-you-container {
+            max-width: 600px;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .next-steps {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .next-steps h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="success-icon">✓</div>
+        <h1>Mensagem Enviada com Sucesso!</h1>
+        <p>Obrigado por entrar em contato com a ConstruCode. Recebemos sua mensagem e nossa equipe entrará em contato em até <strong>24 horas úteis</strong>.</p>
+        
+        <div class="next-steps">
+            <h3>📋 O que acontece agora:</h3>
+            <ol>
+                <li>Nossa equipe analisará sua solicitação</li>
+                <li>Entraremos em contato para alinhar detalhes</li>
+                <li>Prepararemos uma proposta personalizada</li>
+                <li>Marcaremos uma reunião para apresentação</li>
+            </ol>
+        </div>
+
+        <p><strong>Precisa de uma resposta mais rápida?</strong></p>
+        <a href="https://wa.me/5511987654321" target="_blank" class="whatsapp-btn">
+            📱 Falar no WhatsApp
+        </a>
+
+        <div class="action-buttons">
+            <a href="index.html" class="btn btn-primary">Voltar para Home</a>
+            <a href="servicos.html" class="btn btn-secondary">Ver Serviços</a>
+        </div>
+
+        <div class="contact-info">
+            <p><strong>Informações de contato:</strong></p>
+            <p>📧 contato@construcode.com | 📱 (11) 98765-4321</p>
+            <p style="font-size: 0.8rem; margin-top: 1rem;">ID da solicitação: #<span id="requestId">0001</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Gerar ID único para a solicitação
+        document.getElementById('requestId').textContent = 
+            'CC' + new Date().getTime().toString().slice(-6);
+
+        // Redirecionar automaticamente após 30 segundos
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 30000);
+
+        // Contador para redirecionamento
+        let countdown = 30;
+        const countdownElement = document.createElement('p');
+        countdownElement.style.marginTop = '1rem';
+        countdownElement.style.fontSize = '0.9rem';
+        countdownElement.style.color = '#666';
+        countdownElement.innerHTML = `Redirecionando para a home em <span id="countdown">${countdown}</span> segundos...`;
+        
+        document.querySelector('.thank-you-container').appendChild(countdownElement);
+
+        setInterval(() => {
+            countdown--;
+            document.getElementById('countdown').textContent = countdown;
+            
+            if (countdown <= 0) {
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+
+        // Salvar no localStorage que o formulário foi enviado
+        localStorage.setItem('lastContactTime', new Date().toISOString());
+        localStorage.setItem('contactSubmitted', 'true');
+    </script>
+</body>
+</html>

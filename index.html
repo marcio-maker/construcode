@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConstruCode - Soluções Web Profissionais</title>
+    
+    <!-- PWA -->
+    <meta name="theme-color" content="#2c3e50">
+    <meta name="description" content="Soluções web profissionais com tecnologia de ponta">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon-192.png">
+    
+    <!-- SEO -->
+    <meta name="robots" content="index, follow">
+    
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #3c4ae7;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .logo span { color: var(--secondary-color); }
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        .nav-link:hover { color: var(--secondary-color); }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        .nav-link:hover::after { width: 100%; }
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), 
+                        url('https://i.gifer.com/origin/46/462c6f5f67c13830cd9fcdbfc7b55ded.gif');
+            background-size: cover;
+            background-position: center;
+            min-height: 600px;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: 2px solid var(--accent-color);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+        .cta-button:hover {
+            background-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Seções */
+        section { padding: 80px 0; }
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        /* Serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        /* KPIs */
+        .kpi-section { background-color: #f8f9fa; }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        .kpi-item h3 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Blog */
+        .blog-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        .blog-content { padding: 1.5rem; }
+        .blog-meta {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* PWA Status */
+        #pwaStatus {
+            font-size: 0.7rem;
+            background: rgba(255,255,255,0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+            .nav-menu.active { left: 0; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-title h2 { font-size: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Animações */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="servicos.html" class="nav-link">Serviços</a>
+                    <a href="portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="sobre.html" class="nav-link">Sobre</a>
+                    <a href="contato.html" class="nav-link">Contato</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Soluções Web que Impulsionam seu Negócio</h1>
+            <p>Desenvolvimento profissional, design impactante e estratégias digitais que convertem visitantes em clientes.</p>
+            <a href="contato.html" class="cta-button">Comece seu Projeto Agora</a>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Serviços</h2>
+                <p>Soluções completas para sua presença digital</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Desenvolvimento Web</h3>
+                    <p>Sites responsivos, PWAs e aplicações web modernas.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Design UI/UX</h3>
+                    <p>Interfaces intuitivas que encantam e convertem visitantes.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3>Marketing Digital</h3>
+                    <p>Estratégias de SEO e campanhas que aumentam sua visibilidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KPIs -->
+    <section class="kpi-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Resultados Comprovados</h2>
+                <p>Métricas que fazem a diferença</p>
+            </div>
+            <div class="kpi-grid">
+                <div class="kpi-item">
+                    <h3>+200%</h3>
+                    <p>Aumento de Tráfego</p>
+                </div>
+                <div class="kpi-item">
+                    <h3>99.9%</h3>
+                    <p>Uptime Garantido</p>
+                </div>
+                <div class="kpi-item">
+                    <h3>+150</h3>
+                    <p>Clientes Satisfeitos</p>
+                </div>
+                <div class="kpi-item">
+                    <h3>40%</h3>
+                    <p>Conversão Otimizada</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Últimas do Blog</h2>
+                <p>Conteúdo valioso para seu crescimento digital</p>
+            </div>
+            <div class="blog-preview">
+                <a href="posts/pwa-futuro-sites.html" style="text-decoration:none;color:inherit;">
+                    <article class="blog-card">
+                        <div class="blog-image">🚀</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">15 Mar 2024 | Tecnologia</div>
+                            <h3>Porque PWA é o Futuro dos Sites</h3>
+                            <p style="margin:0.5rem 0;color:#666;">Aprenda como Progressive Web Apps revolucionam a experiência mobile.</p>
+                            <span style="color:#3498db;font-weight:600;">Ler mais →</span>
+                        </div>
+                    </article>
+                </a>
+                <a href="posts/seo-2024-estrategias.html" style="text-decoration:none;color:inherit;">
+                    <article class="blog-card">
+                        <div class="blog-image">🔍</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">10 Mar 2024 | SEO</div>
+                            <h3>SEO em 2024: Novas Estratégias</h3>
+                            <p style="margin:0.5rem 0;color:#666;">Descubra técnicas de otimização que realmente funcionam.</p>
+                            <span style="color:#3498db;font-weight:600;">Ler mais →</span>
+                        </div>
+                    </article>
+                </a>
+                <a href="posts/conversao-clic-cliente.html" style="text-decoration:none;color:inherit;">
+                    <article class="blog-card">
+                        <div class="blog-image">💡</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">05 Mar 2024 | Marketing</div>
+                            <h3>Conversão: Do Clic ao Cliente</h3>
+                            <p style="margin:0.5rem 0;color:#666;">Estratégias para transformar visitantes em clientes fiéis.</p>
+                            <span style="color:#3498db;font-weight:600;">Ler mais →</span>
+                        </div>
+                    </article>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>ConstruCode</h3>
+                    <p>Soluções web profissionais que entregam resultados mensuráveis.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="servicos.html">Serviços</a></li>
+                        <li><a href="portfolio.html">Portfólio</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="legal.html#privacidade">Política de Privacidade</a></li>
+                        <li><a href="legal.html#termos">Termos de Uso</a></li>
+                        <li><a href="legal.html#cookies">Política de Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li>📧 contato@construcode.com</li>
+                        <li>📱 (11) 99999-9999</li>
+                        <li><a href="contato.html">Formulário de Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ConstruCode. Todos os direitos reservados. | 
+                   <a href="sitemap.xml" style="color: white; opacity: 0.8;">Mapa do Site</a>
+                </p>
+                <p style="font-size: 0.8rem; margin-top: 10px;">
+                    <span id="installPrompt" style="cursor: pointer; text-decoration: underline;">📱 Instalar App</span> | 
+                    <span id="pwaStatus">PWA Offline</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script PWA SIMPLES -->
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+        
+        // PWA - Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(() => {
+                        document.getElementById('pwaStatus').textContent = 'PWA Pronto';
+                        console.log('✅ PWA registrado');
+                    })
+                    .catch(error => {
+                        document.getElementById('pwaStatus').textContent = 'PWA Erro';
+                        console.log('❌ PWA erro:', error);
+                    });
+            });
+        }
+        
+        // Instalação do App
+        let installPrompt;
+        const installBtn = document.getElementById('installPrompt');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            installPrompt = e;
+            installBtn.style.display = 'inline';
+        });
+        
+        installBtn.addEventListener('click', () => {
+            if (installPrompt) {
+                installPrompt.prompt();
+                installPrompt.userChoice.then((choice) => {
+                    if (choice.outcome === 'accepted') {
+                        installBtn.textContent = '✅ App Instalado';
+                    }
+                    installPrompt = null;
+                });
+            }
+        });
+        
+        // Verificar se já está instalado
+        window.addEventListener('appinstalled', () => {
+            installBtn.textContent = '✅ App Instalado';
+        });
+    </script>
+</body>
+</html>

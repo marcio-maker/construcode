@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - ConstruCode</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Conheça a ConstruCode: nossa história, missão, valores e equipe especializada em desenvolvimento web e marketing digital.">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link.active {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Sobre */
+        .hero-sobre {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-sobre:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-sobre h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+        }
+
+        .hero-sobre p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        /* História */
+        .historia-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--secondary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .timeline-year {
+            position: absolute;
+            top: -15px;
+            background: var(--secondary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-year {
+            right: -70px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-year {
+            left: -70px;
+        }
+
+        /* Valores */
+        .valores-section {
+            padding: 80px 0;
+            background: var(--gray-light);
+        }
+
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .valor-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .valor-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .valor-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+        }
+
+        /* Equipe */
+        .equipe-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .equipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .membro-card {
+            text-align: center;
+            background: var(--gray-light);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .membro-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .membro-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .membro-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Missão Visão Valores */
+        .mvv-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+        }
+
+        .mvv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .mvv-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mvv-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* CTA */
+        .cta-sobre {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .btn-sobre {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-sobre:hover {
+            background: transparent;
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero-sobre h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline:before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 80px);
+                left: 80px !important;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-year,
+            .timeline-item:nth-child(even) .timeline-year {
+                left: -70px;
+                right: auto;
+            }
+
+            .mvv-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* AdSense */
+        .ad-space {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            margin: 3rem 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="servicos.html" class="nav-link">Serviços</a>
+                    <a href="portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="sobre.html" class="nav-link active">Sobre</a>
+                    <a href="contato.html" class="nav-link">Contato</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Sobre -->
+    <section class="hero-sobre">
+        <div class="container">
+            <h1>Transformando Ideias em Realidade Digital</h1>
+            <p>Somos uma equipe apaixonada por tecnologia, inovação e resultados. Desde 2018, ajudamos empresas a construir presenças digitais que realmente convertem.</p>
+        </div>
+    </section>
+
+    <!-- AdSense Top -->
+    <div class="container">
+        <div class="ad-space">
+            Espaço para AdSense (728x90)
+        </div>
+    </div>
+
+    <!-- Nossa História -->
+    <section class="historia-section">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-color); font-family: 'Poppins', sans-serif; margin-bottom: 3rem;">
+                Nossa <span style="color: var(--secondary-color);">Jornada</span>
+            </h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2018</div>
+                    <div class="timeline-content">
+                        <h3>O Início</h3>
+                        <p>Fundada por dois desenvolvedores apaixonados, a ConstruCode começou em uma pequena sala com um grande sonho: criar soluções digitais que realmente fazem a diferença.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2019</div>
+                    <div class="timeline-content">
+                        <h3>Primeiros 50 Clientes</h3>
+                        <p>Com foco em qualidade e resultados, atingimos a marca de 50 clientes satisfeitos. Nossa reputação começou a crescer através de indicações.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h3>Expansão da Equipe</h3>
+                        <p>Contratamos nossos primeiros especialistas em marketing digital e design, expandindo nosso portfólio de serviços.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2021</div>
+                    <div class="timeline-content">
+                        <h3>Escritório Próprio</h3>
+                        <p>Mudamos para nosso primeiro escritório próprio no centro de São Paulo, com capacidade para 20 colaboradores.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-content">
+                        <h3>100+ Projetos</h3>
+                        <p>Atingimos a marca de 100 projetos entregues com sucesso, com clientes em todo o Brasil.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-content">
+                        <h3>Certificação Google Partner</h3>
+                        <p>Nos tornamos parceiros certificados do Google, elevando nosso padrão de qualidade em marketing digital.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-content">
+                        <h3>Novos Horizontes</h3>
+                        <p>Expandimos para o mercado internacional e iniciamos projetos de inovação com inteligência artificial.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valores -->
+    <section class="valores-section">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-color); font-family: 'Poppins', sans-serif; margin-bottom: 3rem;">
+                Nossos <span style="color: var(--secondary-color);">Valores</span>
+            </h2>
+            
+            <div class="valores-grid">
+                <div class="valor-card">
+                    <div class="valor-icon">🎯</div>
+                    <h3>Foco em Resultados</h3>
+                    <p>Não entregamos apenas código, entregamos soluções que geram resultados mensuráveis para seu negócio.</p>
+                </div>
+                
+                <div class="valor-card">
+                    <div class="valor-icon">🤝</div>
+                    <h3>Transparência</h3>
+                    <p>Acreditamos em relacionamentos honestos e transparentes. Sem surpresas, apenas resultados claros.</p>
+                </div>
+                
+                <div class="valor-card">
+                    <div class="valor-icon">🚀</div>
+                    <h3>Inovação Constante</h3>
+                    <p>Estamos sempre atualizados com as últimas tecnologias e tendências do mercado digital.</p>
+                </div>
+                
+                <div class="valor-card">
+                    <div class="valor-icon">❤️</div>
+                    <h3>Paixão pelo Cliente</h3>
+                    <p>Nosso sucesso é medido pelo sucesso dos nossos clientes. Somos parceiros, não apenas prestadores.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Missão Visão Valores -->
+    <section class="mvv-section">
+        <div class="container">
+            <div class="mvv-grid">
+                <div class="mvv-card">
+                    <h3>Missão</h3>
+                    <p>Desenvolver soluções digitais inovadoras que impulsionem o crescimento dos nossos clientes, transformando desafios em oportunidades através da tecnologia.</p>
+                </div>
+                
+                <div class="mvv-card">
+                    <h3>Visão</h3>
+                    <p>Ser referência nacional em desenvolvimento web e marketing digital, reconhecida pela excelência, inovação e resultados extraordinários até 2025.</p>
+                </div>
+                
+                <div class="mvv-card">
+                    <h3>Valores</h3>
+                    <p>Excelência técnica, transparência, inovação, parceria com o cliente, aprendizado contínuo e responsabilidade social.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AdSense Middle -->
+    <div class="container">
+        <div class="ad-space">
+            Espaço para AdSense (300x600)
+        </div>
+    </div>
+
+    <!-- Equipe -->
+    <section class="equipe-section">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-color); font-family: 'Poppins', sans-serif; margin-bottom: 3rem;">
+                Conheça Nossa <span style="color: var(--secondary-color);">Equipe</span>
+            </h2>
+            
+            <div class="equipe-grid">
+                <div class="membro-card">
+                    <div class="membro-avatar">JS</div>
+                    <h3>João Silva</h3>
+                    <p><strong>CEO & Fundador</strong></p>
+                    <p>Engenheiro de Software com 10+ anos de experiência. Especialista em arquitetura de sistemas e PWA.</p>
+                    <div class="membro-social">
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">💼</a>
+                    </div>
+                </div>
+                
+                <div class="membro-card">
+                    <div class="membro-avatar">MS</div>
+                    <h3>Maria Santos</h3>
+                    <p><strong>Diretora de Marketing</strong></p>
+                    <p>Mestra em Marketing Digital com certificação Google. Já gerenciou campanhas de +R$ 5MM.</p>
+                    <div class="membro-social">
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">📸</a>
+                        <a href="#" class="social-icon">💼</a>
+                    </div>
+                </div>
+                
+                <div class="membro-card">
+                    <div class="membro-avatar">PC</div>
+                    <h3>Pedro Costa</h3>
+                    <p><strong>Lead Developer</strong></p>
+                    <p>Especialista em JavaScript, React e Node.js. Apaixonado por performance e boas práticas.</p>
+                    <div class="membro-social">
+                        <a href="#" class="social-icon">gh</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">💼</a>
+                    </div>
+                </div>
+                
+                <div class="membro-card">
+                    <div class="membro-avatar">AR</div>
+                    <h3>Ana Rodrigues</h3>
+                    <p><strong>UX/UI Designer</strong></p>
+                    <p>Designer com foco em experiência do usuário. Já trabalhou em projetos para grandes marcas.</p>
+                    <div class="membro-social">
+                        <a href="#" class="social-icon">be</a>
+                        <a href="#" class="social-icon">📸</a>
+                        <a href="#" class="social-icon">💼</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-sobre">
+        <div class="container">
+            <h2 style="color: var(--primary-color); font-family: 'Poppins', sans-serif; margin-bottom: 1rem;">
+                Pronto para Trabalhar Conosco?
+            </h2>
+            <p style="max-width: 600px; margin: 0 auto 2rem;">
+                Junte-se a mais de 150 empresas que confiaram na ConstruCode para transformar sua presença digital.
+            </p>
+            <a href="contato.html" class="btn-sobre">Entre em Contato</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>ConstruCode</h3>
+                    <p>Transformando ideias em realidade digital desde 2018.</p>
+                    <p><strong>CNPJ:</strong> 12.345.678/0001-99</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Localização</h3>
+                    <ul class="footer-links">
+                        <li>📍 Av. Paulista, 1000</li>
+                        <li>Bela Vista</li>
+                        <li>São Paulo - SP</li>
+                        <li>CEP: 01310-100</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li>📧 contato@construcode.com</li>
+                        <li>📱 (11) 98765-4321</li>
+                        <li>📞 (11) 3456-7890</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Horário</h3>
+                    <ul class="footer-links">
+                        <li>Segunda a Sexta: 9h-18h</li>
+                        <li>Sábado: 9h-13h</li>
+                        <li>Domingo: Fechado</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ConstruCode. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Animação da Timeline
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

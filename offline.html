@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Você está offline - ConstruCode</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--light-color);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .offline-container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .cache-info {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📶</div>
+        <h1>Você está offline</h1>
+        <p>Não foi possível conectar à internet. Mas não se preocupe! Você ainda pode acessar as páginas que já visitou anteriormente.</p>
+        
+        <div style="margin: 2rem 0;">
+            <p><strong>O que você pode fazer:</strong></p>
+            <ul style="text-align: left; display: inline-block;">
+                <li>Acessar páginas já visitadas</li>
+                <li>Ler artigos do blog</li>
+                <li>Ver informações de serviços</li>
+                <li>Consultar nosso portfólio</li>
+            </ul>
+        </div>
+
+        <a href="javascript:location.reload()" class="btn">Tentar Novamente</a>
+        <a href="index.html" class="btn" style="background: var(--primary-color); margin-left: 1rem;">Ir para Home</a>
+
+        <div class="cache-info">
+            <p>Este site funciona offline graças ao PWA (Progressive Web App).</p>
+            <p>Quando a conexão voltar, o conteúdo será atualizado automaticamente.</p>
+        </div>
+    </div>
+
+    <script>
+        // Tentar reconectar automaticamente
+        function checkConnection() {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }
+
+        // Verificar conexão a cada 5 segundos
+        setInterval(checkConnection, 5000);
+
+        // Verificar quando a conexão voltar
+        window.addEventListener('online', function() {
+            alert('Conexão restaurada! Atualizando conteúdo...');
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
+
+        // Mostrar quais páginas estão disponíveis offline
+        document.addEventListener('DOMContentLoaded', function() {
+            if ('caches' in window) {
+                caches.open('construcode-v1').then(function(cache) {
+                    cache.keys().then(function(requests) {
+                        const pageCount = requests.filter(req => 
+                            req.url.includes('.html') && !req.url.includes('offline')
+                        ).length;
+                        
+                        const info = document.querySelector('.cache-info');
+                        if (info && pageCount > 0) {
+                            info.innerHTML += `<p><strong>${pageCount} páginas disponíveis offline</strong></p>`;
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

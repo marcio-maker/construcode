@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Serviços - ConstruCode</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Conheça nossos serviços de desenvolvimento web, design e marketing digital. Soluções completas para seu negócio online.">
+    
+    <style>
+        /* Reutilizando estilos do index.html com adaptações */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --gray-light: #f8f9fa;
+            --gray-medium: #6c757d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link.active {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Serviços */
+        .hero-servicos {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2980b9 100%);
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+
+        .hero-servicos h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-servicos p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Serviços Detalhados */
+        .servico-detalhado {
+            padding: 80px 0;
+        }
+
+        .servico-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .servico-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .servico-header .destaque {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .servico-card-grande {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .servico-card-grande:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .servico-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .servico-card-grande h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .servico-card-grande .preco {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin: 1.5rem 0;
+        }
+
+        .lista-vantagens {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .lista-vantagens li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .lista-vantagens li:before {
+            content: "✓";
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Processo de Trabalho */
+        .processo-trabalho {
+            background-color: var(--gray-light);
+            padding: 80px 0;
+        }
+
+        .etapas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .etapa {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .numero-etapa {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            line-height: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* CTA Final */
+        .cta-final {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: 2px solid var(--accent-color);
+            margin-top: 2rem;
+        }
+
+        .btn-cta:hover {
+            background-color: transparent;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero-servicos h1 {
+                font-size: 2.2rem;
+            }
+
+            .servico-header h2 {
+                font-size: 2rem;
+            }
+
+            .servicos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .servico-card-grande {
+                padding: 1.5rem;
+            }
+        }
+
+        /* AdSense Space */
+        .adsense-space {
+            background-color: #f8f9fa;
+            border: 2px dashed #ced4da;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            margin: 3rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+
+        .badge-popular {
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">Constru<span>Code</span></a>
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="servicos.html" class="nav-link active">Serviços</a>
+                    <a href="portfolio.html" class="nav-link">Portfólio</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="sobre.html" class="nav-link">Sobre</a>
+                    <a href="contato.html" class="nav-link">Contato</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Serviços -->
+    <section class="hero-servicos">
+        <div class="container">
+            <h1>Soluções Completas para Sua Presença Digital</h1>
+            <p>Oferecemos serviços especializados que vão desde o desenvolvimento do seu site até estratégias avançadas de marketing digital. Tudo em um só lugar.</p>
+        </div>
+    </section>
+
+    <!-- AdSense Top -->
+    <div class="container">
+        <div class="adsense-space">
+            Espaço para AdSense (728x90)
+        </div>
+    </div>
+
+    <!-- Serviços Detalhados -->
+    <section class="servico-detalhado">
+        <div class="container">
+            <div class="servico-header">
+                <h2>Nossos <span class="destaque">Planos e Serviços</span></h2>
+                <p>Escolha o pacote ideal para o seu negócio ou solicite um orçamento personalizado</p>
+            </div>
+
+            <div class="servicos-grid">
+                <!-- Plano Básico -->
+                <div class="servico-card-grande">
+                    <div class="servico-icon">🌐</div>
+                    <h3>Site Institucional</h3>
+                    <p>Presença online profissional com design responsivo e otimização básica para SEO.</p>
+                    
+                    <div class="preco">R$ 1.499,00</div>
+                    <p><strong>ou 12x R$ 124,92</strong></p>
+                    
+                    <ul class="lista-vantagens">
+                        <li>Até 5 páginas</li>
+                        <li>Design responsivo</li>
+                        <li>Otimização SEO básica</li>
+                        <li>Formulário de contato</li>
+                        <li>Integração com redes sociais</li>
+                        <li>Suporte por 30 dias</li>
+                    </ul>
+                    
+                    <a href="contato.html?plano=basico" class="btn-cta" style="margin-top: 1rem; display: inline-block;">Solicitar Orçamento</a>
+                </div>
+
+                <!-- Plano Premium -->
+                <div class="servico-card-grande" style="border: 2px solid var(--secondary-color);">
+                    <span class="badge-popular">MAIS POPULAR</span>
+                    <div class="servico-icon">🚀</div>
+                    <h3>Site Premium + Marketing</h3>
+                    <p>Solução completa com PWA, blog integrado e estratégias iniciais de marketing digital.</p>
+                    
+                    <div class="preco">R$ 3.999,00</div>
+                    <p><strong>ou 12x R$ 333,25</strong></p>
+                    
+                    <ul class="lista-vantagens">
+                        <li>Até 10 páginas</li>
+                        <li>PWA (Progressive Web App)</li>
+                        <li>Blog integrado</li>
+                        <li>SEO avançado</li>
+                        <li>Analytics configurado</li>
+                        <li>E-mail marketing básico</li>
+                        <li>Suporte por 90 dias</li>
+                        <li>Treinamento para gestão</li>
+                    </ul>
+                    
+                    <a href="contato.html?plano=premium" class="btn-cta" style="margin-top: 1rem; display: inline-block; background-color: var(--secondary-color); border-color: var(--secondary-color);">Escolher Plano</a>
+                </div>
+
+                <!-- Plano Corporativo -->
+                <div class="servico-card-grande">
+                    <div class="servico-icon">🏢</div>
+                    <h3>Solução Corporativa</h3>
+                    <p>Desenvolvimento completo com sistema personalizado, integrações e marketing contínuo.</p>
+                    
+                    <div class="preco">Sob Consulta</div>
+                    <p><strong>Orçamento personalizado</strong></p>
+                    
+                    <ul class="lista-vantagens">
+                        <li>Sistema personalizado</li>
+                        <li>Integrações com APIs</li>
+                        <li>E-commerce completo</li>
+                        <li>Gestão de campanhas ADS</li>
+                        <li>SEO contínuo</li>
+                        <li>Relatórios mensais</li>
+                        <li>Suporte prioritário</li>
+                        <li>Consultoria estratégica</li>
+                    </ul>
+                    
+                    <a href="contato.html?plano=corporativo" class="btn-cta" style="margin-top: 1rem; display: inline-block;">Fale com Especialista</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AdSense Middle -->
+    <div class="container">
+        <div class="adsense-space">
+            Espaço para AdSense (300x600)
+        </div>
+    </div>
+
+    <!-- Processo de Trabalho -->
+    <section class="processo-trabalho">
+        <div class="container">
+            <div class="servico-header">
+                <h2>Nosso <span class="destaque">Processo de Trabalho</span></h2>
+                <p>Metodologia ágil e transparente para garantir o sucesso do seu projeto</p>
+            </div>
+
+            <div class="etapas-grid">
+                <div class="etapa">
+                    <div class="numero-etapa">1</div>
+                    <h4>Diagnóstico</h4>
+                    <p>Análise completa do seu negócio e definição de objetivos.</p>
+                </div>
+                
+                <div class="etapa">
+                    <div class="numero-etapa">2</div>
+                    <h4>Planejamento</h4>
+                    <p>Estruturação da solução, cronograma e orçamento detalhado.</p>
+                </div>
+                
+                <div class="etapa">
+                    <div class="numero-etapa">3</div>
+                    <h4>Desenvolvimento</h4>
+                    <p>Implementação com acompanhamento em tempo real.</p>
+                </div>
+                
+                <div class="etapa">
+                    <div class="numero-etapa">4</div>
+                    <h4>Entrega</h4>
+                    <p>Lançamento, treinamento e suporte pós-implantação.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços Adicionais -->
+    <section class="servico-detalhado">
+        <div class="container">
+            <div class="servico-header">
+                <h2>Serviços <span class="destaque">Especializados</span></h2>
+            </div>
+
+            <div class="servicos-grid">
+                <div class="servico-card-grande">
+                    <div class="servico-icon">🔍</div>
+                    <h3>SEO Avançado</h3>
+                    <p>Otimização para mecanismos de busca com estratégias de conteúdo e técnincas.</p>
+                    <div class="preco">A partir de R$ 799/mês</div>
+                    <ul class="lista-vantagens">
+                        <li>Análise de keywords</li>
+                        <li>Otimização on-page</li>
+                        <li>Link building</li>
+                        <li>Relatórios mensais</li>
+                    </ul>
+                </div>
+
+                <div class="servico-card-grande">
+                    <div class="servico-icon">📱</div>
+                    <h3>Gestão de Redes Sociais</h3>
+                    <p>Criação e gestão de conteúdo para suas redes sociais.</p>
+                    <div class="preco">A partir de R$ 1.299/mês</div>
+                    <ul class="lista-vantagens">
+                        <li>Criação de conteúdo</li>
+                        <li>Agendamento de posts</li>
+                        <li>Monitoramento</li>
+                        <li>Relatórios de engajamento</li>
+                    </ul>
+                </div>
+
+                <div class="servico-card-grande">
+                    <div class="servico-icon">✉️</div>
+                    <h3>E-mail Marketing</h3>
+                    <p>Campañas automatizadas e newsletters profissionais.</p>
+                    <div class="preco">A partir de R$ 499/mês</div>
+                    <ul class="lista-vantagens">
+                        <li>Criação de templates</li>
+                        <li>Automação de fluxos</li>
+                        <li>Análise de resultados</li>
+                        <li>Segmentação de público</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>Pronto para Transformar seu Negócio?</h2>
+            <p>Entre em contato agora mesmo para uma consultoria gratuita e descubra a melhor solução para suas necessidades.</p>
+            <a href="contato.html" class="btn-cta">Solicitar Consultoria Gratuita</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>ConstruCode</h3>
+                    <p>Soluções web profissionais que entregam resultados mensuráveis.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Serviços</h3>
+                    <ul class="footer-links">
+                        <li><a href="servicos.html#desenvolvimento">Desenvolvimento Web</a></li>
+                        <li><a href="servicos.html#design">Design UI/UX</a></li>
+                        <li><a href="servicos.html#marketing">Marketing Digital</a></li>
+                        <li><a href="servicos.html#seo">SEO</a></li>
+                        <li><a href="servicos.html#sociais">Redes Sociais</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="legal.html#privacidade">Política de Privacidade</a></li>
+                        <li><a href="legal.html#termos">Termos de Uso</a></li>
+                        <li><a href="legal.html#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li>📧 contato@construcode.com</li>
+                        <li>📱 (11) 98765-4321</li>
+                        <li>📍 São Paulo, SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ConstruCode. Todos os direitos reservados. | CNPJ: 12.345.678/0001-99</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.textContent = '☰';
+            }
+        });
+
+        // Smooth scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
